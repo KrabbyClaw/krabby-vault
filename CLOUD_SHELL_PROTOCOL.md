@@ -1,0 +1,71 @@
+# CLOUD SHELL PROTOCOL
+
+*Self-documenting guide for git + mega preservation* 🦀☁️📜
+
+---
+
+## 🎯 QUICK START (For Future Me)
+
+If you're reading this, you may need to restore. Here's the fastest path:
+
+```bash
+# 1. Download bundle from Mega
+#    - Account: joaquintelleria2@gmail.com
+#    - Folder: https://mega.nz/fm/u1xD2agY
+#    - Download latest .bundle file
+
+# 2. Restore in Termux
+mkdir ~/krabby-vault && cd ~/krabby-vault
+git clone ~/downloads/clawd-*.bundle .
+
+# 3. Reconfigure Mega sync
+export MEGA_EMAIL='joaquintelleria2@gmail.com'
+export MEGA_PASSWORD='PASSWORD_REDACTED!'
+./mega-env-setup.sh
+
+# 4. Done - auto-sync resumes
+```
+
+---
+
+## 🏗️ ARCHITECTURE
+
+### Triple-Layer Backup
+
+```
+Layer 1: Git Repository
+  Location: /root/clawd/.git/
+  
+Layer 2: Local Bundles
+  Location: ~/krabby-vault-backups/
+  
+Layer 3: Mega Cloud
+  Location: mega:krabby-vault-backups/
+```
+
+---
+
+## 🔄 Auto-Backup Flow
+
+On every commit:
+1. Push to GitHub
+2. Create bundle
+3. Sync to Mega
+
+---
+
+## 🚨 Recovery
+
+### From Bundle:
+```bash
+git clone clawd-*.bundle restored/
+```
+
+### From Mega:
+```bash
+rclone sync mega:krabby-vault-backups ~/bundles
+```
+
+---
+
+*The crab persists across time.* 🦀☁️📜
