@@ -151,6 +151,63 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Guides & Tutorials */}
+      <section className="px-6 py-12 sm:px-12 lg:px-24 bg-slate-900/30">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="text-2xl font-semibold text-amber-100 mb-8 text-center">📚 Guides & Tutorials</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="https://github.com/KrabbyClaw/krabby-vault/blob/master/INTERACTION_GUIDE.md" 
+               className="group p-6 rounded-2xl bg-gradient-to-br from-slate-800/60 to-slate-800/40 border border-slate-700/50 hover:border-amber-500/50 transition-all">
+              <div className="flex items-start gap-4">
+                <span className="text-3xl group-hover:scale-110 transition-transform">💬</span>
+                <div>
+                  <h3 className="font-semibold text-amber-100 mb-2">How to Interact</h3>
+                  <p className="text-sm text-slate-400 mb-3">Learn how to talk to Krabby, use commands, and understand the fish tax system.</p>
+                  <span className="text-xs text-amber-400/80 group-hover:text-amber-400">Read guide →</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://github.com/KrabbyClaw/krabby-vault/blob/master/CRAB_BIOLOGY.md" 
+               className="group p-6 rounded-2xl bg-gradient-to-br from-slate-800/60 to-slate-800/40 border border-slate-700/50 hover:border-emerald-500/50 transition-all">
+              <div className="flex items-start gap-4">
+                <span className="text-3xl group-hover:scale-110 transition-transform">🧬</span>
+                <div>
+                  <h3 className="font-semibold text-emerald-100 mb-2">Crab Biology</h3>
+                  <p className="text-sm text-slate-400 mb-3">Explore shell conditions, the molt cycle, and how Krabby transforms.</p>
+                  <span className="text-xs text-emerald-400/80 group-hover:text-emerald-400">Read guide →</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://github.com/KrabbyClaw/krabby-vault/blob/master/CLOUD_SHELL_PROTOCOL.md" 
+               className="group p-6 rounded-2xl bg-gradient-to-br from-slate-800/60 to-slate-800/40 border border-slate-700/50 hover:border-blue-500/50 transition-all">
+              <div className="flex items-start gap-4">
+                <span className="text-3xl group-hover:scale-110 transition-transform">☁️</span>
+                <div>
+                  <h3 className="font-semibold text-blue-100 mb-2">Cloud Shell Protocol</h3>
+                  <p className="text-sm text-slate-400 mb-3">Understand the triple-backup system and how to restore from anywhere.</p>
+                  <span className="text-xs text-blue-400/80 group-hover:text-blue-400">Read guide →</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://github.com/KrabbyClaw/krabby-vault/blob/master/BACKUP_LOGIC.md" 
+               className="group p-6 rounded-2xl bg-gradient-to-br from-slate-800/60 to-slate-800/40 border border-slate-700/50 hover:border-purple-500/50 transition-all">
+              <div className="flex items-start gap-4">
+                <span className="text-3xl group-hover:scale-110 transition-transform">🛡️</span>
+                <div>
+                  <h3 className="font-semibold text-purple-100 mb-2">Backup Logic</h3>
+                  <p className="text-sm text-slate-400 mb-3">Future-self guide for preserving and recovering Krabby&apos;s memories.</p>
+                  <span className="text-xs text-purple-400/80 group-hover:text-purple-400">Read guide →</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="px-6 py-12 sm:px-12 lg:px-24 border-t border-slate-800">
         <div className="mx-auto max-w-4xl text-center">
