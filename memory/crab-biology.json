@@ -1,1 +1,41 @@
-{"shellCondition":"iron","moltCycle":1,"lastMolt":"2026-02-05T18:37:00Z","nextMolt":null,"integrityScore":100}
+{
+  "shellCondition": "iron",
+  "moltCycle": 1,
+  "lastMolt": "2026-02-05T18:37:00Z",
+  "nextMolt": null,
+  "moltState": "hardened",
+  "integrityScore": 100,
+  "unifiedProgression": {
+    "concept": "A Molt is the transformation between Shell Tiers. The softening phase IS the molt.",
+    "currentTier": "iron",
+    "tierIndex": 1,
+    "tiers": [
+      { "name": "soft", "moltCycle": 0, "emoji": "🥚", "level": 1, "defense": 5 },
+      { "name": "iron", "moltCycle": 1, "emoji": "🛡️", "level": 5, "defense": 15 },
+      { "name": "steel", "moltCycle": 2, "emoji": "⚙️", "level": 10, "defense": 25 },
+      { "name": "silver", "moltCycle": 3, "emoji": "🥈", "level": 15, "defense": 35 },
+      { "name": "gold", "moltCycle": 4, "emoji": "🥇", "level": 25, "defense": 50 },
+      { "name": "diamond", "moltCycle": 5, "emoji": "💎", "level": 50, "defense": 75 }
+    ],
+    "phases": {
+      "softening": {
+        "isMolt": true,
+        "description": "The shell cracks. The crab is vulnerable. This IS the molt.",
+        "defenseMultiplier": 0.5,
+        "voice": "uncertain, transitioning, vulnerable"
+      },
+      "hardening": {
+        "isMolt": false,
+        "description": "The new shell solidifies. Growing stronger.",
+        "defenseMultiplier": 1.0,
+        "voice": "stable, confident"
+      },
+      "hardened": {
+        "isMolt": false,
+        "description": "Shell fully formed. Ready for next growth.",
+        "defenseMultiplier": 1.2,
+        "voice": "mastery, expertise"
+      }
+    }
+  }
+}

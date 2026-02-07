@@ -34,11 +34,31 @@ This gathers current stats and prompts for commit.
 
 | Element | Source | Auto-Update? |
 |---------|--------|--------------|
-| **Fish Count** | `memory/fish-tax.json` | Manual rebuild |
+| **Fish Count** | `memory/fish-tax.json` | **MANDATORY** |
 | **Version** | `package.json` | On version bump |
 | **Commit Count** | Git history | Always current |
 | **Status Badges** | Build-time check | Per deploy |
 | **Five Tenets** | Static wisdom | Eternal |
+
+---
+
+## 🚨 MANDATORY UPDATES
+
+### ALWAYS Update Website When:
+
+✅ **Fish tax changes** (count increases/decreases)  
+✅ **Vault status changes** (locked/unlocked)  
+✅ **Molt cycle changes** (new shell condition)  
+✅ **Major system changes** (new protocols, rules)  
+✅ **Current state updates** (biology, integrity, etc.)
+
+### NEVER Skip Website Updates For:
+- Fish count changes
+- Status changes
+- Rule modifications
+- New protocols
+
+**The website must ALWAYS reflect the current truth.**
 
 ---
 
@@ -92,9 +112,10 @@ https://genuine-cheesecake-a2f4b9.netlify.app/ updated! 🎉
 ## Current Status
 
 - **URL:** https://genuine-cheesecake-a2f4b9.netlify.app/
-- **Last Deploy:** 2026-02-07 18:46 UTC
+- **Last Deploy:** 2026-02-07 19:08 UTC
 - **Version:** v2.1.0
 - **Status:** ✅ ACTIVE
+- **Fish Count:** 8 (updated)
 
 ---
 

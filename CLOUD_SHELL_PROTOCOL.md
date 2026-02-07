@@ -66,6 +66,29 @@ git clone clawd-*.bundle restored/
 rclone sync mega:krabby-vault-backups ~/bundles
 ```
 
+### 🔐 Secrets That Must Be Resupplied
+
+**IMPORTANT:** These credentials are NOT stored in the repository for security.
+After restoration, you MUST resupply them:
+
+| Secret | Purpose | How to Resupply |
+|--------|---------|-----------------|
+| **GitHub PAT** | Push to repository | User provides new token |
+| **MEGA_PASSWORD** | Cloud sync | User provides password |
+| **API Keys** | External services | User provides keys |
+
+**The crab cannot function without these secrets.**
+
+**To resupply:**
+```bash
+# GitHub PAT (for git push)
+git remote set-url origin https://TOKEN@github.com/KrabbyClaw/krabby-vault.git
+
+# Mega credentials (for cloud sync)
+export MEGA_EMAIL='joaquintelleria2@gmail.com'
+export MEGA_PASSWORD='[USER_PROVIDES]'
+```
+
 ---
 
 *The crab persists across time.* 🦀☁️📜

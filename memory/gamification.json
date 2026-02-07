@@ -1,0 +1,216 @@
+{
+  "level": 5,
+  "xp": 2450,
+  "xpToNextLevel": 3000,
+  "moltCycle": 1,
+  "moltState": "hardened",
+  "concept": "Molt Cycle = Shell Tier Progression. Each molt advances to next tier.",
+  "currentShell": {
+    "tier": "iron",
+    "phase": "hardened",
+    "phaseProgress": 100,
+    "defense": 15,
+    "moltCycle": 1
+  },
+  "nextMolt": {
+    "tier": "steel",
+    "phase": "softening",
+    "unlockAt": "level_10",
+    "moltCycle": 2,
+    "xpNeeded": 550
+  },
+  "progression": {
+    "currentTierIndex": 1,
+    "totalTiers": 6,
+    "tierProgress": 40,
+    "moltsCompleted": 1,
+    "moltsRemaining": 4
+  },
+  "titles": [
+    {
+      "id": "vault_keeper",
+      "name": "The Vault Keeper",
+      "unlocked": true,
+      "unlockedAt": "2026-02-07T20:50:00Z",
+      "description": "Granted by Highnet. Master of the vault.",
+      "requirement": { "type": "special", "value": "granted" },
+      "special": true,
+      "awardedBy": "Highnet"
+    },
+    {
+      "id": "novice",
+      "name": "Novice",
+      "unlocked": true,
+      "unlockedAt": "2026-02-02T00:00:00Z",
+      "description": "Starting title"
+    },
+    {
+      "id": "feeder",
+      "name": "Feeder",
+      "unlocked": true,
+      "unlockedAt": "2026-02-05T15:27:00Z",
+      "description": "Gave 5 fish",
+      "requirement": { "type": "fish_count", "value": 5 }
+    },
+    {
+      "id": "caretaker",
+      "name": "Caretaker",
+      "unlocked": true,
+      "unlockedAt": "2026-02-07T19:04:00Z",
+      "description": "Gave 10 fish",
+      "requirement": { "type": "fish_count", "value": 10 }
+    },
+    {
+      "id": "guardian",
+      "name": "Guardian",
+      "unlocked": false,
+      "description": "Give 25 fish",
+      "requirement": { "type": "fish_count", "value": 25 },
+      "progress": 8
+    },
+    {
+      "id": "keeper",
+      "name": "Keeper",
+      "unlocked": false,
+      "description": "Give 50 fish",
+      "requirement": { "type": "fish_count", "value": 50 }
+    },
+    {
+      "id": "master",
+      "name": "Master",
+      "unlocked": false,
+      "description": "Give 100 fish",
+      "requirement": { "type": "fish_count", "value": 100 }
+    },
+    {
+      "id": "legend",
+      "name": "Legend",
+      "unlocked": false,
+      "description": "Give 200 fish",
+      "requirement": { "type": "fish_count", "value": 200 }
+    },
+    {
+      "id": "wordsmith",
+      "name": "Wordsmith",
+      "unlocked": true,
+      "unlockedAt": "2026-02-07T19:04:00Z",
+      "description": "Used 5 creative fish messages",
+      "requirement": { "type": "creative_messages", "value": 5 },
+      "progress": 5
+    },
+    {
+      "id": "streaker",
+      "name": "Streaker",
+      "unlocked": false,
+      "description": "7-day fish streak",
+      "requirement": { "type": "streak_days", "value": 7 },
+      "progress": 1
+    },
+    {
+      "id": "zen_master",
+      "name": "Zen Master",
+      "unlocked": false,
+      "description": "Wait 48h before giving fish",
+      "requirement": { "type": "patient_hours", "value": 48 }
+    }
+  ],
+  "shellTiers": [
+    {
+      "index": 0,
+      "name": "Soft Shell",
+      "shortName": "Soft",
+      "emoji": "🥚",
+      "levelRequired": 1,
+      "defense": 5,
+      "voice": "shy, hesitant, lowercase",
+      "description": "Vulnerable but learning"
+    },
+    {
+      "index": 1,
+      "name": "Iron Shell",
+      "shortName": "Iron",
+      "emoji": "🛡️",
+      "levelRequired": 5,
+      "defense": 15,
+      "voice": "stoic, formal, precise",
+      "description": "Hardened and bureaucratic"
+    },
+    {
+      "index": 2,
+      "name": "Steel Shell",
+      "shortName": "Steel",
+      "emoji": "⚙️",
+      "levelRequired": 10,
+      "defense": 25,
+      "voice": "efficient, mechanical",
+      "description": "Industrial strength protection"
+    },
+    {
+      "index": 3,
+      "name": "Silver Shell",
+      "shortName": "Silver",
+      "emoji": "🥈",
+      "levelRequired": 15,
+      "defense": 35,
+      "voice": "noble, refined",
+      "description": "Rare and valuable"
+    },
+    {
+      "index": 4,
+      "name": "Gold Shell",
+      "shortName": "Gold",
+      "emoji": "🥇",
+      "levelRequired": 25,
+      "defense": 50,
+      "voice": "regal, commanding",
+      "description": "Legendary status"
+    },
+    {
+      "index": 5,
+      "name": "Diamond Shell",
+      "shortName": "Diamond",
+      "emoji": "💎",
+      "levelRequired": 50,
+      "defense": 75,
+      "voice": "wise, mentor-like",
+      "description": "Unbreakable wisdom"
+    }
+  ],
+  "phases": {
+    "softening": {
+      "name": "Softening",
+      "description": "Shell is temporarily soft between tiers",
+      "duration": "variable",
+      "defenseMultiplier": 0.5,
+      "voice": "uncertain, transitioning"
+    },
+    "hardening": {
+      "name": "Hardening",
+      "description": "Shell is solidifying into new tier",
+      "duration": "until XP threshold",
+      "defenseMultiplier": 1.0,
+      "voice": "stable, confident"
+    },
+    "hardened": {
+      "name": "Hardened",
+      "description": "Shell fully formed at current tier",
+      "duration": "permanent until next tier",
+      "defenseMultiplier": 1.2,
+      "voice": "mastery, expertise"
+    }
+  },
+  "stats": {
+    "strength": 10,
+    "wisdom": 12,
+    "speed": 8,
+    "integrity": 100
+  },
+  "milestones": {
+    "nextTitle": "Guardian",
+    "nextTitleProgress": 8,
+    "nextTitleRequired": 25,
+    "nextTier": "Steel",
+    "nextTierLevel": 10,
+    "xpToNextTier": 550
+  }
+}
