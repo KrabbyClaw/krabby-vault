@@ -74,19 +74,60 @@ After restoration, you MUST resupply them:
 | Secret | Purpose | How to Resupply |
 |--------|---------|-----------------|
 | **GitHub PAT** | Push to repository | User provides new token |
-| **MEGA_PASSWORD** | Cloud sync | User provides password |
+| **MEGA_PASSWORD** | Cloud sync | User provides password via env var |
 | **API Keys** | External services | User provides keys |
 
 **The crab cannot function without these secrets.**
 
-**To resupply:**
+### MEGA_PASSWORD Environment Variable (CRITICAL)
+
+The Mega sync **requires** the `MEGA_PASSWORD` environment variable to be set.
+Unlike the GitHub PAT (which is stored in the git remote URL), the Mega password
+must be provided fresh each session.
+
+**Setup:**
 ```bash
-# GitHub PAT (for git push)
+# Set the password (REQUIRED before any Mega operation)
+export MEGA_PASSWORD="your_mega_password"
+
+# Run the setup script
+./mega-env-setup.sh
+
+# Or manually configure rclone
+rclone config create mega mega user joaquintelleria2@gmail.com pass "$MEGA_PASSWORD" --non-interactive
+```
+
+**Verify Mega is working:**
+```bash
+rclone listremotes  # Should show: mega:
+rclone lsd mega:     # Should list your Mega root folder
+```
+
+**Session Lost? Resupply Required!**
+
+If the terminal/session is closed or lost, `MEGA_PASSWORD` disappears.
+You MUST set it again:
+
+```bash
+# After session restart
+export MEGA_PASSWORD="your_mega_password"
+./mega-env-setup.sh  # Or just use rclone directly
+```
+
+**The crab will warn you:**
+```
+❌ MEGA_PASSWORD not set!
+Run: export MEGA_PASSWORD='your_password'
+```
+
+### GitHub PAT (for git push)
+
+```bash
+# Set the remote with your PAT
 git remote set-url origin https://TOKEN@github.com/KrabbyClaw/krabby-vault.git
 
-# Mega credentials (for cloud sync)
-export MEGA_EMAIL='joaquintelleria2@gmail.com'
-export MEGA_PASSWORD='[USER_PROVIDES]'
+# Now git push works automatically
+git push origin master
 ```
 
 ---
