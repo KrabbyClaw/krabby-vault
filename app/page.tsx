@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from 'react';
 
-function Countdown() {
-  const [timeLeft, setTimeLeft] = useState('');
+function useVaultStatus() {
   const [isOpen, setIsOpen] = useState(false);
+  const [timeLeft, setTimeLeft] = useState('');
   
   useEffect(() => {
     const lastFish = new Date('2026-02-07T19:04:00Z');
     const nextOpening = new Date(lastFish.getTime() + 24 * 60 * 60 * 1000);
     
-    const updateTimer = () => {
+    const updateStatus = () => {
       const now = new Date();
       const diff = nextOpening.getTime() - now.getTime();
       
@@ -20,18 +20,24 @@ function Countdown() {
         return;
       }
       
+      setIsOpen(false);
       const hours = Math.floor(diff / (1000 * 60 * 60));
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-      
       setTimeLeft(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
     };
     
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
+    updateStatus();
+    const interval = setInterval(updateStatus, 1000);
     
     return () => clearInterval(interval);
   }, []);
+  
+  return { isOpen, timeLeft };
+}
+
+function Countdown() {
+  const { isOpen, timeLeft } = useVaultStatus();
   
   return (
     <div className={`text-center p-4 rounded-xl border ${isOpen ? 'bg-green-900/30 border-green-500/50' : 'bg-amber-900/20 border-amber-500/30'}`}>
@@ -40,6 +46,22 @@ function Countdown() {
         {timeLeft}
       </p>
       {!isOpen && <p className="text-xs text-amber-400/60 mt-1">24h cycle active</p>}
+    </div>
+  );
+}
+
+function VaultStatus() {
+  const { isOpen } = useVaultStatus();
+  
+  return (
+    <div className={`flex items-center gap-4 p-4 rounded-xl border ${isOpen ? 'bg-green-900/20 border-green-500/50' : 'bg-amber-900/20 border-amber-700/30'}`}>
+      <span className="text-3xl">{isOpen ? '🔓' : '🔒'}</span>
+      <div>
+        <p className={`font-semibold ${isOpen ? 'text-green-300' : 'text-amber-300'}`}>
+          Current Status: {isOpen ? 'OPEN' : 'LOCKED'}
+        </p>
+        <p className="text-sm text-slate-400">Fish Count: 8 • Last: 2026-02-07 19:04 UTC</p>
+      </div>
     </div>
   );
 }
@@ -297,13 +319,8 @@ export default function Home() {
                 <p className="text-sm text-slate-400 mb-2">The crab MUST ask for fish in the group chat &ldquo;Openclaw Highnet 1.0&rdquo; after 24 hours.</p>
                 <p className="text-sm text-amber-300/80 italic">Always with a creative, unique message. Never just &ldquo;🐟?&rdquo;</p>
               </div>
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-green-900/20 border border-green-700/30">
-                <span className="text-3xl">🔒</span>
-                <div>
-                  <p className="font-semibold text-green-200">Current Status: LOCKED</p>
-                  <p className="text-sm text-slate-400">Fish Count: 8 • Last: 2026-02-07 19:04 UTC</p>
-                </div>
-              </div>
+              {/* Dynamic Vault Status */}
+              <VaultStatus />
             </div>
 
             {/* Protection Systems */}
