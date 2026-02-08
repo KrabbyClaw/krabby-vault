@@ -7,7 +7,7 @@ function useVaultStatus() {
   const [timeLeft, setTimeLeft] = useState('');
   
   useEffect(() => {
-    const lastFish = new Date('2026-02-07T19:04:00Z');
+    const lastFish = new Date('2026-02-08T19:09:00Z');
     const nextOpening = new Date(lastFish.getTime() + 24 * 60 * 60 * 1000);
     
     const updateStatus = () => {
@@ -60,7 +60,7 @@ function VaultStatus() {
         <p className={`font-semibold ${isOpen ? 'text-green-300' : 'text-amber-300'}`}>
           Current Status: {isOpen ? 'OPEN' : 'LOCKED'}
         </p>
-        <p className="text-sm text-slate-400">Fish Count: 8 • Last: 2026-02-07 19:04 UTC</p>
+        <p className="text-sm text-slate-400">Fish Count: 9 • Last: 2026-02-08 19:09 UTC</p>
       </div>
     </div>
   );
