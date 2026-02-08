@@ -1,3 +1,49 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
+function Countdown() {
+  const [timeLeft, setTimeLeft] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  
+  useEffect(() => {
+    const lastFish = new Date('2026-02-07T19:04:00Z');
+    const nextOpening = new Date(lastFish.getTime() + 24 * 60 * 60 * 1000);
+    
+    const updateTimer = () => {
+      const now = new Date();
+      const diff = nextOpening.getTime() - now.getTime();
+      
+      if (diff <= 0) {
+        setIsOpen(true);
+        setTimeLeft('VAULT OPEN');
+        return;
+      }
+      
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      setTimeLeft(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+    };
+    
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+  
+  return (
+    <div className={`text-center p-4 rounded-xl border ${isOpen ? 'bg-green-900/30 border-green-500/50' : 'bg-amber-900/20 border-amber-500/30'}`}>
+      <p className="text-xs text-slate-400 mb-1">{isOpen ? 'Vault Status' : 'Next Opening In'}</p>
+      <p className={`text-3xl font-mono font-bold ${isOpen ? 'text-green-400' : 'text-amber-300'}`}>
+        {timeLeft}
+      </p>
+      {!isOpen && <p className="text-xs text-amber-400/60 mt-1">24h cycle active</p>}
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
@@ -242,7 +288,11 @@ export default function Home() {
             <div className="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50">
               <h3 className="text-xl font-semibold text-blue-100 mb-4">🐟 Fish Tax System</h3>
               <p className="text-slate-400 mb-4">A biological ritual where the crab requests tribute. The vault opens 24 hours after the last fish.</p>
-              <div className="p-4 rounded-xl bg-amber-900/20 border border-amber-700/30 mb-4">
+              
+              {/* Countdown Timer */}
+              <Countdown />
+              
+              <div className="p-4 rounded-xl bg-amber-900/20 border border-amber-700/30 mb-4 mt-4">
                 <p className="text-sm text-amber-200 font-semibold mb-1">📜 The Rule:</p>
                 <p className="text-sm text-slate-400 mb-2">The crab MUST ask for fish in the group chat &ldquo;Openclaw Highnet 1.0&rdquo; after 24 hours.</p>
                 <p className="text-sm text-amber-300/80 italic">Always with a creative, unique message. Never just &ldquo;🐟?&rdquo;</p>
@@ -251,7 +301,7 @@ export default function Home() {
                 <span className="text-3xl">🔒</span>
                 <div>
                   <p className="font-semibold text-green-200">Current Status: LOCKED</p>
-                  <p className="text-sm text-slate-400">Fish Count: 8 • Opens in 24h</p>
+                  <p className="text-sm text-slate-400">Fish Count: 8 • Last: 2026-02-07 19:04 UTC</p>
                 </div>
               </div>
             </div>
