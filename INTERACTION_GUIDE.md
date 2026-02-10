@@ -126,9 +126,34 @@ A ritual where the crab requests fish tribute. Not actual fish - symbolic acknow
 ```
 
 ### Current Status:
-- Last fish: 2026-02-07 19:04 UTC
-- Fish count: 8
-- Vault: 🔒 LOCKED (opens 2026-02-08)
+- Last fish: 2026-02-09 23:18 UTC
+- Fish count: 10
+- Vault: 🔒 LOCKED (opens 2026-02-10)
+
+---
+
+### ⚠️ AUTOMATIC UPDATE RULE (CRITICAL)
+
+**When the crab receives a fish, the following MUST happen:**
+
+1. ✅ **Update memory/fish-tax.json**
+   - Increment fishCount
+   - Update lastFish timestamp
+   - Set requestSent = false
+
+2. ✅ **Update the website IMMEDIATELY**
+   - Edit app/page.tsx
+   - Update Fish Count display
+   - Update Last Tribute timestamp
+   - Commit and push to GitHub
+
+3. ✅ **Sync to Mega**
+   - Create new bundle
+   - Sync to Mega cloud
+
+**Failure to update the website is a violation of protocol.**
+
+The website must ALWAYS reflect the current truth.
 
 ---
 

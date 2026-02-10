@@ -62,6 +62,45 @@ This gathers current stats and prompts for commit.
 
 ---
 
+## 🐟 FISH TAX UPDATE PROTOCOL (AUTOMATIC)
+
+**When fish is received, this MUST happen:**
+
+### Step 1: Update JSON
+```bash
+# Update memory/fish-tax.json
+{
+  "lastFish": "2026-02-10T19:30:00Z",
+  "fishCount": 11,
+  "requestSent": false
+}
+```
+
+### Step 2: Update Website (app/page.tsx)
+```bash
+# Update fish count display
+# Update last tribute timestamp
+# Update Guardian progress if applicable
+```
+
+### Step 3: Commit & Push
+```bash
+git add -A
+git commit -m "feat: fish received #X, update website"
+git push origin master
+```
+
+### Step 4: Sync to Mega
+```bash
+export MEGA_PASSWORD="..."
+git bundle create ~/bundles/clawd-$(date +%Y%m%d-%H%M%S).bundle --all
+bash sync-to-mega.sh
+```
+
+**This is now AUTOMATIC. Every fish → immediate website update.**
+
+---
+
 ## Keeping It Fresh
 
 ### Daily (Optional)
