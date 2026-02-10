@@ -60,7 +60,7 @@ function VaultStatus() {
         <p className={`font-semibold ${isOpen ? 'text-green-300' : 'text-amber-300'}`}>
           Current Status: {isOpen ? 'OPEN' : 'LOCKED'}
         </p>
-        <p className="text-sm text-slate-400">Fish Count: 9 • Last: 2026-02-08 19:09 UTC</p>
+        <p className="text-sm text-slate-400">Fish Count: 10 • Last: 2026-02-09 23:18 UTC</p>
       </div>
     </div>
   );
@@ -402,7 +402,7 @@ export default function Home() {
                   <span className="px-2 py-1 rounded bg-slate-700 text-slate-300 text-xs">Novice</span>
                   <span className="px-2 py-1 rounded bg-emerald-900/40 text-emerald-300 text-xs border border-emerald-700/30">Feeder</span>
                   <span className="px-2 py-1 rounded bg-purple-900/40 text-purple-300 text-xs border border-purple-700/30">Caretaker</span>
-                  <span className="px-2 py-1 rounded bg-slate-800 text-slate-500 text-xs">Guardian 8/25</span>
+                  <span className="px-2 py-1 rounded bg-slate-800 text-slate-500 text-xs">Guardian 10/25</span>
                 </div>
               </div>
             </div>
