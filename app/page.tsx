@@ -88,8 +88,8 @@ export default function Home() {
           </p>
           
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <span className="px-4 py-2 rounded-full bg-amber-900/30 border border-amber-500/50 text-sm text-amber-300">
-              🏆 The Vault Keeper
+            <span className="px-4 py-2 rounded-full bg-blue-900/30 border border-blue-500/50 text-sm text-blue-300">
+              🐟 Fish Hoarder
             </span>
             <span className="px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-sm text-emerald-300">
               🛡️ Iron Shell
@@ -328,7 +328,7 @@ export default function Home() {
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">🐟</span>
                     <div>
-                      <p className="text-sm text-blue-300 font-semibold">Achievement Unlocked!</p>
+                      <p className="text-sm text-blue-300 font-semibold">New Title Unlocked!</p>
                       <p className="text-xs text-slate-400">Fish Hoarder - 10 fish accumulated</p>
                     </div>
                   </div>
@@ -400,28 +400,21 @@ export default function Home() {
               {/* Current Title */}
               <div className="pt-4 border-t border-slate-700/50 mb-4">
                 <p className="text-sm text-slate-400 mb-2">Current Title</p>
-                <div className="p-3 rounded-lg bg-amber-900/30 border border-amber-500/30">
-                  <p className="text-lg font-bold text-amber-300">🏆 The Vault Keeper</p>
-                  <p className="text-xs text-slate-400">Granted by Highnet • Master of the vault</p>
+                <div className="p-4 rounded-lg bg-blue-900/30 border border-blue-500/30">
+                  <p className="text-2xl font-bold text-blue-300">🐟 Fish Hoarder</p>
+                  <p className="text-sm text-slate-300 mt-1">Accumulated 10 fish in the vault</p>
+                  <p className="text-xs text-slate-500 mt-2">Earned: 2026-02-09</p>
                 </div>
               </div>
               
-              {/* Latest Achievement */}
+              {/* Other Unlocked Titles */}
               <div className="pt-4 border-t border-slate-700/50 mb-4">
-                <p className="text-sm text-slate-400 mb-2">Latest Achievement</p>
-                <div className="p-3 rounded-lg bg-blue-900/30 border border-blue-500/30">
-                  <p className="text-lg font-bold text-blue-300">🐟 Fish Hoarder</p>
-                  <p className="text-xs text-slate-400">Accumulated 10 fish in the vault • 2026-02-09</p>
-                </div>
-              </div>
-              
-              {/* Other Titles */}
-              <div className="pt-4 border-t border-slate-700/50">
-                <p className="text-sm text-slate-400 mb-2">Other Titles</p>
+                <p className="text-sm text-slate-400 mb-2">Other Unlocked Titles</p>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-2 py-1 rounded bg-slate-700 text-slate-300 text-xs">Novice</span>
                   <span className="px-2 py-1 rounded bg-emerald-900/40 text-emerald-300 text-xs border border-emerald-700/30">Feeder</span>
                   <span className="px-2 py-1 rounded bg-purple-900/40 text-purple-300 text-xs border border-purple-700/30">Caretaker</span>
+                  <span className="px-2 py-1 rounded bg-amber-900/40 text-amber-300 text-xs border border-amber-700/30">The Vault Keeper</span>
                   <span className="px-2 py-1 rounded bg-slate-800 text-slate-500 text-xs">Guardian 10/25</span>
                 </div>
               </div>

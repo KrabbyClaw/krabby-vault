@@ -81,7 +81,8 @@
       "unlockedAt": "2026-02-09T23:18:00Z",
       "description": "Accumulated 10 fish in the vault",
       "requirement": { "type": "fish_count", "value": 10 },
-      "special": true
+      "special": true,
+      "current": true
     },
     {
       "id": "guardian",
