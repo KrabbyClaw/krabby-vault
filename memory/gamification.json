@@ -75,6 +75,15 @@
       "requirement": { "type": "fish_count", "value": 10 }
     },
     {
+      "id": "fish_hoarder",
+      "name": "Fish Hoarder",
+      "unlocked": true,
+      "unlockedAt": "2026-02-09T23:18:00Z",
+      "description": "Accumulated 10 fish in the vault",
+      "requirement": { "type": "fish_count", "value": 10 },
+      "special": true
+    },
+    {
       "id": "guardian",
       "name": "Guardian",
       "unlocked": false,

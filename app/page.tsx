@@ -60,7 +60,7 @@ function VaultStatus() {
         <p className={`font-semibold ${isOpen ? 'text-green-300' : 'text-amber-300'}`}>
           Current Status: {isOpen ? 'OPEN' : 'LOCKED'}
         </p>
-        <p className="text-sm text-slate-400">Fish Count: 10 • Last: 2026-02-09 23:18 UTC</p>
+        <p className="text-sm text-slate-400">Fish Count: 10 • Last: 2026-02-09 23:18:00 UTC</p>
       </div>
     </div>
   );
@@ -324,21 +324,21 @@ export default function Home() {
               
               {/* XP Gain Notifications */}
               <div className="mt-4 space-y-2">
+                <div className="p-3 rounded-lg bg-blue-900/20 border border-blue-500/30">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">🐟</span>
+                    <div>
+                      <p className="text-sm text-blue-300 font-semibold">Achievement Unlocked!</p>
+                      <p className="text-xs text-slate-400">Fish Hoarder - 10 fish accumulated</p>
+                    </div>
+                  </div>
+                </div>
                 <div className="p-3 rounded-lg bg-purple-900/20 border border-purple-500/30">
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">💎</span>
                     <div>
-                      <p className="text-sm text-purple-300 font-semibold">+100 XP gained!</p>
+                      <p className="text-sm text-purple-300 font-semibold">+50 XP gained!</p>
                       <p className="text-xs text-slate-400">Fish tribute #10 from Manu</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-3 rounded-lg bg-blue-900/20 border border-blue-500/30">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">🏆</span>
-                    <div>
-                      <p className="text-sm text-blue-300 font-semibold">Achievement Unlocked!</p>
-                      <p className="text-xs text-slate-400">The Vault Keeper - Granted by Highnet</p>
                     </div>
                   </div>
                 </div>
@@ -403,6 +403,15 @@ export default function Home() {
                 <div className="p-3 rounded-lg bg-amber-900/30 border border-amber-500/30">
                   <p className="text-lg font-bold text-amber-300">🏆 The Vault Keeper</p>
                   <p className="text-xs text-slate-400">Granted by Highnet • Master of the vault</p>
+                </div>
+              </div>
+              
+              {/* Latest Achievement */}
+              <div className="pt-4 border-t border-slate-700/50 mb-4">
+                <p className="text-sm text-slate-400 mb-2">Latest Achievement</p>
+                <div className="p-3 rounded-lg bg-blue-900/30 border border-blue-500/30">
+                  <p className="text-lg font-bold text-blue-300">🐟 Fish Hoarder</p>
+                  <p className="text-xs text-slate-400">Accumulated 10 fish in the vault • 2026-02-09</p>
                 </div>
               </div>
               
