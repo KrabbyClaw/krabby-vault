@@ -7,7 +7,7 @@ function useVaultStatus() {
   const [timeLeft, setTimeLeft] = useState('');
   
   useEffect(() => {
-    const lastFish = new Date('2026-02-08T19:09:00Z');
+    const lastFish = new Date('2026-02-09T23:18:00Z');
     const nextOpening = new Date(lastFish.getTime() + 24 * 60 * 60 * 1000);
     
     const updateStatus = () => {
