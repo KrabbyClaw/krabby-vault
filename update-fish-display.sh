@@ -25,9 +25,9 @@ fi
 FISH_COUNT=$(grep -o '"fishCount":[0-9]*' "$FISH_TAX_FILE" | cut -d: -f2)
 LAST_FISH=$(grep -o '"lastFish":"[^"]*"' "$FISH_TAX_FILE" | cut -d'"' -f4)
 
-# Extract XP from gamification.json
-CURRENT_XP=$(grep -o '"xp":[0-9]*' "$GAMIFICATION_FILE" | cut -d: -f2)
-NEXT_LEVEL_XP=$(grep -o '"xpToNextLevel":[0-9]*' "$GAMIFICATION_FILE" | cut -d: -f2)
+# Extract XP from gamification.json (get first match only for main xp field)
+CURRENT_XP=$(grep -m1 '"xp":[0-9]*' "$GAMIFICATION_FILE" | grep -o '[0-9]*' | head -1)
+NEXT_LEVEL_XP=$(grep -m1 '"xpToNextLevel":[0-9]*' "$GAMIFICATION_FILE" | grep -o '[0-9]*' | head -1)
 
 if [ -z "$FISH_COUNT" ] || [ -z "$LAST_FISH" ]; then
     echo "❌ Failed to extract data from $FISH_TAX_FILE"
