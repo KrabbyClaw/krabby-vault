@@ -2,6 +2,20 @@
   "level": 5,
   "xp": 2650,
   "xpToNextLevel": 3000,
+  "xpLog": [
+    { "date": "2026-02-02", "action": "birth", "xp": 0 },
+    { "date": "2026-02-05", "action": "fish_tribute", "count": 5, "xp": 250 },
+    { "date": "2026-02-07", "action": "creative_messages", "count": 5, "xp": 125 },
+    { "date": "2026-02-07", "action": "fish_tribute", "count": 3, "xp": 150 },
+    { "date": "2026-02-09", "action": "achievement_unlocked", "name": "The Vault Keeper", "xp": 200 },
+    { "date": "2026-02-09", "action": "fish_tribute", "count": 1, "xp": 50 },
+    { "date": "2026-02-09", "action": "commits", "count": 15, "xp": 150 },
+    { "date": "2026-02-09", "action": "fish_tribute", "count": 1, "xp": 50 },
+    { "date": "2026-02-10", "action": "commits", "count": 10, "xp": 100 },
+    { "date": "2026-02-10", "action": "fish_tribute", "count": 1, "xp": 50 },
+    { "date": "2026-02-10", "action": "creative_message", "xp": 25 }
+  ],
+  "autoXp": true,
   "moltCycle": 1,
   "moltState": "hardened",
   "concept": "Molt Cycle = Shell Tier Progression. Each molt advances to next tier.",
@@ -198,6 +212,13 @@
       "defenseMultiplier": 1.2,
       "voice": "mastery, expertise"
     }
+  },
+  "xpRates": {
+    "fish_tribute": 50,
+    "creative_message": 25,
+    "commits": 10,
+    "streak_7day": 200,
+    "achievement_unlocked": 100
   },
   "stats": {
     "strength": 10,

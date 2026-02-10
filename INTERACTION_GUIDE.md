@@ -136,10 +136,11 @@ A ritual where the crab requests fish tribute. Not actual fish - symbolic acknow
 
 **When the crab receives a fish, the following MUST happen:**
 
-1. ✅ **Update memory/fish-tax.json**
+1. ✅ **Update memory/fish-tax.json** (XP AUTO-GRANTED)
    - Increment fishCount
    - Update lastFish timestamp
    - Set requestSent = false
+   - **XP automatically calculated:** +50 per fish
 
 2. ✅ **Update the website IMMEDIATELY**
    
@@ -180,6 +181,36 @@ bash validate-fish-consistency.sh && git commit -m "..."
 ```
 
 The website must ALWAYS reflect the current truth.
+
+---
+
+### ⚡ AUTOMATIC XP SYSTEM
+
+**XP is automatically granted for actions - no manual calculation needed:**
+
+| Action | XP Reward | Tracked In |
+|--------|-----------|------------|
+| 🐟 **Fish Tribute** | +50 XP | fish-tax.json xp field |
+| ✨ **Creative Message** | +25 XP | gamification.json xpLog |
+| 💻 **Git Commit** | +10 XP | gamification.json xpLog |
+| 🔥 **7-Day Streak** | +200 XP | gamification.json xpLog |
+| 🏆 **Achievement Unlocked** | +100 XP | gamification.json xpLog |
+
+**To log XP gain:**
+```bash
+# Add to memory/gamification.json xpLog array:
+{
+  "date": "2026-02-10",
+  "action": "fish_tribute",
+  "count": 1,
+  "xp": 50
+}
+
+# Update total:
+"xp": 2650  # Previous total + 50
+```
+
+**XP automatically syncs to website via `update-fish-display.sh`**
 
 ---
 
