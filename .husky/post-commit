@@ -6,7 +6,16 @@ REPO_DIR="$(git rev-parse --show-toplevel)"
 BUNDLE_NAME="clawd-$(date +%Y%m%d-%H%M%S).bundle"
 BUNDLE_DIR="$HOME/krabby-vault-backups"
 
-echo "🦀 Creating bundle..."
+echo "🦀 Post-commit hook starting..."
+
+# Validate fish data consistency
+if [ -f "$REPO_DIR/validate-fish-consistency.sh" ]; then
+    echo "🔍 Validating fish data consistency..."
+    if ! bash "$REPO_DIR/validate-fish-consistency.sh"; then
+        echo "⚠️  WARNING: Fish data inconsistent! Run: bash update-fish-display.sh"
+        # Don't exit - just warn, let user fix manually
+    fi
+fi
 
 # Create bundle directory
 mkdir -p "$BUNDLE_DIR"

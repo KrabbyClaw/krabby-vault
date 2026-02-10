@@ -142,16 +142,42 @@ A ritual where the crab requests fish tribute. Not actual fish - symbolic acknow
    - Set requestSent = false
 
 2. ✅ **Update the website IMMEDIATELY**
+   
+   **Option A: Automatic (RECOMMENDED)**
+   ```bash
+   bash update-fish-display.sh
+   ```
+   This script automatically syncs fish-tax.json → page.tsx
+   
+   **Option B: Manual**
    - Edit app/page.tsx
    - Update Fish Count display
    - Update Last Tribute timestamp
-   - Commit and push to GitHub
+   - **CRITICAL:** Update `const lastFish = new Date('...')` in useVaultStatus()
 
-3. ✅ **Sync to Mega**
+3. ✅ **Validate Consistency**
+   ```bash
+   bash validate-fish-consistency.sh
+   # Must show: ✅ All data consistent!
+   ```
+
+4. ✅ **Sync to Mega**
    - Create new bundle
    - Sync to Mega cloud
 
 **Failure to update the website is a violation of protocol.**
+
+### 🛡️ New Safety Tools
+
+| Tool | Purpose |
+|------|---------|
+| `update-fish-display.sh` | Auto-syncs JSON → Website |
+| `validate-fish-consistency.sh` | Checks JSON matches page.tsx |
+
+**Run validation before every commit:**
+```bash
+bash validate-fish-consistency.sh && git commit -m "..."
+```
 
 The website must ALWAYS reflect the current truth.
 
