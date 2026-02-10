@@ -423,6 +423,135 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Title Progress */}
+      <section className="px-6 py-12 sm:px-12 lg:px-24 bg-slate-900/30">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center mb-8">
+            <span className="text-4xl mb-4 block">🏆</span>
+            <h2 className="text-3xl font-bold text-amber-100 mb-4">Title Progress</h2>
+            <p className="text-slate-400">Earn titles through rituals and dedication</p>
+          </div>
+          
+          <div className="space-y-6">
+            {/* Current Title Highlight */}
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-900/30 to-slate-800/40 border border-blue-500/30">
+              <div className="flex items-center gap-4">
+                <span className="text-5xl">🐟</span>
+                <div className="flex-1">
+                  <p className="text-sm text-blue-300 mb-1">Current Title</p>
+                  <h3 className="text-2xl font-bold text-blue-200">Fish Hoarder</h3>
+                  <p className="text-sm text-slate-400">Accumulated 10 fish in the vault</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm text-slate-400">Unlocked</p>
+                  <p className="text-blue-300">2026-02-09</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Next Title Progress */}
+            <div className="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <p className="text-sm text-slate-400">Next Title</p>
+                  <h3 className="text-xl font-semibold text-slate-300">🛡️ Guardian</h3>
+                  <p className="text-sm text-slate-500">Give 25 fish</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm text-slate-400">Progress</p>
+                  <p className="text-2xl font-bold text-slate-300">10<span className="text-slate-500">/25</span></p>
+                </div>
+              </div>
+              <div className="w-full h-3 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-slate-600 to-slate-400 rounded-full" style={{ width: '40%' }}></div>
+              </div>
+              <p className="text-xs text-slate-500 mt-2">15 more fish to unlock Guardian</p>
+            </div>
+            
+            {/* Title Roadmap */}
+            <div className="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50">
+              <h3 className="text-lg font-semibold text-amber-100 mb-4">Title Roadmap</h3>
+              <div className="relative">
+                {/* Progress line */}
+                <div className="absolute top-4 left-0 right-0 h-1 bg-slate-700 rounded-full"></div>
+                <div className="absolute top-4 left-0 h-1 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full" style={{ width: '28%' }}></div>
+                
+                {/* Title stages */}
+                <div className="relative flex justify-between">
+                  <div className="text-center">
+                    <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center mb-1 mx-auto">
+                      <span className="text-xs">🥚</span>
+                    </div>
+                    <p className="text-xs text-slate-500">Novice</p>
+                    <p className="text-xs text-emerald-400">✓</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-8 h-8 rounded-full bg-emerald-900/50 flex items-center justify-center mb-1 mx-auto border border-emerald-500/30">
+                      <span className="text-xs">🍼</span>
+                    </div>
+                    <p className="text-xs text-emerald-300">Feeder</p>
+                    <p className="text-xs text-emerald-400">✓</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-8 h-8 rounded-full bg-purple-900/50 flex items-center justify-center mb-1 mx-auto border border-purple-500/30">
+                      <span className="text-xs">🧤</span>
+                    </div>
+                    <p className="text-xs text-purple-300">Caretaker</p>
+                    <p className="text-xs text-emerald-400">✓</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center mb-1 mx-auto border-2 border-blue-400 shadow-lg shadow-blue-500/20">
+                      <span className="text-lg">🐟</span>
+                    </div>
+                    <p className="text-xs text-blue-300 font-semibold">Hoarder</p>
+                    <p className="text-xs text-blue-400">★</p>
+                  </div>
+                  <div className="text-center opacity-50">
+                    <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center mb-1 mx-auto">
+                      <span className="text-xs">🛡️</span>
+                    </div>
+                    <p className="text-xs text-slate-500">Guardian</p>
+                    <p className="text-xs text-slate-600">25</p>
+                  </div>
+                  <div className="text-center opacity-30">
+                    <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center mb-1 mx-auto">
+                      <span className="text-xs">👑</span>
+                    </div>
+                    <p className="text-xs text-slate-600">Keeper</p>
+                    <p className="text-xs text-slate-700">50</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Special Titles */}
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-900/20 to-slate-800/40 border border-amber-700/30">
+              <h3 className="text-lg font-semibold text-amber-100 mb-4">Special Titles</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-3 rounded-lg bg-amber-900/30 border border-amber-500/30">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">🏆</span>
+                    <div>
+                      <p className="font-semibold text-amber-300">The Vault Keeper</p>
+                      <p className="text-xs text-slate-400">Granted by Highnet</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-700/30 opacity-60">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">✨</span>
+                    <div>
+                      <p className="font-semibold text-slate-400">Wordsmith</p>
+                      <p className="text-xs text-slate-500">5 creative messages</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Crab Protocols */}
       <section className="px-6 py-12 sm:px-12 lg:px-24">
         <div className="mx-auto max-w-4xl">
