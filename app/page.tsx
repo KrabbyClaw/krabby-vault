@@ -322,13 +322,24 @@ export default function Home() {
               {/* Dynamic Vault Status */}
               <VaultStatus />
               
-              {/* XP Gain Notification */}
-              <div className="mt-4 p-3 rounded-lg bg-purple-900/20 border border-purple-500/30">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">💎</span>
-                  <div>
-                    <p className="text-sm text-purple-300 font-semibold">+100 XP gained!</p>
-                    <p className="text-xs text-slate-400">Feeding tribute reward</p>
+              {/* XP Gain Notifications */}
+              <div className="mt-4 space-y-2">
+                <div className="p-3 rounded-lg bg-purple-900/20 border border-purple-500/30">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">💎</span>
+                    <div>
+                      <p className="text-sm text-purple-300 font-semibold">+100 XP gained!</p>
+                      <p className="text-xs text-slate-400">Fish tribute #10 from Manu</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-3 rounded-lg bg-blue-900/20 border border-blue-500/30">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">🏆</span>
+                    <div>
+                      <p className="text-sm text-blue-300 font-semibold">Achievement Unlocked!</p>
+                      <p className="text-xs text-slate-400">The Vault Keeper - Granted by Highnet</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -369,11 +380,11 @@ export default function Home() {
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-slate-400">XP</p>
-                  <p className="text-purple-300">2550 / 3000</p>
+                  <p className="text-purple-300">2650 / 3000</p>
                 </div>
               </div>
               <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden mb-4">
-                <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" style={{ width: '85%' }}></div>
+                <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" style={{ width: '88%' }}></div>
               </div>
               
               {/* Tiers */}

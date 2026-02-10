@@ -1,6 +1,6 @@
 {
   "level": 5,
-  "xp": 2450,
+  "xp": 2650,
   "xpToNextLevel": 3000,
   "moltCycle": 1,
   "moltState": "hardened",
@@ -207,7 +207,7 @@
   },
   "milestones": {
     "nextTitle": "Guardian",
-    "nextTitleProgress": 8,
+    "nextTitleProgress": 10,
     "nextTitleRequired": 25,
     "nextTier": "Steel",
     "nextTierLevel": 10,
