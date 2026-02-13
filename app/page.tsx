@@ -281,10 +281,10 @@ function TitlesShowcase() {
       <div className="p-4 rounded-xl bg-slate-800/40 border border-slate-700/50">
         <div className="flex items-center justify-between mb-2">
           <span className="text-slate-300">🛡️ Guardian</span>
-          <span className="text-sm text-slate-500">10/25 fish</span>
+          <span className="text-sm text-slate-500">11/25 fish</span>
         </div>
-        <ProgressBar current={10} max={25} color="slate" size="sm" />
-        <p className="text-xs text-slate-500 mt-2">15 more fish to unlock</p>
+        <ProgressBar current={11} max={25} color="slate" size="sm" />
+        <p className="text-xs text-slate-500 mt-2">14 more fish to unlock</p>
       </div>
     </div>
   );
