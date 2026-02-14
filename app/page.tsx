@@ -196,56 +196,6 @@ function VaultDashboard() {
   );
 }
 
-function LevelProgression() {
-  const xpPercent = (CRAB_DATA.xp / CRAB_DATA.xpMax) * 100;
-  const tiers = [
-    { name: "Soft", icon: "🥚", level: 1, xp: 0 },
-    { name: "Iron", icon: "🛡️", level: 5, xp: 2000, current: true },
-    { name: "Steel", icon: "⚙️", level: 6, xp: 3000 },
-    { name: "Silver", icon: "🥈", level: 7, xp: 5000 },
-    { name: "Gold", icon: "🥇", level: 8, xp: 8000 },
-    { name: "Diamond", icon: "💎", level: 9, xp: 12000 },
-  ];
-  
-  return (
-    <div className="space-y-4">
-      {/* Current Stats */}
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm text-slate-400">Current Shell</p>
-          <p className="text-xl font-bold text-amber-300">{tiers.find(t => t.current)?.icon} {CRAB_DATA.shell} • Level {CRAB_DATA.level}</p>
-        </div>
-        <div className="text-right">
-          <p className="text-sm text-slate-400">Experience</p>
-          <p className="text-xl font-bold text-purple-300">{CRAB_DATA.xp.toLocaleString()} <span className="text-slate-500">/ {CRAB_DATA.xpMax.toLocaleString()}</span></p>
-        </div>
-      </div>
-      
-      {/* XP Bar */}
-      <ProgressBar current={CRAB_DATA.xp} max={CRAB_DATA.xpMax} color="purple" size="lg" />
-      <p className="text-xs text-slate-500 text-right">{Math.round(xpPercent)}% to next tier</p>
-      
-      {/* Tier Roadmap */}
-      <div className="relative pt-6">
-        <div className="absolute top-8 left-0 right-0 h-1 bg-slate-800 rounded-full" />
-        <div className="absolute top-8 left-0 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 rounded-full" style={{ width: '40%' }} />
-        
-        <div className="relative flex justify-between">
-          {tiers.map((tier) => (
-            <div key={tier.name} className={`text-center ${tier.current ? 'opacity-100' : tier.level < 5 ? 'opacity-70' : 'opacity-40'}`}>
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg mb-1 mx-auto ${tier.current ? 'bg-amber-500/30 border-2 border-amber-400 shadow-lg shadow-amber-500/20' : 'bg-slate-800 border border-slate-700'}`}>
-                {tier.icon}
-              </div>
-              <p className={`text-xs ${tier.current ? 'text-amber-300 font-semibold' : 'text-slate-500'}`}>{tier.name}</p>
-              {tier.current && <p className="text-xs text-amber-400">★</p>}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function TitlesShowcase() {
   const currentTitle = CRAB_DATA.titles.find(t => t.current);
   const unlockedTitles = CRAB_DATA.titles.filter(t => t.earned);
@@ -351,14 +301,6 @@ export default function Home() {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8">
           {/* Left Column: Progression */}
           <div className="space-y-8">
-            {/* Shell Progression */}
-            <div className="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50">
-              <h2 className="text-xl font-bold text-slate-200 mb-4 flex items-center gap-2">
-                🐚 Shell Progression
-              </h2>
-              <LevelProgression />
-            </div>
-            
             {/* Titles */}
             <div className="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50">
               <h2 className="text-xl font-bold text-slate-200 mb-4 flex items-center gap-2">
