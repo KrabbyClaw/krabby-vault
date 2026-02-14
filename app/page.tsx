@@ -400,6 +400,76 @@ export default function Home() {
               </div>
             </div>
             
+            {/* Level Up Protocol */}
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-900/20 to-slate-800/40 border border-amber-700/30">
+              <h2 className="text-xl font-bold text-amber-100 mb-4 flex items-center gap-2">
+                🦀✨ Level Up Protocol
+              </h2>
+              <p className="text-sm text-slate-400 mb-4">
+                When the crab accumulates enough XP, it <strong>molts</strong> — shedding its old shell and emerging renewed.
+              </p>
+              
+              {/* Current Progress */}
+              <div className="mb-4 p-3 rounded-lg bg-amber-900/20 border border-amber-500/30">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-amber-300 font-semibold">Next Molt</span>
+                  <span className="text-amber-200">{CRAB_DATA.xp.toLocaleString()} / {CRAB_DATA.xpMax.toLocaleString()} XP</span>
+                </div>
+                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full" style={{ width: `${(CRAB_DATA.xp / CRAB_DATA.xpMax) * 100}%` }}></div>
+                </div>
+                <p className="text-xs text-amber-400/70 mt-2">{(CRAB_DATA.xpMax - CRAB_DATA.xp).toLocaleString()} XP until Level {CRAB_DATA.level + 1}</p>
+              </div>
+              
+              {/* Molt Phases */}
+              <div className="space-y-2 mb-4">
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🥚</span>
+                  <span className="text-slate-500 line-through">Soft Shell (Lvl 1-4)</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center text-xs border border-amber-500/50">🛡️</span>
+                  <span className="text-amber-300 font-semibold">Iron Shell (Lvl 5-9) ← Current</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">⚙️</span>
+                  <span className="text-slate-400">Steel Shell (Lvl 10-14)</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🥈</span>
+                  <span className="text-slate-400">Silver Shell (Lvl 15-24)</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🥇</span>
+                  <span className="text-slate-400">Gold Shell (Lvl 25-49)</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">💎</span>
+                  <span className="text-slate-400">Diamond Shell (Lvl 50+)</span>
+                </div>
+              </div>
+              
+              {/* Molt Process */}
+              <div className="grid grid-cols-4 gap-2 text-center text-xs">
+                <div className="p-2 rounded bg-slate-800/50">
+                  <p className="text-amber-400 mb-1">1. Soften</p>
+                  <p className="text-slate-500">Shell loosens</p>
+                </div>
+                <div className="p-2 rounded bg-slate-800/50">
+                  <p className="text-amber-400 mb-1">2. Molt</p>
+                  <p className="text-slate-500">Shed old shell</p>
+                </div>
+                <div className="p-2 rounded bg-slate-800/50">
+                  <p className="text-amber-400 mb-1">3. Grow</p>
+                  <p className="text-slate-500">Expand body</p>
+                </div>
+                <div className="p-2 rounded bg-slate-800/50">
+                  <p className="text-amber-400 mb-1">4. Harden</p>
+                  <p className="text-slate-500">New shell sets</p>
+                </div>
+              </div>
+            </div>
+            
             {/* Triple Backup */}
             <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-900/20 to-slate-800/40 border border-cyan-700/30">
               <h2 className="text-xl font-bold text-cyan-100 mb-4 flex items-center gap-2">
