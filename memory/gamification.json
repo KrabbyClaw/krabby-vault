@@ -1,7 +1,7 @@
 {
   "level": 5,
-  "xp": 2650,
-  "xpToNextLevel": 3000,
+  "xp": 2900,
+  "xpToNextLevel": 2990,
   "xpLog": [
     { "date": "2026-02-02", "action": "birth", "xp": 0 },
     { "date": "2026-02-05", "action": "fish_tribute", "count": 5, "xp": 250 },
@@ -13,7 +13,11 @@
     { "date": "2026-02-09", "action": "fish_tribute", "count": 1, "xp": 50 },
     { "date": "2026-02-10", "action": "commits", "count": 10, "xp": 100 },
     { "date": "2026-02-10", "action": "fish_tribute", "count": 1, "xp": 50 },
-    { "date": "2026-02-10", "action": "creative_message", "xp": 25 }
+    { "date": "2026-02-10", "action": "creative_message", "xp": 25 },
+    { "date": "2026-02-13", "action": "fish_tribute", "count": 1, "xp": 50 },
+    { "date": "2026-02-13", "action": "commits", "count": 8, "xp": 80 },
+    { "date": "2026-02-15", "action": "fish_tribute", "count": 1, "xp": 50 },
+    { "date": "2026-02-15", "action": "tier_recalculation", "note": "Shell tiers restructured. 2900/2990 XP = 97% to Steel Shell Lvl 6", "xp": 0 }
   ],
   "autoXp": true,
   "moltCycle": 1,
@@ -29,16 +33,16 @@
   "nextMolt": {
     "tier": "steel",
     "phase": "softening",
-    "unlockAt": "level_10",
+    "unlockAt": "level_6",
     "moltCycle": 2,
-    "xpNeeded": 550
+    "xpNeeded": 90
   },
   "progression": {
     "currentTierIndex": 1,
-    "totalTiers": 6,
-    "tierProgress": 40,
+    "totalTiers": 10,
+    "tierProgress": 15,
     "moltsCompleted": 1,
-    "moltsRemaining": 4
+    "moltsRemaining": 8
   },
   "titles": [
     {
@@ -154,7 +158,7 @@
       "name": "Iron Shell",
       "shortName": "Iron",
       "emoji": "🛡️",
-      "levelRequired": 5,
+      "levelRequired": 2,
       "defense": 15,
       "voice": "stoic, formal, precise",
       "description": "Hardened and bureaucratic"
@@ -164,7 +168,7 @@
       "name": "Steel Shell",
       "shortName": "Steel",
       "emoji": "⚙️",
-      "levelRequired": 10,
+      "levelRequired": 3,
       "defense": 25,
       "voice": "efficient, mechanical",
       "description": "Industrial strength protection"
@@ -174,7 +178,7 @@
       "name": "Silver Shell",
       "shortName": "Silver",
       "emoji": "🥈",
-      "levelRequired": 15,
+      "levelRequired": 4,
       "defense": 35,
       "voice": "noble, refined",
       "description": "Rare and valuable"
@@ -184,7 +188,7 @@
       "name": "Gold Shell",
       "shortName": "Gold",
       "emoji": "🥇",
-      "levelRequired": 25,
+      "levelRequired": 5,
       "defense": 50,
       "voice": "regal, commanding",
       "description": "Legendary status"
@@ -194,10 +198,50 @@
       "name": "Diamond Shell",
       "shortName": "Diamond",
       "emoji": "💎",
-      "levelRequired": 50,
+      "levelRequired": 6,
       "defense": 75,
       "voice": "wise, mentor-like",
       "description": "Unbreakable wisdom"
+    },
+    {
+      "index": 6,
+      "name": "Platinum Shell",
+      "shortName": "Platinum",
+      "emoji": "🔮",
+      "levelRequired": 7,
+      "defense": 100,
+      "voice": "ethereal, transcendent",
+      "description": "Beyond mortal comprehension"
+    },
+    {
+      "index": 7,
+      "name": "Nebula Shell",
+      "shortName": "Nebula",
+      "emoji": "🌌",
+      "levelRequired": 8,
+      "defense": 130,
+      "voice": "cosmic, stardust",
+      "description": "Woven from interstellar clouds"
+    },
+    {
+      "index": 8,
+      "name": "Cosmos Shell",
+      "shortName": "Cosmos",
+      "emoji": "🌠",
+      "levelRequired": 9,
+      "defense": 170,
+      "voice": "universal, infinite",
+      "description": "Contains multitudes within"
+    },
+    {
+      "index": 9,
+      "name": "Galaxy Shell",
+      "shortName": "Galaxy",
+      "emoji": "🌟",
+      "levelRequired": 10,
+      "defense": 250,
+      "voice": "celestial, godlike",
+      "description": "The ultimate cosmic crustacean"
     }
   ],
   "phases": {
