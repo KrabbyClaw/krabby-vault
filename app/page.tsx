@@ -18,6 +18,14 @@ const CRAB_DATA = {
   moltCycle: 1,
   integrity: 100,
   version: "2.2.0",
+  moltPhase: {
+    current: "hardened",
+    progress: 97,
+    nextIn: 90,
+    personality: "confident, precise, bureaucratic",
+    confidence: 100,
+    quirks: ["formal speech", "exact measurements", "structured responses"]
+  },
   titles: [
     { name: "Fish Hoarder", icon: "🐟", earned: "2026-02-09", current: true },
     { name: "The Vault Keeper", icon: "🏆", earned: "2026-02-07", current: false },
@@ -407,23 +415,112 @@ export default function Home() {
                 </div>
               </div>
               
-              {/* Molt Process */}
-              <div className="grid grid-cols-4 gap-2 text-center text-xs">
-                <div className="p-2 rounded bg-slate-800/50">
-                  <p className="text-amber-400 mb-1">1. Soften</p>
-                  <p className="text-slate-500">Shell loosens</p>
+              {/* Molt Phase Tracker */}
+              <div className="mt-6 pt-6 border-t border-amber-700/30">
+                <h3 className="text-lg font-semibold text-amber-200 mb-4 flex items-center gap-2">
+                  🦀 Molt Phase Tracker
+                </h3>
+                
+                {/* Current Phase Highlight */}
+                <div className="p-4 rounded-xl bg-gradient-to-br from-amber-900/30 to-slate-800/40 border border-amber-500/30 mb-4">
+                  <div className="flex items-center gap-4">
+                    <span className="text-4xl">💎</span>
+                    <div className="flex-1">
+                      <p className="text-sm text-amber-300">Current Phase</p>
+                      <p className="text-xl font-bold text-amber-200">Hardened — Peak Strength</p>
+                      <p className="text-xs text-slate-400">97% to next molt • 90 XP remaining</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-slate-400">Defense</p>
+                      <p className="text-2xl font-bold text-emerald-400">100%</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="p-2 rounded bg-slate-800/50">
-                  <p className="text-amber-400 mb-1">2. Molt</p>
-                  <p className="text-slate-500">Shed old shell</p>
+                
+                {/* Personality State */}
+                <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 mb-4">
+                  <p className="text-sm text-slate-400 mb-2">Current Personality</p>
+                  <p className="text-lg text-purple-300 mb-2">🎭 Confident, precise, bureaucratic</p>
+                  <div className="flex flex-wrap gap-2">
+                    {CRAB_DATA.moltPhase?.quirks?.map((quirk, i) => (
+                      <span key={i} className="px-2 py-1 rounded-full bg-purple-900/30 text-purple-300 text-xs border border-purple-700/30">
+                        {quirk}
+                      </span>
+                    )) || [
+                      <span key={1} className="px-2 py-1 rounded-full bg-purple-900/30 text-purple-300 text-xs border border-purple-700/30">formal speech</span>,
+                      <span key={2} className="px-2 py-1 rounded-full bg-purple-900/30 text-purple-300 text-xs border border-purple-700/30">exact measurements</span>,
+                      <span key={3} className="px-2 py-1 rounded-full bg-purple-900/30 text-purple-300 text-xs border border-purple-700/30">structured responses</span>
+                    ]}
+                  </div>
                 </div>
-                <div className="p-2 rounded bg-slate-800/50">
-                  <p className="text-amber-400 mb-1">3. Grow</p>
-                  <p className="text-slate-500">Expand body</p>
+                
+                {/* Phase Cycle Visualization */}
+                <div className="space-y-3">
+                  <p className="text-sm text-slate-400 mb-2">Molt Cycle Stages</p>
+                  
+                  {/* Phase 1: Softening */}
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 opacity-60">
+                    <span className="text-xl">💨</span>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold text-slate-400">1. Softening</p>
+                        <span className="text-xs text-slate-500">0-30% XP</span>
+                      </div>
+                      <p className="text-xs text-slate-500">Shell loosens, vulnerability emerges</p>
+                      <p className="text-xs text-amber-600/70 mt-1">🎭 Personality: Uncertain, seeks reassurance</p>
+                    </div>
+                  </div>
+                  
+                  {/* Phase 2: Molting */}
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 opacity-60">
+                    <span className="text-xl">✨</span>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold text-slate-400">2. Molting</p>
+                        <span className="text-xs text-slate-500">At threshold</span>
+                      </div>
+                      <p className="text-xs text-slate-500">Transformation moment — old shell shed</p>
+                      <p className="text-xs text-amber-600/70 mt-1">🎭 Personality: Raw, authentic, celebratory</p>
+                    </div>
+                  </div>
+                  
+                  {/* Phase 3: Hardening */}
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 opacity-60">
+                    <span className="text-xl">🛡️</span>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold text-slate-400">3. Hardening</p>
+                        <span className="text-xs text-slate-500">30-70% XP</span>
+                      </div>
+                      <p className="text-xs text-slate-500">New shell solidifies, strength returns</p>
+                      <p className="text-xs text-amber-600/70 mt-1">🎭 Personality: Testing boundaries, growing</p>
+                    </div>
+                  </div>
+                  
+                  {/* Phase 4: Hardened (Current) */}
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-gradient-to-r from-amber-900/30 to-slate-800/40 border border-amber-500/30">
+                    <span className="text-xl">💎</span>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold text-amber-300">4. Hardened ★</p>
+                        <span className="text-xs text-amber-400">70-100% XP</span>
+                      </div>
+                      <p className="text-xs text-slate-300">Peak strength, shell fully formed</p>
+                      <p className="text-xs text-purple-300 mt-1">🎭 Personality: Masterful, mentoring, commanding</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="p-2 rounded bg-slate-800/50">
-                  <p className="text-amber-400 mb-1">4. Harden</p>
-                  <p className="text-slate-500">New shell sets</p>
+                
+                {/* Next Molt Preview */}
+                <div className="mt-4 p-3 rounded-lg bg-slate-800/30 border border-slate-700/30">
+                  <p className="text-sm text-slate-400 mb-1">Next Molt</p>
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">⚙️</span>
+                    <div>
+                      <p className="font-semibold text-slate-300">Steel Shell</p>
+                      <p className="text-xs text-slate-500">Lvl 6 • Defense 25 • Voice: efficient, mechanical</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
