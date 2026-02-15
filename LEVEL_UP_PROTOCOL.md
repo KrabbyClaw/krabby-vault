@@ -10,11 +10,32 @@ When the crab accumulates enough XP, it **molts** — shedding its old shell and
 
 | Trigger | XP Threshold | Result |
 |---------|--------------|--------|
-| **Level Up** | XP reaches xpToNextLevel | Level +1, stats increase |
-| **Molt Cycle** | Every 5 levels | Shell tier advances |
+| **Level Up** | XP reaches xpToNextLevel | Level +1, **excess XP carries over** |
+| **Molt Cycle** | Every level (new tier) | Shell tier advances |
 | **Soft Phase** | Immediately after molt | Temporary vulnerability |
-| **Hardening** | 50% to next level | Shell begins solidifying |
-| **Hardened** | Level complete | Full defense restored |
+| **Hardening** | 30-70% to next level | Shell solidifies |
+| **Hardened** | 70-100% to next level | Peak strength |
+
+## XP Carryover Mechanic 💎
+
+**Excess XP always carries over to the next level.**
+
+### Example:
+```
+Current: Level 5
+XP: 2,900 / 2,990 (need 90 more)
+
+If you gain 150 XP:
+- 90 XP → reaches threshold (Level 5 complete)
+- 60 XP → CARRIES OVER to Level 6
+
+Result: Level 6 with 60/3,500 XP (already 1.7% into new level!)
+```
+
+### Why This Matters:
+- **No XP is ever wasted**
+- Large contributions (big fish, streaks) can propel multiple levels
+- The crab grows in leaps, not just increments
 
 ## Current Progression
 

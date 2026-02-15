@@ -421,6 +421,18 @@ export default function Home() {
                   🦀 Molt Phase Tracker
                 </h3>
                 
+                {/* XP Carryover Note */}
+                <div className="p-3 rounded-lg bg-emerald-900/20 border border-emerald-500/30 mb-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-lg">💎</span>
+                    <div>
+                      <p className="text-sm text-emerald-300 font-semibold">XP Carryover Enabled</p>
+                      <p className="text-xs text-slate-400">Excess XP carries to next level — no XP is ever wasted!</p>
+                      <p className="text-xs text-emerald-400/70 mt-1">Example: 2,900/2,990 + 150 XP = Level 6 with 60 XP carried over</p>
+                    </div>
+                  </div>
+                </div>
+                
                 {/* Current Phase Highlight */}
                 <div className="p-4 rounded-xl bg-gradient-to-br from-amber-900/30 to-slate-800/40 border border-amber-500/30 mb-4">
                   <div className="flex items-center gap-4">

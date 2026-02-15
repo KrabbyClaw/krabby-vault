@@ -22,7 +22,12 @@
   "autoXp": true,
   "moltCycle": 1,
   "moltState": "hardened",
-  "concept": "Molt Cycle = Shell Tier Progression. Each molt advances to next tier.",
+  "concept": "Molt Cycle = Shell Tier Progression. Each molt advances to next tier. Excess XP carries over to next level.",
+  "xpCarryover": {
+    "enabled": true,
+    "description": "When XP exceeds threshold, excess carries to next level",
+    "example": "2900/2990 + 150 XP = Level 6 with 60 XP carried over"
+  },
   "moltPhases": {
     "currentPhase": "hardened",
     "phaseProgress": 97,
