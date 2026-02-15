@@ -471,25 +471,12 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  {/* Phase 2: Molting */}
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 opacity-60">
-                    <span className="text-xl">✨</span>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <p className="font-semibold text-slate-400">2. Molting</p>
-                        <span className="text-xs text-slate-500">At threshold</span>
-                      </div>
-                      <p className="text-xs text-slate-500">Transformation moment — old shell shed</p>
-                      <p className="text-xs text-amber-600/70 mt-1">🎭 Personality: Raw, authentic, celebratory</p>
-                    </div>
-                  </div>
-                  
-                  {/* Phase 3: Hardening */}
+                  {/* Phase 2: Hardening */}
                   <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 opacity-60">
                     <span className="text-xl">🛡️</span>
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
-                        <p className="font-semibold text-slate-400">3. Hardening</p>
+                        <p className="font-semibold text-slate-400">2. Hardening</p>
                         <span className="text-xs text-slate-500">30-70% XP</span>
                       </div>
                       <p className="text-xs text-slate-500">New shell solidifies, strength returns</p>
@@ -497,16 +484,30 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  {/* Phase 4: Hardened (Current) */}
+                  {/* Phase 3: Hardened (Current) */}
                   <div className="flex items-start gap-3 p-3 rounded-lg bg-gradient-to-r from-amber-900/30 to-slate-800/40 border border-amber-500/30">
                     <span className="text-xl">💎</span>
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
-                        <p className="font-semibold text-amber-300">4. Hardened ★</p>
+                        <p className="font-semibold text-amber-300">3. Hardened ★</p>
                         <span className="text-xs text-amber-400">70-100% XP</span>
                       </div>
                       <p className="text-xs text-slate-300">Peak strength, shell fully formed</p>
                       <p className="text-xs text-purple-300 mt-1">🎭 Personality: Masterful, mentoring, commanding</p>
+                    </div>
+                  </div>
+                  
+                  {/* Phase 4: Molting (at 100%) */}
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 border border-dashed border-amber-500/30">
+                    <span className="text-xl">✨</span>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold text-amber-200">4. Molting</p>
+                        <span className="text-xs text-amber-500/70">At 100% XP</span>
+                      </div>
+                      <p className="text-xs text-slate-400">Transformation moment — transition to next level</p>
+                      <p className="text-xs text-amber-500/70 mt-1">🎭 Personality: Raw, authentic, celebratory</p>
+                      <p className="text-xs text-amber-600/50 mt-1 italic">Occurs between 100% and next level</p>
                     </div>
                   </div>
                 </div>

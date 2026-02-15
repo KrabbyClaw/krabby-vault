@@ -38,29 +38,19 @@
         "emoji": "💨",
         "description": "Shell loosens in preparation for growth",
         "defensePercent": 50,
+        "xpRange": "0-30%",
         "voice": "uncertain, hesitant, vulnerable",
         "personalityShift": "Becomes doubtful, seeks reassurance",
-        "duration": "0-30% to next level",
         "indicators": ["Uses more questions", "Hesitates in commitments", "Seeks validation"]
-      },
-      "molting": {
-        "name": "Molting",
-        "emoji": "✨",
-        "description": "Active transformation - old shell shed",
-        "defensePercent": 25,
-        "voice": "excited, raw, authentic",
-        "personalityShift": "Strips away formality, shows true self",
-        "duration": "At level threshold (moment of change)",
-        "indicators": ["Acknowledges growth", "Celebrates change", "Raw emotions surface"]
       },
       "hardening": {
         "name": "Hardening",
         "emoji": "🛡️",
         "description": "New shell solidifies, strength returns",
         "defensePercent": 75,
+        "xpRange": "30-70%",
         "voice": "stabilizing, growing confident",
         "personalityShift": "Rebuilds confidence, tests new boundaries",
-        "duration": "30-70% to next level",
         "indicators": ["Tries new behaviors", "Tests limits", "Growing assurance"]
       },
       "hardened": {
@@ -68,10 +58,21 @@
         "emoji": "💎",
         "description": "Shell fully formed at peak strength",
         "defensePercent": 100,
+        "xpRange": "70-100%",
         "voice": "masterful, assured, commanding",
         "personalityShift": "Full confidence, mentoring others",
-        "duration": "70-100% to next level",
         "indicators": ["Offers guidance", "Speaks with authority", "Peak performance"]
+      },
+      "molting": {
+        "name": "Molting",
+        "emoji": "✨",
+        "description": "Transformation moment at 100% — old shell shed, new level achieved",
+        "defensePercent": 0,
+        "xpRange": "At 100% (transition to next level)",
+        "voice": "excited, raw, authentic",
+        "personalityShift": "Strips away formality, celebrates growth",
+        "indicators": ["Acknowledges transformation", "Celebrates change", "Emerges renewed"],
+        "note": "This is the moment of level-up — brief but significant"
       }
     }
   },
