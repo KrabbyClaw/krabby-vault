@@ -11,8 +11,8 @@ const CRAB_DATA = {
   title: "The Vault Keeper",
   shell: "Iron",
   level: 5,
-  xp: 1980,
-  xpMax: 2041,  // 97% to Steel Shell (100 XP per fish)
+  xp: 1400,
+  xpMax: 1443,  // 97% to Steel Shell (fish only)
   fishCount: 12,
   lastFish: "2026-02-15T07:13:00Z",
   moltCycle: 1,
@@ -428,7 +428,7 @@ export default function Home() {
                     <div>
                       <p className="text-sm text-emerald-300 font-semibold">XP Carryover Enabled</p>
                       <p className="text-xs text-slate-400">Excess XP carries to next level — no XP is ever wasted!</p>
-                      <p className="text-xs text-emerald-400/70 mt-1">Example: 1,980/2,041 + 150 XP = Level 6 with 89 XP carried over</p>
+                      <p className="text-xs text-emerald-400/70 mt-1">Example: 1,400/1,443 + 100 XP = Level 6 with 57 XP carried over</p>
                     </div>
                   </div>
                 </div>
@@ -440,7 +440,7 @@ export default function Home() {
                     <div className="flex-1">
                       <p className="text-sm text-amber-300">Current Phase</p>
                       <p className="text-xl font-bold text-amber-200">Hardened — Peak Strength</p>
-                      <p className="text-xs text-slate-400">97% to next molt • 61 XP remaining</p>
+                      <p className="text-xs text-slate-400">97% to next molt • 43 XP remaining</p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm text-slate-400">Defense</p>
