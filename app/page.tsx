@@ -359,6 +359,21 @@ export default function Home() {
                 When the crab accumulates enough XP, it <strong>molts</strong> — shedding its old shell and emerging renewed.
               </p>
               
+              {/* XP Sources */}
+              <div className="mb-4 p-3 rounded-lg bg-slate-800/50 border border-slate-700/50">
+                <p className="text-sm text-slate-400 mb-2">XP Sources</p>
+                <div className="flex gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🐟</span>
+                    <span className="text-sm text-emerald-300">Fish: 100 XP</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🏆</span>
+                    <span className="text-sm text-amber-300">Achievements: 100 XP</span>
+                  </div>
+                </div>
+              </div>
+              
               {/* Current Progress */}
               <div className="mb-4 p-3 rounded-lg bg-amber-900/20 border border-amber-500/30">
                 <div className="flex items-center justify-between mb-2">
