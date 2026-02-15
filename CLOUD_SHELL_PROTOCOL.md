@@ -28,6 +28,46 @@ export MEGA_PASSWORD='PASSWORD_REDACTED!'
 
 ---
 
+## 🏛️ RESTORATION HIERARCHY
+
+**⚠️ CRITICAL: Trust Order (highest to lowest)**
+
+| Priority | Source | When to Use |
+|----------|--------|-------------|
+| **1** | **GitHub Repository** | **ALWAYS FIRST** — Primary source of truth |
+| **2** | **Local Bundles** | If GitHub fails — Secondary backup |
+| **3** | **Mega Cloud** | **LAST RESORT ONLY** — Manual backup, may be outdated |
+
+### Restoration Priority Rule
+
+**GitHub > Local Bundles > Mega**
+
+- **GitHub** is always current and clean
+- **Mega** is for emergencies only
+- After any Mega restore, verify against GitHub and push clean state
+
+### ⚠️ MEGA RESTORATION WARNING
+
+When restoring from Mega:
+- Mega may contain **old/deprecated files** that were removed from GitHub
+- **Delete anything** not in the current GitHub repo
+- Mega is a "snapshot in time" — GitHub is the living source
+- Always run `git status` after Mega restore to see unexpected files
+
+### Quick Restore Commands
+
+```bash
+# PREFERRED: GitHub (always try this first)
+git clone https://github.com/KrabbyClaw/krabby-vault.git
+
+# LAST RESORT: Mega (only if GitHub is unavailable)
+rclone copy mega:krabby-vault-backups/clawd-*.bundle ./
+git clone clawd-*.bundle krabby-vault/
+# Then delete any files not in GitHub!
+```
+
+---
+
 ## 🏗️ ARCHITECTURE
 
 ### Triple-Layer Backup
