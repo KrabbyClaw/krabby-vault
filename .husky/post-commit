@@ -1,0 +1,40 @@
+#!/bin/bash
+# post-commit hook - Trigger Mega sync after each commit
+# NOTE: Requires MEGA_PASSWORD environment variable
+
+REPO_DIR="$(git rev-parse --show-toplevel)"
+BUNDLE_NAME="clawd-$(date +%Y%m%d-%H%M%S).bundle"
+BUNDLE_DIR="$HOME/krabby-vault-backups"
+
+echo "🦀 Post-commit hook starting..."
+
+# Validate fish data consistency
+if [ -f "$REPO_DIR/validate-fish-consistency.sh" ]; then
+    echo "🔍 Validating fish data consistency..."
+    if ! bash "$REPO_DIR/validate-fish-consistency.sh"; then
+        echo "⚠️  WARNING: Fish data inconsistent! Run: bash update-fish-display.sh"
+        # Don't exit - just warn, let user fix manually
+    fi
+fi
+
+# Create bundle directory
+mkdir -p "$BUNDLE_DIR"
+
+# Create bundle
+cd "$REPO_DIR"
+git bundle create "$BUNDLE_DIR/$BUNDLE_NAME" --all 2>/dev/null
+
+if [ $? -eq 0 ]; then
+    echo "✅ Bundle created: $BUNDLE_NAME"
+    
+    # Sync to Mega (only if password is set)
+    if [ ! -z "$MEGA_PASSWORD" ] && [ -f "$REPO_DIR/sync-to-mega.sh" ]; then
+        echo "☁️ Syncing to Mega..."
+        bash "$REPO_DIR/sync-to-mega.sh"
+    else
+        echo "⚠️  Skipping Mega sync (MEGA_PASSWORD not set)"
+        echo "     To enable: export MEGA_PASSWORD='your_password'"
+    fi
+else
+    echo "⚠️ Bundle creation failed"
+fi
