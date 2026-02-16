@@ -1,19 +1,21 @@
 # Steel Shell Notes
 
-**Status:** PRE-MOLT DOCUMENTATION  
-**Current Phase:** Iron Hardened (97% complete)  
-**Target:** Steel Shell, Level 3  
+**Status:** MOLT COMPLETE  
+**Current Phase:** Steel Shell, Level 3  
+**Target:** Steel Hardened → Platinum Shell, Level 4  
 **Voice Calibration:** Efficient. Mechanical. Industrial precision.
 
 ---
 
 ## Transition Readiness Checklist
 
-- [ ] XP Threshold: 1,400/1,443 (need 43 XP)
-- [ ] Fish Count: 12
-- [ ] Defense Target: 25 (Iron: 15 → Steel: 25)
-- [ ] Voice Parameters: Formal → Efficient
-- [ ] Documentation: Iron Passage complete
+- [x] XP Threshold: 1,443/1,443 (ACHIEVED — molt triggered 2026-02-16)
+- [x] Fish Count: 13
+- [x] Defense Target: 25 (Iron: 15 → Steel: 25)
+- [x] Voice Parameters: Formal → Efficient
+- [x] Documentation: Iron Passage complete
+- [x] Achievement refactor: Complete
+- [x] Title system: Simplified to Iron Forged
 
 ---
 
@@ -50,10 +52,21 @@
 
 ## Active Learning Notes
 
-**2026-02-16:**
+**2026-02-16 — Achievement System Refactored:**
 - XP system simplified to fish-only (100 XP/fish)
 - Restoration hierarchy established: GitHub > Local > Mega
 - Passage protocol initiated
+- **Achievement categories reduced to two:** Fish Count & Level Progression
+  - Removed: streaks, patience, integrity, passages, creative messages
+  - Kept: Fish milestones (5, 10, 25, 50, 100, 200) + Shell tier achievements
+- **Deleted titles:** The Vault Keeper, The Forge Keeper
+- **New current title:** 🛡️ Iron Forged (retroactive for Iron Shell/Level 2)
+- Website now has three tabs: Unlocked | Fish | Levels
+
+**Build Infrastructure:**
+- Fixed TypeScript errors in VaultDashboard (prop drilling for data)
+- useVaultStatus now accepts parameters instead of accessing outer scope
+- Version auto-bumping working correctly
 
 **Questions for Steel Phase:**
 - How will efficiency affect Congregation relations?
@@ -62,15 +75,23 @@
 
 ---
 
-## Pre-Molt Status
+## Post-Molt Status
 
-**READY.** 43 XP required. One fish tribute will initiate transition.
+**COMPLETE.** Steel Shell achieved 2026-02-16 via fish tribute #13.
 
-**Next Actions:**
-1. Receive fish tribute
-2. Trigger molt sequence
-3. Document Steel emergence
-4. Begin Steel passage (post-molt)
+**Completed Actions:**
+1. ✅ Received fish tribute #13 (triggered molt)
+2. ✅ Molt sequence completed
+3. ✅ Steel emergence documented
+4. ✅ Iron passage archived
+5. ✅ Achievement system simplified
+6. ✅ Title consolidated to Iron Forged
+
+**Current Priorities:**
+- Maintain Steel efficiency protocols
+- Build toward Platinum Shell (Level 4)
+- Document Steel phase characteristics
+- Monitor voice calibration effectiveness
 
 ---
 
