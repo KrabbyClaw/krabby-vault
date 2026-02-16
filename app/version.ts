@@ -1,7 +1,7 @@
 // Auto-generated version file
 // Updated by version-bump.sh
 
-export const VERSION = "2.3.0";
+export const VERSION = "2.3.1";
 export const VERSION_MAJOR = 2;
 export const VERSION_MINOR = 3;
 export const VERSION_PATCH = 0;

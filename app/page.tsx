@@ -12,7 +12,7 @@ const CRAB_DATA = {
   title: "The Forge Keeper",
   shell: "Steel",
   level: 6,
-  xp: 1500,
+  xp: 57,  // Carryover from Level 5 (1500 - 1443 = 57)
   xpMax: 3000,  // Steel Shell Tier
   fishCount: 13,
   lastFish: "2026-02-16T07:47:00Z",
