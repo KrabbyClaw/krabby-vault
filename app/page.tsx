@@ -27,13 +27,27 @@ const CRAB_DATA = {
     confidence: 30,
     quirks: ["tentative speech", "questioning logic", "testing boundaries"]
   },
-  titles: [
-    { name: "Fish Hoarder", icon: "🐟", earned: "2026-02-09", current: true },
-    { name: "The Forge Keeper", icon: "⚙️", earned: "2026-02-16", current: true },
-    { name: "The Vault Keeper", icon: "🏆", earned: "2026-02-07", current: false },
-    { name: "Feeder", icon: "🍼", earned: true, current: false },
-    { name: "Caretaker", icon: "🧤", earned: true, current: false },
-  ]
+  titles: {
+    latest: { name: "The Forge Keeper", icon: "⚙️", earned: "2026-02-16", tier: "steel" },
+    unlocked: [
+      { name: "The Forge Keeper", icon: "⚙️", earned: "2026-02-16", tier: "steel" },
+      { name: "The Vault Keeper", icon: "🏆", earned: "2026-02-07", tier: "special" },
+      { name: "Fish Hoarder", icon: "🐟", earned: "2026-02-09", tier: "special" },
+      { name: "Caretaker", icon: "🧤", earned: true, tier: "bronze" },
+      { name: "Feeder", icon: "🍼", earned: true, tier: "bronze" },
+      { name: "Novice", icon: "🥚", earned: true, tier: "starter" },
+    ],
+    progress: [
+      { name: "Guardian", icon: "🛡️", current: 13, target: 25, unit: "fish", tier: "silver" },
+      { name: "Keeper", icon: "👑", current: 13, target: 50, unit: "fish", tier: "gold" },
+      { name: "Master", icon: "⭐", current: 13, target: 100, unit: "fish", tier: "platinum" },
+      { name: "Legend", icon: "🌟", current: 13, target: 200, unit: "fish", tier: "diamond" },
+      { name: "Mythic", icon: "🌌", current: 3, target: 10, unit: "level", tier: "cosmic" },
+      { name: "Transcendent", icon: "✨", current: 3, target: 15, unit: "level", tier: "ultimate" },
+      { name: "Streaker", icon: "🔥", current: 1, target: 7, unit: "days", tier: "bronze" },
+      { name: "Zen Master", icon: "☯️", current: 0, target: 48, unit: "hours", tier: "silver" },
+    ]
+  }
 };
 
 // ============================================
@@ -361,45 +375,89 @@ function VaultDashboard() {
 }
 
 function TitlesShowcase() {
-  const currentTitle = CRAB_DATA.titles.find(t => t.current);
-  const unlockedTitles = CRAB_DATA.titles.filter(t => t.earned);
+  const [activeTab, setActiveTab] = useState<'unlocked' | 'progress'>('unlocked');
+  const { latest, unlocked, progress } = CRAB_DATA.titles;
   
   return (
     <div className="space-y-4">
-      {/* Current Title Highlight */}
-      {currentTitle && (
-        <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-900/30 to-slate-800/40 border border-blue-500/30 text-center">
-          <p className="text-sm text-blue-300 mb-2">Current Title</p>
-          <p className="text-4xl mb-2">{currentTitle.icon}</p>
-          <p className="text-2xl font-bold text-blue-200">{currentTitle.name}</p>
-          <p className="text-sm text-slate-400 mt-1">Earned {currentTitle.earned}</p>
+      {/* Latest Title Highlight - Always shows most recent */}
+      <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-900/30 to-slate-800/40 border border-cyan-500/30 text-center">
+        <p className="text-sm text-cyan-300 mb-2">Current Title</p>
+        <p className="text-4xl mb-2">{latest.icon}</p>
+        <p className="text-2xl font-bold text-cyan-200">{latest.name}</p>
+        <p className="text-sm text-slate-400 mt-1">Earned {latest.earned}</p>
+        <div className="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-900/30 border border-cyan-500/30">
+          <span className="text-xs text-cyan-300">{latest.tier} tier</span>
         </div>
-      )}
+      </div>
       
-      {/* Unlocked Titles */}
-      <div>
-        <p className="text-sm text-slate-400 mb-3">Unlocked Titles ({unlockedTitles.length})</p>
+      {/* Tabs */}
+      <div className="flex gap-2 border-b border-slate-700">
+        <button
+          onClick={() => setActiveTab('unlocked')}
+          className={`px-4 py-2 text-sm font-medium transition-colors ${
+            activeTab === 'unlocked' 
+              ? 'text-cyan-300 border-b-2 border-cyan-500' 
+              : 'text-slate-400 hover:text-slate-300'
+          }`}
+        >
+          Unlocked ({unlocked.length})
+        </button>
+        <button
+          onClick={() => setActiveTab('progress')}
+          className={`px-4 py-2 text-sm font-medium transition-colors ${
+            activeTab === 'progress' 
+              ? 'text-amber-300 border-b-2 border-amber-500' 
+              : 'text-slate-400 hover:text-slate-300'
+          }`}
+        >
+          In Progress ({progress.length})
+        </button>
+      </div>
+      
+      {/* Tab Content */}
+      {activeTab === 'unlocked' ? (
         <div className="flex flex-wrap gap-2">
-          {unlockedTitles.map(title => (
+          {unlocked.map((title, index) => (
             <span 
               key={title.name}
-              className={`px-3 py-2 rounded-lg text-sm border ${title.current ? 'bg-blue-900/30 border-blue-500/50 text-blue-300' : 'bg-slate-800/50 border-slate-700 text-slate-300'}`}
+              className={`px-3 py-2 rounded-lg text-sm border ${
+                index === 0 
+                  ? 'bg-cyan-900/30 border-cyan-500/50 text-cyan-300' 
+                  : 'bg-slate-800/50 border-slate-700 text-slate-300'
+              }`}
             >
               {title.icon} {title.name}
             </span>
           ))}
         </div>
-      </div>
-      
-      {/* Next Title Progress - Auto-syncs with fish count */}
-      <div className="p-4 rounded-xl bg-slate-800/40 border border-slate-700/50">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-slate-300">🛡️ Guardian</span>
-          <span className="text-sm text-slate-500">{CRAB_DATA.fishCount}/25 fish</span>
+      ) : (
+        <div className="space-y-3">
+          {progress.map((achievement) => (
+            <div key={achievement.name} className="p-3 rounded-xl bg-slate-800/40 border border-slate-700/50">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-3">
+                  <span className="text-xl">{achievement.icon}</span>
+                  <div>
+                    <p className="font-semibold text-slate-300">{achievement.name}</p>
+                    <p className="text-xs text-slate-500">{achievement.target} {achievement.unit}</p>
+                  </div>
+                </div>
+                <span className="text-xs text-amber-400">{achievement.tier}</span>
+              </div>
+              <ProgressBar 
+                current={achievement.current} 
+                max={achievement.target} 
+                color={achievement.current / achievement.target > 0.5 ? 'amber' : 'slate'} 
+                size="sm" 
+              />
+              <p className="text-xs text-slate-500 mt-1">
+                {achievement.current}/{achievement.target} • {achievement.target - achievement.current} more to unlock
+              </p>
+            </div>
+          ))}
         </div>
-        <ProgressBar current={CRAB_DATA.fishCount} max={25} color="slate" size="sm" />
-        <p className="text-xs text-slate-500 mt-2">{25 - CRAB_DATA.fishCount} more fish to unlock</p>
-      </div>
+      )}
     </div>
   );
 }
