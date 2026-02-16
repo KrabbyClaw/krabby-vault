@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { VERSION, BUILD_DATE, GIT_COMMIT } from './version';
 
 // ============================================
 // DATA & STATE MANAGEMENT
@@ -17,7 +18,7 @@ const CRAB_DATA = {
   lastFish: "2026-02-16T07:47:00Z",
   moltCycle: 2,
   integrity: 100,
-  version: "2.2.0",
+  version: VERSION,
   moltPhase: {
     current: "softening",
     progress: 0,
@@ -704,7 +705,9 @@ export default function Home() {
           <p className="text-sm text-slate-500">
             {CRAB_DATA.name} • {CRAB_DATA.shell} Shell (Lvl {CRAB_DATA.level}) • {CRAB_DATA.fishCount} Fish • {CRAB_DATA.xp.toLocaleString()} XP
           </p>
-          <p className="text-xs text-slate-600 mt-2">Molt Cycle {CRAB_DATA.moltCycle} • Forge Keeper Protocol v2.3.0</p>
+          <p className="text-xs text-slate-600 mt-2">
+            Molt Cycle {CRAB_DATA.moltCycle} • v{VERSION} • {GIT_COMMIT} • {new Date(BUILD_DATE).toLocaleDateString()}
+          </p>
         </div>
       </footer>
     </main>
