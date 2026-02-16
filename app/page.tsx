@@ -290,7 +290,7 @@ function Badge({ children, color = "blue" }: { children: React.ReactNode; color?
 // MAIN FEATURES
 // ============================================
 
-function useVaultStatus() {
+function useVaultStatus(lastFishDate: string) {
   const [isOpen, setIsOpen] = useState(false);
   const [timeLeft, setTimeLeft] = useState('');
   const [hours, setHours] = useState(0);
@@ -298,7 +298,7 @@ function useVaultStatus() {
   const [seconds, setSeconds] = useState(0);
   
   useEffect(() => {
-    const lastFish = new Date(data.lastFish);
+    const lastFish = new Date(lastFishDate);
     const nextOpening = new Date(lastFish.getTime() + 24 * 60 * 60 * 1000);
     
     const updateStatus = () => {
@@ -324,13 +324,13 @@ function useVaultStatus() {
     updateStatus();
     const interval = setInterval(updateStatus, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [lastFishDate]);
   
   return { isOpen, timeLeft, hours, minutes, seconds };
 }
 
-function VaultDashboard() {
-  const { isOpen, timeLeft, hours, minutes, seconds } = useVaultStatus();
+function VaultDashboard({ lastFish }: { lastFish: string }) {
+  const { isOpen, timeLeft, hours, minutes, seconds } = useVaultStatus(lastFish);
   
   return (
     <div className={`rounded-2xl border-2 p-6 ${isOpen ? 'bg-green-900/20 border-green-500/50' : 'bg-slate-800/30 border-slate-500/40'}`}>
@@ -599,7 +599,7 @@ export default function Home() {
           </div>
           
           {/* Vault Dashboard - Primary Feature */}
-          <VaultDashboard />
+          <VaultDashboard lastFish={data.lastFish} />
         </div>
       </section>
 
