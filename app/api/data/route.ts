@@ -48,26 +48,36 @@ export async function GET() {
                   t.id === 'caretaker' || t.id === 'feeder' ? 'bronze' :
                   t.id === 'wordsmith' ? 'silver' : 'starter'
           })),
-        progress: (gamification.titles || [])
-          .filter((t: any) => !t.unlocked && t.progress !== undefined)
-          .map((t: any) => ({
-            name: t.name,
-            icon: t.id === 'guardian' ? '🛡️' :
-                  t.id === 'keeper' ? '👑' :
-                  t.id === 'master' ? '⭐' :
-                  t.id === 'legend' ? '🌟' :
-                  t.id === 'mythic' ? '🌌' :
-                  t.id === 'transcendent' ? '✨' :
-                  t.id === 'streaker' ? '🔥' :
-                  t.id === 'zen_master' ? '☯️' : '🎯',
-            current: t.progress || 0,
-            target: t.requirement?.value || 100,
-            unit: t.requirement?.type === 'fish_count' ? 'fish' :
-                  t.requirement?.type === 'level' ? 'level' :
-                  t.requirement?.type === 'streak_days' ? 'days' :
-                  t.requirement?.type === 'patient_hours' ? 'hours' : 'units',
-            tier: t.tier || 'bronze'
-          }))
+        progress: {
+          fish: (gamification.titles || [])
+            .filter((t: any) => !t.unlocked && t.requirement?.type === 'fish_count')
+            .map((t: any) => ({
+              name: t.name,
+              icon: t.id === 'guardian' ? '🛡️' :
+                    t.id === 'keeper' ? '👑' :
+                    t.id === 'master' ? '⭐' :
+                    t.id === 'legend' ? '🌟' : '🎯',
+              current: fishTax.fishCount || 0,
+              target: t.requirement?.value || 100,
+              unit: 'fish'
+            })),
+          levels: (gamification.titles || [])
+            .filter((t: any) => !t.unlocked && t.requirement?.type === 'level')
+            .map((t: any) => ({
+              name: t.name,
+              icon: t.id === 'silver_shell' ? '🥈' :
+                    t.id === 'gold_shell' ? '🥇' :
+                    t.id === 'diamond_shell' ? '💎' :
+                    t.id === 'platinum_shell' ? '🔮' :
+                    t.id === 'nebula_shell' ? '🌌' :
+                    t.id === 'cosmos_shell' ? '🌠' :
+                    t.id === 'galaxy_shell' ? '🌟' : '✨',
+              current: fishTax.level || 1,
+              target: t.requirement?.value || 10,
+              unit: 'level',
+              shell: t.name.replace(' Forged', '')
+            }))
+        }
       },
       
       // Molt phase data

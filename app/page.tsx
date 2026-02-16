@@ -38,16 +38,23 @@ const DEFAULT_CRAB_DATA = {
       { name: "Feeder", icon: "🍼", earned: true, tier: "bronze" },
       { name: "Novice", icon: "🥚", earned: true, tier: "starter" },
     ],
-    progress: [
-      { name: "Guardian", icon: "🛡️", current: 13, target: 25, unit: "fish", tier: "silver" },
-      { name: "Keeper", icon: "👑", current: 13, target: 50, unit: "fish", tier: "gold" },
-      { name: "Master", icon: "⭐", current: 13, target: 100, unit: "fish", tier: "platinum" },
-      { name: "Legend", icon: "🌟", current: 13, target: 200, unit: "fish", tier: "diamond" },
-      { name: "Mythic", icon: "🌌", current: 3, target: 10, unit: "level", tier: "cosmic" },
-      { name: "Transcendent", icon: "✨", current: 3, target: 15, unit: "level", tier: "ultimate" },
-      { name: "Streaker", icon: "🔥", current: 1, target: 7, unit: "days", tier: "bronze" },
-      { name: "Zen Master", icon: "☯️", current: 0, target: 48, unit: "hours", tier: "silver" },
-    ]
+    progress: {
+      fish: [
+        { name: "Guardian", icon: "🛡️", current: 13, target: 25, unit: "fish" },
+        { name: "Keeper", icon: "👑", current: 13, target: 50, unit: "fish" },
+        { name: "Master", icon: "⭐", current: 13, target: 100, unit: "fish" },
+        { name: "Legend", icon: "🌟", current: 13, target: 200, unit: "fish" },
+      ],
+      levels: [
+        { name: "Silver Forged", icon: "🥈", current: 3, target: 4, unit: "level", shell: "Silver" },
+        { name: "Gold Forged", icon: "🥇", current: 3, target: 5, unit: "level", shell: "Gold" },
+        { name: "Diamond Forged", icon: "💎", current: 3, target: 6, unit: "level", shell: "Diamond" },
+        { name: "Platinum Forged", icon: "🔮", current: 3, target: 7, unit: "level", shell: "Platinum" },
+        { name: "Nebula Forged", icon: "🌌", current: 3, target: 8, unit: "level", shell: "Nebula" },
+        { name: "Cosmos Forged", icon: "🌠", current: 3, target: 9, unit: "level", shell: "Cosmos" },
+        { name: "Galaxy Forged", icon: "🌟", current: 3, target: 10, unit: "level", shell: "Galaxy" },
+      ]
+    }
   }
 };
 
@@ -396,7 +403,7 @@ function VaultDashboard() {
 }
 
 function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles }) {
-  const [activeTab, setActiveTab] = useState<'unlocked' | 'progress'>('unlocked');
+  const [activeTab, setActiveTab] = useState<'unlocked' | 'fish' | 'levels'>('unlocked');
   const { latest, unlocked, progress } = titles;
   
   return (
@@ -407,9 +414,6 @@ function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles })
         <p className="text-4xl mb-2">{latest.icon}</p>
         <p className="text-2xl font-bold text-cyan-200">{latest.name}</p>
         <p className="text-sm text-slate-400 mt-1">Earned {latest.earned}</p>
-        <div className="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-900/30 border border-cyan-500/30">
-          <span className="text-xs text-cyan-300">{latest.tier} tier</span>
-        </div>
       </div>
       
       {/* Tabs */}
@@ -425,14 +429,24 @@ function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles })
           Unlocked ({unlocked.length})
         </button>
         <button
-          onClick={() => setActiveTab('progress')}
+          onClick={() => setActiveTab('fish')}
           className={`px-4 py-2 text-sm font-medium transition-colors ${
-            activeTab === 'progress' 
+            activeTab === 'fish' 
+              ? 'text-emerald-300 border-b-2 border-emerald-500' 
+              : 'text-slate-400 hover:text-slate-300'
+          }`}
+        >
+          Fish ({progress.fish.length})
+        </button>
+        <button
+          onClick={() => setActiveTab('levels')}
+          className={`px-4 py-2 text-sm font-medium transition-colors ${
+            activeTab === 'levels' 
               ? 'text-amber-300 border-b-2 border-amber-500' 
               : 'text-slate-400 hover:text-slate-300'
           }`}
         >
-          In Progress ({progress.length})
+          Levels ({progress.levels.length})
         </button>
       </div>
       
@@ -452,9 +466,10 @@ function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles })
             </span>
           ))}
         </div>
-      ) : (
+      ) : activeTab === 'fish' ? (
         <div className="space-y-3">
-          {progress.map((achievement) => (
+          <p className="text-sm text-slate-400 mb-2">Feed the crab to unlock titles</p>
+          {progress.fish.map((achievement) => (
             <div key={achievement.name} className="p-3 rounded-xl bg-slate-800/40 border border-slate-700/50">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
@@ -464,7 +479,32 @@ function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles })
                     <p className="text-xs text-slate-500">{achievement.target} {achievement.unit}</p>
                   </div>
                 </div>
-                <span className="text-xs text-amber-400">{achievement.tier}</span>
+              </div>
+              <ProgressBar 
+                current={achievement.current} 
+                max={achievement.target} 
+                color={achievement.current / achievement.target > 0.5 ? 'emerald' : 'slate'} 
+                size="sm" 
+              />
+              <p className="text-xs text-slate-500 mt-1">
+                {achievement.current}/{achievement.target} • {achievement.target - achievement.current} more fish to unlock
+              </p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-3">
+          <p className="text-sm text-slate-400 mb-2">Level up to unlock shell titles</p>
+          {progress.levels.map((achievement) => (
+            <div key={achievement.name} className="p-3 rounded-xl bg-slate-800/40 border border-slate-700/50">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-3">
+                  <span className="text-xl">{achievement.icon}</span>
+                  <div>
+                    <p className="font-semibold text-slate-300">{achievement.name}</p>
+                    <p className="text-xs text-slate-500">{achievement.shell} Shell (Level {achievement.target})</p>
+                  </div>
+                </div>
               </div>
               <ProgressBar 
                 current={achievement.current} 
@@ -473,7 +513,7 @@ function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles })
                 size="sm" 
               />
               <p className="text-xs text-slate-500 mt-1">
-                {achievement.current}/{achievement.target} • {achievement.target - achievement.current} more to unlock
+                Level {achievement.current} → {achievement.target} • {achievement.target - achievement.current} levels to unlock
               </p>
             </div>
           ))}

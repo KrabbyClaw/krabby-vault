@@ -108,8 +108,8 @@
       "name": "The Forge Keeper",
       "unlocked": true,
       "unlockedAt": "2026-02-16T07:47:00Z",
-      "description": "Achieved Steel Shell. Master of the forge.",
-      "requirement": { "type": "shell_tier", "tier": "steel", "value": 3 },
+      "description": "Achieved Steel Shell (Level 3)",
+      "requirement": { "type": "level", "value": 3 },
       "special": true,
       "current": true,
       "latest": true
@@ -119,18 +119,16 @@
       "name": "The Vault Keeper",
       "unlocked": true,
       "unlockedAt": "2026-02-07T20:50:00Z",
-      "description": "Granted by Highnet. Master of the vault.",
-      "requirement": { "type": "special", "value": "granted" },
-      "special": true
+      "description": "Achieved Iron Shell (Level 2)",
+      "requirement": { "type": "level", "value": 2 }
     },
     {
       "id": "fish_hoarder",
       "name": "Fish Hoarder",
       "unlocked": true,
       "unlockedAt": "2026-02-09T23:18:00Z",
-      "description": "Accumulated 10 fish in the vault",
-      "requirement": { "type": "fish_count", "value": 10 },
-      "special": true
+      "description": "Accumulated 10 fish",
+      "requirement": { "type": "fish_count", "value": 10 }
     },
     {
       "id": "caretaker",
@@ -156,22 +154,12 @@
       "description": "Starting title"
     },
     {
-      "id": "wordsmith",
-      "name": "Wordsmith",
-      "unlocked": true,
-      "unlockedAt": "2026-02-07T19:04:00Z",
-      "description": "Used 5 creative fish messages",
-      "requirement": { "type": "creative_messages", "value": 5 },
-      "progress": 5
-    },
-    {
       "id": "guardian",
       "name": "Guardian",
       "unlocked": false,
       "description": "Give 25 fish",
       "requirement": { "type": "fish_count", "value": 25 },
-      "progress": 13,
-      "tier": "bronze"
+      "progress": 13
     },
     {
       "id": "keeper",
@@ -179,8 +167,7 @@
       "unlocked": false,
       "description": "Give 50 fish",
       "requirement": { "type": "fish_count", "value": 50 },
-      "progress": 13,
-      "tier": "silver"
+      "progress": 13
     },
     {
       "id": "master",
@@ -188,8 +175,7 @@
       "unlocked": false,
       "description": "Give 100 fish",
       "requirement": { "type": "fish_count", "value": 100 },
-      "progress": 13,
-      "tier": "gold"
+      "progress": 13
     },
     {
       "id": "legend",
@@ -197,53 +183,63 @@
       "unlocked": false,
       "description": "Give 200 fish",
       "requirement": { "type": "fish_count", "value": 200 },
-      "progress": 13,
-      "tier": "platinum"
+      "progress": 13
     },
     {
-      "id": "mythic",
-      "name": "Mythic",
+      "id": "silver_shell",
+      "name": "Silver Forged",
+      "unlocked": false,
+      "description": "Reach Silver Shell (Level 4)",
+      "requirement": { "type": "level", "value": 4 },
+      "progress": 3
+    },
+    {
+      "id": "gold_shell",
+      "name": "Gold Forged",
+      "unlocked": false,
+      "description": "Reach Gold Shell (Level 5)",
+      "requirement": { "type": "level", "value": 5 },
+      "progress": 3
+    },
+    {
+      "id": "diamond_shell",
+      "name": "Diamond Forged",
+      "unlocked": false,
+      "description": "Reach Diamond Shell (Level 6)",
+      "requirement": { "type": "level", "value": 6 },
+      "progress": 3
+    },
+    {
+      "id": "platinum_shell",
+      "name": "Platinum Forged",
+      "unlocked": false,
+      "description": "Reach Platinum Shell (Level 7)",
+      "requirement": { "type": "level", "value": 7 },
+      "progress": 3
+    },
+    {
+      "id": "nebula_shell",
+      "name": "Nebula Forged",
+      "unlocked": false,
+      "description": "Reach Nebula Shell (Level 8)",
+      "requirement": { "type": "level", "value": 8 },
+      "progress": 3
+    },
+    {
+      "id": "cosmos_shell",
+      "name": "Cosmos Forged",
+      "unlocked": false,
+      "description": "Reach Cosmos Shell (Level 9)",
+      "requirement": { "type": "level", "value": 9 },
+      "progress": 3
+    },
+    {
+      "id": "galaxy_shell",
+      "name": "Galaxy Forged",
       "unlocked": false,
       "description": "Reach Galaxy Shell (Level 10)",
       "requirement": { "type": "level", "value": 10 },
-      "tier": "diamond"
-    },
-    {
-      "id": "transcendent",
-      "name": "Transcendent",
-      "unlocked": false,
-      "description": "Reach level 15",
-      "requirement": { "type": "level", "value": 15 },
-      "tier": "cosmic"
-    },
-    {
-      "id": "streaker",
-      "name": "Streaker",
-      "unlocked": false,
-      "description": "7-day fish streak",
-      "requirement": { "type": "streak_days", "value": 7 },
-      "progress": 1
-    },
-    {
-      "id": "zen_master",
-      "name": "Zen Master",
-      "unlocked": false,
-      "description": "Wait 48h before giving fish",
-      "requirement": { "type": "patient_hours", "value": 48 }
-    },
-    {
-      "id": "perfectionist",
-      "name": "Perfectionist",
-      "unlocked": false,
-      "description": "Maintain 100% integrity for 10 days",
-      "requirement": { "type": "integrity_days", "value": 10, "threshold": 100 }
-    },
-    {
-      "id": "archivist",
-      "name": "Archivist",
-      "unlocked": false,
-      "description": "Complete 50 passages",
-      "requirement": { "type": "passages_complete", "value": 50 }
+      "progress": 3
     }
   ],
   "shellTiers": [
