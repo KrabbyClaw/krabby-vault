@@ -329,7 +329,7 @@ function useVaultStatus(lastFishDate: string) {
   return { isOpen, timeLeft, hours, minutes, seconds };
 }
 
-function VaultDashboard({ lastFish }: { lastFish: string }) {
+function VaultDashboard({ lastFish, fishCount }: { lastFish: string; fishCount: number }) {
   const { isOpen, timeLeft, hours, minutes, seconds } = useVaultStatus(lastFish);
   
   return (
@@ -382,7 +382,7 @@ function VaultDashboard({ lastFish }: { lastFish: string }) {
       {/* Fish Stats */}
       <div className="mt-6 pt-6 border-t border-slate-700/50 grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="text-center">
-          <p className="text-3xl font-bold text-blue-400">{data.fishCount}</p>
+          <p className="text-3xl font-bold text-blue-400">{fishCount}</p>
           <p className="text-xs text-slate-400">Total Fish</p>
         </div>
         <div className="text-center">
@@ -395,7 +395,7 @@ function VaultDashboard({ lastFish }: { lastFish: string }) {
         </div>
         <div className="text-center">
           <p className="text-xs text-slate-400">Last Fed</p>
-          <p className="text-sm text-slate-300">{new Date(data.lastFish).toLocaleDateString()}</p>
+          <p className="text-sm text-slate-300">{new Date(lastFish).toLocaleDateString()}</p>
         </div>
       </div>
     </div>
@@ -599,7 +599,7 @@ export default function Home() {
           </div>
           
           {/* Vault Dashboard - Primary Feature */}
-          <VaultDashboard lastFish={data.lastFish} />
+          <VaultDashboard lastFish={data.lastFish} fishCount={data.fishCount} />
         </div>
       </section>
 
