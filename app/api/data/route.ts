@@ -15,8 +15,7 @@ export async function GET() {
     const combinedData = {
       // Core stats from fish-tax
       name: "Krabby",
-      title: fishTax.shell === "Steel" ? "The Forge Keeper" : 
-             fishTax.shell === "Iron" ? "The Vault Keeper" : "Novice",
+      title: "Iron Forged",
       shell: fishTax.shell || "Soft",
       level: fishTax.level || 1,
       xp: fishTax.xp || 0,
@@ -30,23 +29,17 @@ export async function GET() {
       titles: {
         latest: gamification.titles?.find((t: any) => t.latest) || 
                 gamification.titles?.find((t: any) => t.current) ||
-                { name: "Novice", icon: "🥚", earned: new Date().toISOString(), tier: "starter" },
+                { name: "Novice", icon: "🥚", earned: new Date().toISOString() },
         unlocked: (gamification.titles || [])
           .filter((t: any) => t.unlocked)
           .map((t: any) => ({
             name: t.name,
-            icon: t.id === 'forge_keeper' ? '⚙️' :
-                  t.id === 'vault_keeper' ? '🏆' :
+            icon: t.id === 'iron_forged' ? '🛡️' :
                   t.id === 'fish_hoarder' ? '🐟' :
                   t.id === 'caretaker' ? '🧤' :
                   t.id === 'feeder' ? '🍼' :
-                  t.id === 'novice' ? '🥚' :
-                  t.id === 'wordsmith' ? '✍️' : '🦀',
-            earned: t.unlockedAt || true,
-            tier: t.id === 'forge_keeper' ? 'steel' :
-                  t.id === 'vault_keeper' || t.id === 'fish_hoarder' ? 'special' :
-                  t.id === 'caretaker' || t.id === 'feeder' ? 'bronze' :
-                  t.id === 'wordsmith' ? 'silver' : 'starter'
+                  t.id === 'novice' ? '🥚' : '🦀',
+            earned: t.unlockedAt || true
           })),
         progress: {
           fish: (gamification.titles || [])

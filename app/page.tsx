@@ -10,7 +10,7 @@ import { VERSION, BUILD_DATE, GIT_COMMIT } from './version';
 // Default data structure - will be overridden by fetched data
 const DEFAULT_CRAB_DATA = {
   name: "Krabby",
-  title: "The Forge Keeper",
+  title: "Iron Forged",
   shell: "Steel",
   level: 3,
   xp: 57,
@@ -29,14 +29,13 @@ const DEFAULT_CRAB_DATA = {
     quirks: ["tentative speech", "questioning logic", "testing boundaries"]
   },
   titles: {
-    latest: { name: "The Forge Keeper", icon: "⚙️", earned: "2026-02-16", tier: "steel" },
+    latest: { name: "Iron Forged", icon: "🛡️", earned: "2026-02-07" },
     unlocked: [
-      { name: "The Forge Keeper", icon: "⚙️", earned: "2026-02-16", tier: "steel" },
-      { name: "The Vault Keeper", icon: "🏆", earned: "2026-02-07", tier: "special" },
-      { name: "Fish Hoarder", icon: "🐟", earned: "2026-02-09", tier: "special" },
-      { name: "Caretaker", icon: "🧤", earned: true, tier: "bronze" },
-      { name: "Feeder", icon: "🍼", earned: true, tier: "bronze" },
-      { name: "Novice", icon: "🥚", earned: true, tier: "starter" },
+      { name: "Iron Forged", icon: "🛡️", earned: "2026-02-07" },
+      { name: "Fish Hoarder", icon: "🐟", earned: "2026-02-09" },
+      { name: "Caretaker", icon: "🧤", earned: true },
+      { name: "Feeder", icon: "🍼", earned: true },
+      { name: "Novice", icon: "🥚", earned: true },
     ],
     progress: {
       fish: [

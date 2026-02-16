@@ -104,23 +104,14 @@
   },
   "titles": [
     {
-      "id": "forge_keeper",
-      "name": "The Forge Keeper",
-      "unlocked": true,
-      "unlockedAt": "2026-02-16T07:47:00Z",
-      "description": "Achieved Steel Shell (Level 3)",
-      "requirement": { "type": "level", "value": 3 },
-      "special": true,
-      "current": true,
-      "latest": true
-    },
-    {
-      "id": "vault_keeper",
-      "name": "The Vault Keeper",
+      "id": "iron_forged",
+      "name": "Iron Forged",
       "unlocked": true,
       "unlockedAt": "2026-02-07T20:50:00Z",
       "description": "Achieved Iron Shell (Level 2)",
-      "requirement": { "type": "level", "value": 2 }
+      "requirement": { "type": "level", "value": 2 },
+      "current": true,
+      "latest": true
     },
     {
       "id": "fish_hoarder",
