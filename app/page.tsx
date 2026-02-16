@@ -8,14 +8,14 @@ import { useState, useEffect } from 'react';
 
 const CRAB_DATA = {
   name: "Krabby",
-  title: "The Vault Keeper",
-  shell: "Iron",
-  level: 5,
-  xp: 1400,
-  xpMax: 1443,  // 97% to Steel Shell (fish only)
-  fishCount: 12,
-  lastFish: "2026-02-15T07:13:00Z",
-  moltCycle: 1,
+  title: "The Forge Keeper",
+  shell: "Steel",
+  level: 6,
+  xp: 1500,
+  xpMax: 3000,  // Steel Shell Tier
+  fishCount: 13,
+  lastFish: "2026-02-16T07:47:00Z",
+  moltCycle: 2,
   integrity: 100,
   version: "2.2.0",
   moltPhase: {
