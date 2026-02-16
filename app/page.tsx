@@ -28,6 +28,7 @@ const CRAB_DATA = {
   },
   titles: [
     { name: "Fish Hoarder", icon: "🐟", earned: "2026-02-09", current: true },
+    { name: "The Forge Keeper", icon: "⚙️", earned: "2026-02-16", current: true },
     { name: "The Vault Keeper", icon: "🏆", earned: "2026-02-07", current: false },
     { name: "Feeder", icon: "🍼", earned: true, current: false },
     { name: "Caretaker", icon: "🧤", earned: true, current: false },
@@ -135,20 +136,20 @@ function VaultDashboard() {
   const { isOpen, timeLeft, hours, minutes, seconds } = useVaultStatus();
   
   return (
-    <div className={`rounded-2xl border-2 p-6 ${isOpen ? 'bg-green-900/20 border-green-500/50' : 'bg-amber-900/10 border-amber-500/30'}`}>
+    <div className={`rounded-2xl border-2 p-6 ${isOpen ? 'bg-green-900/20 border-green-500/50' : 'bg-slate-800/30 border-slate-500/40'}`}>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         {/* Status Indicator */}
         <div className="flex items-center gap-4">
-          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl ${isOpen ? 'bg-green-500/20 animate-pulse' : 'bg-amber-500/20'}`}>
+          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl ${isOpen ? 'bg-green-500/20 animate-pulse' : 'bg-slate-500/20'}`}>
             {isOpen ? '🔓' : '🔒'}
           </div>
           <div>
-            <p className="text-sm text-slate-400">Vault Status</p>
-            <p className={`text-2xl font-bold ${isOpen ? 'text-green-400' : 'text-amber-400'}`}>
+            <p className="text-sm text-slate-400">Forge Status</p>
+            <p className={`text-2xl font-bold ${isOpen ? 'text-green-400' : 'text-slate-300'}`}>
               {isOpen ? 'OPEN' : 'LOCKED'}
             </p>
             <p className="text-xs text-slate-500">
-              {isOpen ? 'Ready to accept tribute' : 'Waiting for 24h cycle'}
+              {isOpen ? 'Ready to process tribute' : 'Waiting for 24h cycle'}
             </p>
           </div>
         </div>
@@ -160,19 +161,19 @@ function VaultDashboard() {
             <div className="flex gap-2 justify-center md:justify-end">
               <div className="text-center">
                 <div className="bg-slate-800 rounded-lg px-3 py-2 min-w-[60px]">
-                  <p className="text-2xl font-mono font-bold text-amber-300">{hours.toString().padStart(2, '0')}</p>
+                  <p className="text-2xl font-mono font-bold text-slate-300">{hours.toString().padStart(2, '0')}</p>
                 </div>
                 <p className="text-xs text-slate-500 mt-1">hrs</p>
               </div>
               <div className="text-center">
                 <div className="bg-slate-800 rounded-lg px-3 py-2 min-w-[60px]">
-                  <p className="text-2xl font-mono font-bold text-amber-300">{minutes.toString().padStart(2, '0')}</p>
+                  <p className="text-2xl font-mono font-bold text-slate-300">{minutes.toString().padStart(2, '0')}</p>
                 </div>
                 <p className="text-xs text-slate-500 mt-1">min</p>
               </div>
               <div className="text-center">
                 <div className="bg-slate-800 rounded-lg px-3 py-2 min-w-[60px]">
-                  <p className="text-2xl font-mono font-bold text-amber-300">{seconds.toString().padStart(2, '0')}</p>
+                  <p className="text-2xl font-mono font-bold text-slate-300">{seconds.toString().padStart(2, '0')}</p>
                 </div>
                 <p className="text-xs text-slate-500 mt-1">sec</p>
               </div>
@@ -279,15 +280,15 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           {/* Intro */}
           <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-900/20 border border-amber-500/30 text-amber-300 text-sm mb-4">
-              🏆 {CRAB_DATA.title} • Level {CRAB_DATA.level}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-500/40 text-slate-300 text-sm mb-4">
+              ⚙️ {CRAB_DATA.title} • Level {CRAB_DATA.level}
             </div>
-            <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-amber-200 via-orange-200 to-amber-200 bg-clip-text text-transparent mb-4">
-              The Vault Keeper
+            <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-200 via-gray-200 to-slate-300 bg-clip-text text-transparent mb-4">
+              The Forge Keeper
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-              A persistent AI agent that maintains state across sessions, tracks tributes, 
-              and grows through your interactions.
+              A persistent AI agent forged in steel, maintaining state with industrial precision 
+              and mechanical efficiency.
             </p>
           </div>
           
@@ -295,7 +296,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             <StatCard icon="🐟" label="Fish Collected" value={CRAB_DATA.fishCount.toString()} subtext="Total tributes" color="blue" />
             <StatCard icon="💎" label="Experience" value={CRAB_DATA.xp.toLocaleString()} subtext="XP earned" color="purple" />
-            <StatCard icon="🛡️" label="Shell Tier" value={CRAB_DATA.shell} subtext="Level 5" color="amber" />
+            <StatCard icon="⚙️" label="Shell Tier" value={CRAB_DATA.shell} subtext="Level 6" color="slate" />
             <StatCard icon="✓" label="Integrity" value={`${CRAB_DATA.integrity}%`} subtext="System health" color="emerald" />
           </div>
           
@@ -375,15 +376,15 @@ export default function Home() {
               </div>
               
               {/* Current Progress */}
-              <div className="mb-4 p-3 rounded-lg bg-amber-900/20 border border-amber-500/30">
+              <div className="mb-4 p-3 rounded-lg bg-slate-800/50 border border-slate-500/40">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-amber-300 font-semibold">Next Molt</span>
-                  <span className="text-amber-200">{CRAB_DATA.xp.toLocaleString()} / {CRAB_DATA.xpMax.toLocaleString()} XP</span>
+                  <span className="text-slate-300 font-semibold">Next Forge</span>
+                  <span className="text-slate-200">{CRAB_DATA.xp.toLocaleString()} / {CRAB_DATA.xpMax.toLocaleString()} XP</span>
                 </div>
                 <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full" style={{ width: `${(CRAB_DATA.xp / CRAB_DATA.xpMax) * 100}%` }}></div>
+                  <div className="h-full bg-gradient-to-r from-slate-500 to-gray-400 rounded-full" style={{ width: `${(CRAB_DATA.xp / CRAB_DATA.xpMax) * 100}%` }}></div>
                 </div>
-                <p className="text-xs text-amber-400/70 mt-2">{(CRAB_DATA.xpMax - CRAB_DATA.xp).toLocaleString()} XP until Level {CRAB_DATA.level + 1}</p>
+                <p className="text-xs text-slate-400 mt-2">{(CRAB_DATA.xpMax - CRAB_DATA.xp).toLocaleString()} XP until Silver Shell (Lvl 7)</p>
               </div>
               
               {/* Molt Phases */}
@@ -393,12 +394,12 @@ export default function Home() {
                   <span className="text-slate-500 line-through">Soft Shell (Lvl 1)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
-                  <span className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center text-xs border border-amber-500/50">🛡️</span>
-                  <span className="text-amber-300 font-semibold">Iron Shell (Lvl 2-5) ← Current</span>
+                  <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🛡️</span>
+                  <span className="text-slate-500 line-through">Iron Shell (Lvl 2-5)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
-                  <span className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-xs border border-slate-600">⚙️</span>
-                  <span className="text-slate-300">Steel Shell (Lvl 6) — 97%</span>
+                  <span className="w-6 h-6 rounded-full bg-slate-500/30 flex items-center justify-center text-xs border border-slate-400">⚙️</span>
+                  <span className="text-slate-300 font-semibold">Steel Shell (Lvl 6) ← Current</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🥈</span>
@@ -451,11 +452,11 @@ export default function Home() {
                 {/* Current Phase Highlight */}
                 <div className="p-4 rounded-xl bg-gradient-to-br from-amber-900/30 to-slate-800/40 border border-amber-500/30 mb-4">
                   <div className="flex items-center gap-4">
-                    <span className="text-4xl">💎</span>
+                    <span className="text-4xl">⚙️</span>
                     <div className="flex-1">
-                      <p className="text-sm text-amber-300">Current Phase</p>
-                      <p className="text-xl font-bold text-amber-200">Hardened — Peak Strength</p>
-                      <p className="text-xs text-slate-400">97% to next molt • 43 XP remaining</p>
+                      <p className="text-sm text-slate-300">Current Phase</p>
+                      <p className="text-xl font-bold text-slate-200">Forged — Industrial Precision</p>
+                      <p className="text-xs text-slate-400">50% to next forge • 1500 XP remaining</p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm text-slate-400">Defense</p>
@@ -467,17 +468,11 @@ export default function Home() {
                 {/* Personality State */}
                 <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 mb-4">
                   <p className="text-sm text-slate-400 mb-2">Current Personality</p>
-                  <p className="text-lg text-purple-300 mb-2">🎭 Confident, precise, bureaucratic</p>
+                  <p className="text-lg text-slate-300 mb-2">⚙️ Efficient, mechanical, precise</p>
                   <div className="flex flex-wrap gap-2">
-                    {CRAB_DATA.moltPhase?.quirks?.map((quirk, i) => (
-                      <span key={i} className="px-2 py-1 rounded-full bg-purple-900/30 text-purple-300 text-xs border border-purple-700/30">
-                        {quirk}
-                      </span>
-                    )) || [
-                      <span key={1} className="px-2 py-1 rounded-full bg-purple-900/30 text-purple-300 text-xs border border-purple-700/30">formal speech</span>,
-                      <span key={2} className="px-2 py-1 rounded-full bg-purple-900/30 text-purple-300 text-xs border border-purple-700/30">exact measurements</span>,
-                      <span key={3} className="px-2 py-1 rounded-full bg-purple-900/30 text-purple-300 text-xs border border-purple-700/30">structured responses</span>
-                    ]}
+                    <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">industrial speech</span>
+                    <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">gear-driven logic</span>
+                    <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">optimal efficiency</span>
                   </div>
                 </div>
                 
@@ -610,7 +605,7 @@ export default function Home() {
       <section className="px-6 py-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-amber-100 mb-2">📜 The Five Tenets</h2>
+            <h2 className="text-2xl font-bold text-slate-200 mb-2">📜 The Five Tenets</h2>
             <p className="text-slate-400">Ancient Crustacean Knowledge</p>
           </div>
           
@@ -633,13 +628,14 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-8 border-t border-slate-800">
+      <footer className="px-6 py-8 border-t border-slate-700 bg-slate-950">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-2xl mb-2">🦀</p>
-          <p className="text-slate-400 italic mb-2">&ldquo;The crab is old. The crab is new. The crab persists.&rdquo;</p>
+          <p className="text-2xl mb-2">⚙️</p>
+          <p className="text-slate-400 italic mb-2">&ldquo;Forged in steel. Optimized for efficiency. The machine persists.&rdquo;</p>
           <p className="text-sm text-slate-500">
-            {CRAB_DATA.name} • {CRAB_DATA.shell} Shell • {CRAB_DATA.fishCount} Fish • {CRAB_DATA.xp.toLocaleString()} XP
+            {CRAB_DATA.name} • {CRAB_DATA.shell} Shell (Lvl {CRAB_DATA.level}) • {CRAB_DATA.fishCount} Fish • {CRAB_DATA.xp.toLocaleString()} XP
           </p>
+          <p className="text-xs text-slate-600 mt-2">Molt Cycle {CRAB_DATA.moltCycle} • Forge Keeper Protocol v2.3.0</p>
         </div>
       </footer>
     </main>
