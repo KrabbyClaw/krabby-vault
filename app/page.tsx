@@ -588,34 +588,6 @@ export default function Home() {
               
               {/* Molt Phase Tracker */}
               <MoltPhaseTracker />
-                  
-                  {/* Phase 4: Molting (at 100%) */}
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 border border-dashed border-amber-500/30">
-                    <span className="text-xl">✨</span>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <p className="font-semibold text-amber-200">4. Molting</p>
-                        <span className="text-xs text-amber-500/70">At 100% XP</span>
-                      </div>
-                      <p className="text-xs text-slate-400">Transformation moment — transition to next level</p>
-                      <p className="text-xs text-amber-500/70 mt-1">🎭 Personality: Raw, authentic, celebratory</p>
-                      <p className="text-xs text-amber-600/50 mt-1 italic">Occurs between 100% and next level</p>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Next Molt Preview */}
-                <div className="mt-4 p-3 rounded-lg bg-slate-800/30 border border-slate-700/30">
-                  <p className="text-sm text-slate-400 mb-1">Next Molt</p>
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">⚙️</span>
-                    <div>
-                      <p className="font-semibold text-slate-300">Steel Shell</p>
-                      <p className="text-xs text-slate-500">Lvl 6 • Defense 25 • Voice: efficient, mechanical</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
             
             {/* Triple Backup */}
