@@ -36,6 +36,160 @@ const CRAB_DATA = {
 };
 
 // ============================================
+// AUTOMATIC MOLT PHASE CALCULATION
+// ============================================
+
+function calculateMoltPhase(xp: number, xpMax: number) {
+  const percentage = (xp / xpMax) * 100;
+  
+  if (percentage < 30) {
+    return {
+      phase: "softening",
+      name: "Softening",
+      icon: "💨",
+      description: "Shell loosens, vulnerability emerges",
+      personality: "Uncertain, seeks reassurance",
+      defense: 30,
+      color: "slate",
+      range: "0-30%",
+      isCurrent: true
+    };
+  } else if (percentage < 70) {
+    return {
+      phase: "hardening",
+      name: "Hardening",
+      icon: "⚙️",
+      description: "New shell solidifies, strength returns",
+      personality: "Testing boundaries, growing",
+      defense: 65,
+      color: "slate",
+      range: "30-70%",
+      isCurrent: true
+    };
+  } else {
+    return {
+      phase: "hardened",
+      name: "Hardened",
+      icon: "💎",
+      description: "Peak strength, shell fully formed",
+      personality: "Masterful, commanding",
+      defense: 100,
+      color: "amber",
+      range: "70-100%",
+      isCurrent: true
+    };
+  }
+}
+
+function MoltPhaseTracker() {
+  const currentPhase = calculateMoltPhase(CRAB_DATA.xp, CRAB_DATA.xpMax);
+  const percentage = Math.round((CRAB_DATA.xp / CRAB_DATA.xpMax) * 100);
+  
+  const phases = [
+    { key: "softening", name: "Softening", icon: "💨", range: "0-30%", description: "Shell loosens, vulnerability emerges", personality: "Uncertain, seeks reassurance" },
+    { key: "hardening", name: "Hardening", icon: "⚙️", range: "30-70%", description: "New shell solidifies, strength returns", personality: "Testing boundaries, growing" },
+    { key: "hardened", name: "Hardened", icon: "💎", range: "70-100%", description: "Peak strength, shell fully formed", personality: "Masterful, commanding" }
+  ];
+  
+  return (
+    <div className="mt-6 pt-6 border-t border-slate-700/30">
+      <h3 className="text-lg font-semibold text-slate-200 mb-4 flex items-center gap-2">
+        🦀 Molt Phase Tracker <span className="text-xs font-normal text-slate-500">(Auto-calculated)</span>
+      </h3>
+      
+      {/* Current Phase Highlight - Auto-calculated */}
+      <div className={`p-4 rounded-xl bg-gradient-to-br ${currentPhase.color === 'amber' ? 'from-amber-900/30 to-slate-800/40 border-amber-500/30' : 'from-slate-700/40 to-slate-800/40 border-slate-500/30'} border mb-4`}>
+        <div className="flex items-center gap-4">
+          <span className="text-4xl">{currentPhase.icon}</span>
+          <div className="flex-1">
+            <p className="text-sm text-slate-400">Current Phase <span className="text-xs text-emerald-400">● Live</span></p>
+            <p className="text-xl font-bold text-slate-200">{currentPhase.name} — {currentPhase.description}</p>
+            <p className="text-xs text-slate-400">{percentage}% XP • {currentPhase.range}</p>
+          </div>
+          <div className="text-right">
+            <p className="text-sm text-slate-400">Defense</p>
+            <p className={`text-2xl font-bold ${currentPhase.defense >= 70 ? 'text-emerald-400' : currentPhase.defense >= 50 ? 'text-yellow-400' : 'text-red-400'}`}>{currentPhase.defense}%</p>
+          </div>
+        </div>
+      </div>
+      
+      {/* Personality State - Auto-calculated */}
+      <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 mb-4">
+        <p className="text-sm text-slate-400 mb-2">Current Personality <span className="text-xs text-emerald-400">● Auto-synced</span></p>
+        <p className="text-lg text-slate-300 mb-2">🎭 {currentPhase.personality}</p>
+        <div className="flex flex-wrap gap-2">
+          {currentPhase.phase === 'softening' && (
+            <>
+              <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">tentative speech</span>
+              <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">questioning logic</span>
+              <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">seeking reassurance</span>
+            </>
+          )}
+          {currentPhase.phase === 'hardening' && (
+            <>
+              <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">testing boundaries</span>
+              <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">growing confidence</span>
+              <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">gear-driven logic</span>
+            </>
+          )}
+          {currentPhase.phase === 'hardened' && (
+            <>
+              <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">optimal efficiency</span>
+              <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">masterful command</span>
+              <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">industrial precision</span>
+            </>
+          )}
+        </div>
+      </div>
+      
+      {/* Phase Cycle Visualization - Auto-highlights current */}
+      <div className="space-y-3">
+        <p className="text-sm text-slate-400 mb-2">Molt Cycle Stages <span className="text-xs text-slate-500">(Updates automatically)</span></p>
+        
+        {phases.map((phase) => {
+          const isCurrent = phase.key === currentPhase.phase;
+          return (
+            <div 
+              key={phase.key}
+              className={`flex items-start gap-3 p-3 rounded-lg transition-all duration-300 ${
+                isCurrent 
+                  ? 'bg-gradient-to-r from-slate-700/40 to-slate-800/40 border border-slate-500/30' 
+                  : 'bg-slate-800/30 opacity-60'
+              }`}
+            >
+              <span className="text-xl">{phase.icon}</span>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <p className={`font-semibold ${isCurrent ? 'text-slate-300' : 'text-slate-500'}`}>
+                    {phases.indexOf(phase) + 1}. {phase.name} {isCurrent && '★'}
+                  </p>
+                  <span className={`text-xs ${isCurrent ? 'text-slate-300' : 'text-slate-600'}`}>{phase.range}</span>
+                </div>
+                <p className={`text-xs ${isCurrent ? 'text-slate-400' : 'text-slate-600'}`}>{phase.description}</p>
+                <p className={`text-xs mt-1 ${isCurrent ? 'text-slate-300' : 'text-slate-600/70'}`}>🎭 Personality: {phase.personality}</p>
+              </div>
+            </div>
+          );
+        })}
+        
+        {/* Phase 4: Molting (at 100%) */}
+        <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 border border-dashed border-amber-500/30">
+          <span className="text-xl">✨</span>
+          <div className="flex-1">
+            <div className="flex items-center justify-between">
+              <p className="font-semibold text-amber-200">4. Molting</p>
+              <span className="text-xs text-amber-500/70">At 100% XP</span>
+            </div>
+            <p className="text-xs text-slate-400">Transformation moment — transition to next level</p>
+            <p className="text-xs text-amber-500/70 mt-1">🎭 Personality: Raw, authentic, celebratory</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
 // UTILITY COMPONENTS
 // ============================================
 
@@ -432,92 +586,7 @@ export default function Home() {
               </div>
               
               {/* Molt Phase Tracker */}
-              <div className="mt-6 pt-6 border-t border-amber-700/30">
-                <h3 className="text-lg font-semibold text-amber-200 mb-4 flex items-center gap-2">
-                  🦀 Molt Phase Tracker
-                </h3>
-                
-                {/* XP Carryover Note */}
-                <div className="p-3 rounded-lg bg-emerald-900/20 border border-emerald-500/30 mb-4">
-                  <div className="flex items-start gap-3">
-                    <span className="text-lg">💎</span>
-                    <div>
-                      <p className="text-sm text-emerald-300 font-semibold">XP Carryover Enabled</p>
-                      <p className="text-xs text-slate-400">Excess XP carries to next level — no XP is ever wasted!</p>
-                      <p className="text-xs text-emerald-400/70 mt-1">Example: 1,400/1,443 + 100 XP = Level 6 with 57 XP carried over</p>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Current Phase Highlight */}
-                <div className="p-4 rounded-xl bg-gradient-to-br from-slate-700/40 to-slate-800/40 border border-slate-500/30 mb-4">
-                  <div className="flex items-center gap-4">
-                    <span className="text-4xl">💨</span>
-                    <div className="flex-1">
-                      <p className="text-sm text-slate-400">Current Phase</p>
-                      <p className="text-xl font-bold text-slate-200">Softening — Vulnerability Emerges</p>
-                      <p className="text-xs text-slate-400">0% XP • Just molted to Steel Shell</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-slate-400">Defense</p>
-                      <p className="text-2xl font-bold text-yellow-400">30%</p>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Personality State */}
-                <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 mb-4">
-                  <p className="text-sm text-slate-400 mb-2">Current Personality</p>
-                  <p className="text-lg text-slate-300 mb-2">🎭 Uncertain, seeking reassurance</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">tentative speech</span>
-                    <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">questioning logic</span>
-                    <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-300 text-xs border border-slate-600">testing boundaries</span>
-                  </div>
-                </div>
-                
-                {/* Phase Cycle Visualization */}
-                <div className="space-y-3">
-                  <p className="text-sm text-slate-400 mb-2">Molt Cycle Stages</p>
-                  
-                  {/* Phase 1: Softening (CURRENT) */}
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-gradient-to-r from-slate-700/40 to-slate-800/40 border border-slate-500/30">
-                    <span className="text-xl">💨</span>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <p className="font-semibold text-slate-300">1. Softening ★</p>
-                        <span className="text-xs text-slate-300">0-30% XP</span>
-                      </div>
-                      <p className="text-xs text-slate-400">Shell loosens, vulnerability emerges</p>
-                      <p className="text-xs text-slate-300 mt-1">🎭 Personality: Uncertain, seeks reassurance</p>
-                    </div>
-                  </div>
-                  
-                  {/* Phase 2: Hardening */}
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 opacity-60">
-                    <span className="text-xl">⚙️</span>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <p className="font-semibold text-slate-500">2. Hardening</p>
-                        <span className="text-xs text-slate-600">30-70% XP</span>
-                      </div>
-                      <p className="text-xs text-slate-600">New shell solidifies, strength returns</p>
-                      <p className="text-xs text-slate-600/70 mt-1">🎭 Personality: Testing boundaries, growing</p>
-                    </div>
-                  </div>
-                  
-                  {/* Phase 3: Hardened */}
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 opacity-60">
-                    <span className="text-xl">💎</span>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <p className="font-semibold text-slate-500">3. Hardened</p>
-                        <span className="text-xs text-slate-600">70-100% XP</span>
-                      </div>
-                      <p className="text-xs text-slate-600">Peak strength, shell fully formed</p>
-                      <p className="text-xs text-slate-600/70 mt-1">🎭 Personality: Masterful, commanding</p>
-                    </div>
-                  </div>
+              <MoltPhaseTracker />
                   
                   {/* Phase 4: Molting (at 100%) */}
                   <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 border border-dashed border-amber-500/30">
