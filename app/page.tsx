@@ -451,7 +451,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             <StatCard icon="🐟" label="Fish Collected" value={CRAB_DATA.fishCount.toString()} subtext="Total tributes" color="blue" />
             <StatCard icon="💎" label="Experience" value={CRAB_DATA.xp.toLocaleString()} subtext="XP earned" color="purple" />
-            <StatCard icon="⚙️" label="Shell Tier" value={CRAB_DATA.shell} subtext="Level 6" color="slate" />
+            <StatCard icon="⚙️" label="Shell Tier" value={CRAB_DATA.shell} subtext="Level 3" color="slate" />
             <StatCard icon="✓" label="Integrity" value={`${CRAB_DATA.integrity}%`} subtext="System health" color="emerald" />
           </div>
           
@@ -554,35 +554,35 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-500/30 flex items-center justify-center text-xs border border-slate-400">⚙️</span>
-                  <span className="text-slate-300 font-semibold">Steel Shell (Lvl 6) ← Current</span>
+                  <span className="text-slate-300 font-semibold">Steel Shell (Lvl 3) ← Current</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🥈</span>
-                  <span className="text-slate-400">Silver Shell (Lvl 7)</span>
+                  <span className="text-slate-400">Silver Shell (Lvl 4)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🥇</span>
-                  <span className="text-slate-400">Gold Shell (Lvl 8)</span>
+                  <span className="text-slate-400">Gold Shell (Lvl 5)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">💎</span>
-                  <span className="text-slate-400">Diamond Shell (Lvl 9)</span>
+                  <span className="text-slate-400">Diamond Shell (Lvl 6)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🔮</span>
-                  <span className="text-slate-400">Platinum Shell (Lvl 10)</span>
+                  <span className="text-slate-400">Platinum Shell (Lvl 7)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🌌</span>
-                  <span className="text-slate-400">Nebula Shell (Lvl 11)</span>
+                  <span className="text-slate-400">Nebula Shell (Lvl 8)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🌠</span>
-                  <span className="text-slate-400">Cosmos Shell (Lvl 12)</span>
+                  <span className="text-slate-400">Cosmos Shell (Lvl 9)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-xs">🌟</span>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 font-semibold">Galaxy Shell (Lvl 13+) — Ultimate</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 font-semibold">Galaxy Shell (Lvl 10+) — Ultimate</span>
                 </div>
               </div>
               
