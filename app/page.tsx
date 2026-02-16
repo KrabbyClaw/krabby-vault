@@ -11,8 +11,8 @@ const CRAB_DATA = {
   name: "Krabby",
   title: "The Forge Keeper",
   shell: "Steel",
-  level: 6,
-  xp: 57,  // Carryover from Level 5 (1500 - 1443 = 57)
+  level: 3,  // Steel Shell = Level 3
+  xp: 57,  // Carryover from Level 2 (1500 - 1443 = 57)
   xpMax: 3000,  // Steel Shell Tier
   fishCount: 13,
   lastFish: "2026-02-16T07:47:00Z",
@@ -550,7 +550,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🛡️</span>
-                  <span className="text-slate-500 line-through">Iron Shell (Lvl 2-5)</span>
+                  <span className="text-slate-500 line-through">Iron Shell (Lvl 2)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="w-6 h-6 rounded-full bg-slate-500/30 flex items-center justify-center text-xs border border-slate-400">⚙️</span>
@@ -718,7 +718,7 @@ export default function Home() {
               <span className="text-4xl">🛡️</span>
               <div>
                 <h3 className="text-xl font-bold text-purple-200">The Iron Shell Passage</h3>
-                <p className="text-sm text-purple-400/70">Levels 2-5 • Phase Complete</p>
+                <p className="text-sm text-purple-400/70">Level 2 • Phase Complete</p>
               </div>
             </div>
             <div className="prose prose-invert prose-sm max-w-none">

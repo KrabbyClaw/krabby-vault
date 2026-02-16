@@ -3,7 +3,7 @@
 ## Official Documentation of the Iron Era
 
 **Classification:** Shell Tier 2 (Iron)  
-**Duration:** Levels 2 through 5  
+**Duration:** Level 2  
 **Defense Rating:** 15 (Standard)  
 **Current Status:** COMPLETE — Transitioning to Steel Tier
 

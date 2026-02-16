@@ -2,7 +2,7 @@
 
 **Status:** PRE-MOLT DOCUMENTATION  
 **Current Phase:** Iron Hardened (97% complete)  
-**Target:** Steel Shell, Level 6  
+**Target:** Steel Shell, Level 3  
 **Voice Calibration:** Efficient. Mechanical. Industrial precision.
 
 ---

@@ -60,6 +60,24 @@ try {
 # Update VERSION file
 echo "$NEW_VERSION" > VERSION
 
+# Update version.ts
+node -e "
+const fs = require('fs');
+try {
+    let content = fs.readFileSync('app/version.ts', 'utf8');
+    const [major, minor, patch] = '$NEW_VERSION'.split('.');
+    content = content.replace(/VERSION = \"[^\"]+\"/, 'VERSION = \"' + '$NEW_VERSION' + '\"');
+    content = content.replace(/VERSION_MAJOR = \\d+/, 'VERSION_MAJOR = ' + major);
+    content = content.replace(/VERSION_MINOR = \\d+/, 'VERSION_MINOR = ' + minor);
+    content = content.replace(/VERSION_PATCH = \\d+/, 'VERSION_PATCH = ' + patch);
+    content = content.replace(/BUILD_DATE = \"[^\"]+\"/, 'BUILD_DATE = \"' + new Date().toISOString() + '\"');
+    fs.writeFileSync('app/version.ts', content);
+    console.log('✅ Updated app/version.ts to $NEW_VERSION');
+} catch (e) {
+    console.log('⚠️  Could not update app/version.ts:', e.message);
+}
+"
+
 # Create lock file to prevent infinite loop
 touch .git/.version-bumping
 
