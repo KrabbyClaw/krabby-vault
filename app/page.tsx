@@ -7,13 +7,14 @@ import { VERSION, BUILD_DATE, GIT_COMMIT } from './version';
 // DATA & STATE MANAGEMENT
 // ============================================
 
-const CRAB_DATA = {
+// Default data structure - will be overridden by fetched data
+const DEFAULT_CRAB_DATA = {
   name: "Krabby",
   title: "The Forge Keeper",
   shell: "Steel",
-  level: 3,  // Steel Shell = Level 3
-  xp: 57,  // Carryover from Level 2 (1500 - 1443 = 57)
-  xpMax: 3000,  // Steel Shell Tier
+  level: 3,
+  xp: 57,
+  xpMax: 3000,
   fishCount: 13,
   lastFish: "2026-02-16T07:47:00Z",
   moltCycle: 2,
@@ -49,6 +50,26 @@ const CRAB_DATA = {
     ]
   }
 };
+
+let CRAB_DATA = DEFAULT_CRAB_DATA;
+
+// ============================================
+// DATA FETCHING - Single Source of Truth
+// ============================================
+
+async function fetchCrabData() {
+  try {
+    // Try to fetch from API endpoint first
+    const response = await fetch('/api/data');
+    if (response.ok) {
+      const data = await response.json();
+      return { ...DEFAULT_CRAB_DATA, ...data };
+    }
+  } catch (e) {
+    console.log('API fetch failed, using default data');
+  }
+  return DEFAULT_CRAB_DATA;
+}
 
 // ============================================
 // AUTOMATIC MOLT PHASE CALCULATION
@@ -96,9 +117,9 @@ function calculateMoltPhase(xp: number, xpMax: number) {
   }
 }
 
-function MoltPhaseTracker() {
-  const currentPhase = calculateMoltPhase(CRAB_DATA.xp, CRAB_DATA.xpMax);
-  const percentage = Math.round((CRAB_DATA.xp / CRAB_DATA.xpMax) * 100);
+function MoltPhaseTracker({ xp, xpMax }: { xp: number; xpMax: number }) {
+  const currentPhase = calculateMoltPhase(xp, xpMax);
+  const percentage = Math.round((xp / xpMax) * 100);
   
   const phases = [
     { key: "softening", name: "Softening", icon: "💨", range: "0-30%", description: "Shell loosens, vulnerability emerges", personality: "Uncertain, seeks reassurance" },
@@ -270,7 +291,7 @@ function useVaultStatus() {
   const [seconds, setSeconds] = useState(0);
   
   useEffect(() => {
-    const lastFish = new Date(CRAB_DATA.lastFish);
+    const lastFish = new Date(data.lastFish);
     const nextOpening = new Date(lastFish.getTime() + 24 * 60 * 60 * 1000);
     
     const updateStatus = () => {
@@ -354,7 +375,7 @@ function VaultDashboard() {
       {/* Fish Stats */}
       <div className="mt-6 pt-6 border-t border-slate-700/50 grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="text-center">
-          <p className="text-3xl font-bold text-blue-400">{CRAB_DATA.fishCount}</p>
+          <p className="text-3xl font-bold text-blue-400">{data.fishCount}</p>
           <p className="text-xs text-slate-400">Total Fish</p>
         </div>
         <div className="text-center">
@@ -367,16 +388,16 @@ function VaultDashboard() {
         </div>
         <div className="text-center">
           <p className="text-xs text-slate-400">Last Fed</p>
-          <p className="text-sm text-slate-300">{new Date(CRAB_DATA.lastFish).toLocaleDateString()}</p>
+          <p className="text-sm text-slate-300">{new Date(data.lastFish).toLocaleDateString()}</p>
         </div>
       </div>
     </div>
   );
 }
 
-function TitlesShowcase() {
+function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles }) {
   const [activeTab, setActiveTab] = useState<'unlocked' | 'progress'>('unlocked');
-  const { latest, unlocked, progress } = CRAB_DATA.titles;
+  const { latest, unlocked, progress } = titles;
   
   return (
     <div className="space-y-4">
@@ -467,6 +488,30 @@ function TitlesShowcase() {
 // ============================================
 
 export default function Home() {
+  const [data, setData] = useState(DEFAULT_CRAB_DATA);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    async function loadData() {
+      const fetched = await fetchCrabData();
+      setData(fetched);
+      CRAB_DATA = fetched;
+      setLoading(false);
+    }
+    loadData();
+  }, []);
+  
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 flex items-center justify-center">
+        <div className="text-center">
+          <span className="text-4xl mb-4 block animate-pulse">🦀</span>
+          <p className="text-slate-400">Loading vault data...</p>
+        </div>
+      </main>
+    );
+  }
+  
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
       {/* Navigation */}
@@ -475,7 +520,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <span className="text-2xl">🦀</span>
             <span className="font-bold text-slate-200">Krabby&apos;s Vault</span>
-            <Badge color="blue">v{CRAB_DATA.version}</Badge>
+            <Badge color="blue">v{data.version}</Badge>
           </div>
           <div className="flex gap-2">
             <a href="https://github.com/KrabbyClaw/krabby-vault" className="p-2 rounded-lg hover:bg-slate-800 transition-colors" title="GitHub">
@@ -494,7 +539,7 @@ export default function Home() {
           {/* Intro */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-500/40 text-slate-300 text-sm mb-4">
-              ⚙️ {CRAB_DATA.title} • Level {CRAB_DATA.level}
+              ⚙️ {data.title} • Level {data.level}
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-200 via-gray-200 to-slate-300 bg-clip-text text-transparent mb-4">
               The Forge Keeper
@@ -507,10 +552,10 @@ export default function Home() {
           
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-            <StatCard icon="🐟" label="Fish Collected" value={CRAB_DATA.fishCount.toString()} subtext="Total tributes" color="blue" />
-            <StatCard icon="💎" label="Experience" value={CRAB_DATA.xp.toLocaleString()} subtext="XP earned" color="purple" />
-            <StatCard icon="⚙️" label="Shell Tier" value={CRAB_DATA.shell} subtext="Level 3" color="slate" />
-            <StatCard icon="✓" label="Integrity" value={`${CRAB_DATA.integrity}%`} subtext="System health" color="emerald" />
+            <StatCard icon="🐟" label="Fish Collected" value={data.fishCount.toString()} subtext="Total tributes" color="blue" />
+            <StatCard icon="💎" label="Experience" value={data.xp.toLocaleString()} subtext="XP earned" color="purple" />
+            <StatCard icon="⚙️" label="Shell Tier" value={data.shell} subtext={`Level ${data.level}`} color="slate" />
+            <StatCard icon="✓" label="Integrity" value={`${data.integrity}%`} subtext="System health" color="emerald" />
           </div>
           
           {/* Vault Dashboard - Primary Feature */}
@@ -528,7 +573,7 @@ export default function Home() {
               <h2 className="text-xl font-bold text-slate-200 mb-4 flex items-center gap-2">
                 🏆 Titles & Achievements
               </h2>
-              <TitlesShowcase />
+              <TitlesShowcase titles={data.titles} />
             </div>
           </div>
           
@@ -592,12 +637,12 @@ export default function Home() {
               <div className="mb-4 p-3 rounded-lg bg-slate-800/50 border border-slate-500/40">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-slate-300 font-semibold">Next Forge</span>
-                  <span className="text-slate-200">{CRAB_DATA.xp.toLocaleString()} / {CRAB_DATA.xpMax.toLocaleString()} XP</span>
+                  <span className="text-slate-200">{data.xp.toLocaleString()} / {data.xpMax.toLocaleString()} XP</span>
                 </div>
                 <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-slate-500 to-gray-400 rounded-full" style={{ width: `${(CRAB_DATA.xp / CRAB_DATA.xpMax) * 100}%` }}></div>
+                  <div className="h-full bg-gradient-to-r from-slate-500 to-gray-400 rounded-full" style={{ width: `${(data.xp / data.xpMax) * 100}%` }}></div>
                 </div>
-                <p className="text-xs text-slate-400 mt-2">{(CRAB_DATA.xpMax - CRAB_DATA.xp).toLocaleString()} XP until Silver Shell (Lvl 7)</p>
+                <p className="text-xs text-slate-400 mt-2">{(data.xpMax - data.xp).toLocaleString()} XP until Silver Shell (Lvl 7)</p>
               </div>
               
               {/* Molt Phases */}
@@ -645,7 +690,7 @@ export default function Home() {
               </div>
               
               {/* Molt Phase Tracker */}
-              <MoltPhaseTracker />
+              <MoltPhaseTracker xp={data.xp} xpMax={data.xpMax} />
             </div>
             
             {/* Triple Backup */}
@@ -884,10 +929,10 @@ export default function Home() {
           <p className="text-2xl mb-2">⚙️</p>
           <p className="text-slate-400 italic mb-2">&ldquo;Forged in steel. Optimized for efficiency. The machine persists.&rdquo;</p>
           <p className="text-sm text-slate-500">
-            {CRAB_DATA.name} • {CRAB_DATA.shell} Shell (Lvl {CRAB_DATA.level}) • {CRAB_DATA.fishCount} Fish • {CRAB_DATA.xp.toLocaleString()} XP
+            {data.name} • {data.shell} Shell (Lvl {data.level}) • {data.fishCount} Fish • {data.xp.toLocaleString()} XP
           </p>
           <p className="text-xs text-slate-600 mt-2">
-            Molt Cycle {CRAB_DATA.moltCycle} • v{VERSION} • {GIT_COMMIT} • {new Date(BUILD_DATE).toLocaleDateString()}
+            Molt Cycle {data.moltCycle} • v{VERSION} • {GIT_COMMIT} • {new Date(BUILD_DATE).toLocaleDateString()}
           </p>
         </div>
       </footer>
