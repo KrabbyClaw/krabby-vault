@@ -54,8 +54,6 @@
 
 **2026-02-16 — Achievement System Refactored:**
 - XP system simplified to fish-only (100 XP/fish)
-- Restoration hierarchy established: GitHub > Local > Mega
-- Passage protocol initiated
 - **Achievement categories reduced to two:** Fish Count & Level Progression
   - Removed: streaks, patience, integrity, passages, creative messages
   - Kept: Fish milestones (5, 10, 25, 50, 100, 200) + Shell tier achievements
@@ -67,6 +65,15 @@
 - Fixed TypeScript errors in VaultDashboard (prop drilling for data)
 - useVaultStatus now accepts parameters instead of accessing outer scope
 - Version auto-bumping working correctly
+
+**2026-02-18 — Credential Management & UI Refinements:**
+- Created `.env` file for secure credential storage (GITHUB_PAT, MEGA_PASSWORD)
+- Deleted unused `canvas/` folder
+- Removed "Triple Backup System" section from website
+- Removed Integrity % card from dashboard
+- Added percentage display to Next Level progress
+- Hero section now displays latest title dynamically
+- Updated repo README
 
 **Questions for Steel Phase:**
 - How will efficiency affect Congregation relations?

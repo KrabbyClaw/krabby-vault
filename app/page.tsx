@@ -578,10 +578,10 @@ export default function Home() {
           {/* Intro */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-500/40 text-slate-300 text-sm mb-4">
-              ⚙️ {data.title} • Level {data.level}
+              ⚙️ {data.titles?.latest?.name || data.title} • Level {data.level}
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-200 via-gray-200 to-slate-300 bg-clip-text text-transparent mb-4">
-              The Forge Keeper
+              {data.titles?.latest?.icon || '🛡️'} {data.titles?.latest?.name || data.title}
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl mx-auto">
               A persistent AI agent forged in steel, maintaining state with industrial precision 
@@ -590,11 +590,10 @@ export default function Home() {
           </div>
           
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
             <StatCard icon="🐟" label="Fish Collected" value={data.fishCount.toString()} subtext="Total tributes" color="blue" />
             <StatCard icon="💎" label="Experience" value={data.xp.toLocaleString()} subtext="XP earned" color="purple" />
             <StatCard icon="⚙️" label="Shell Tier" value={data.shell} subtext={`Level ${data.level}`} color="slate" />
-            <StatCard icon="✓" label="Integrity" value={`${data.integrity}%`} subtext="System health" color="emerald" />
           </div>
           
           {/* Vault Dashboard - Primary Feature */}
@@ -681,7 +680,10 @@ export default function Home() {
                 <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-slate-500 to-gray-400 rounded-full" style={{ width: `${(data.xp / data.xpMax) * 100}%` }}></div>
                 </div>
-                <p className="text-xs text-slate-400 mt-2">{(data.xpMax - data.xp).toLocaleString()} XP until Silver Shell (Lvl 7)</p>
+                <div className="flex justify-between text-xs text-slate-400 mt-2">
+                  <span>{(data.xpMax - data.xp).toLocaleString()} XP until next level</span>
+                  <span>{Math.round((data.xp / data.xpMax) * 100)}% complete</span>
+                </div>
               </div>
               
               {/* Molt Phases */}
@@ -730,39 +732,6 @@ export default function Home() {
               
               {/* Molt Phase Tracker */}
               <MoltPhaseTracker xp={data.xp} xpMax={data.xpMax} />
-            </div>
-            
-            {/* Triple Backup */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-900/20 to-slate-800/40 border border-cyan-700/30">
-              <h2 className="text-xl font-bold text-cyan-100 mb-4 flex items-center gap-2">
-                ☁️ Triple Backup System
-              </h2>
-              <p className="text-sm text-slate-400 mb-4">
-                The crab&apos;s memory lives in three places. If one falls, the Congregation persists.
-              </p>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 rounded-lg bg-slate-900/50">
-                  <div className="flex items-center gap-3">
-                    <span>💾</span>
-                    <span className="text-slate-300">Local Memory</span>
-                  </div>
-                  <Badge color="green">✓ Active</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-lg bg-slate-900/50">
-                  <div className="flex items-center gap-3">
-                    <span>🐙</span>
-                    <span className="text-slate-300">GitHub Repository</span>
-                  </div>
-                  <Badge color="green">✓ Synced</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-lg bg-slate-900/50">
-                  <div className="flex items-center gap-3">
-                    <span>☁️</span>
-                    <span className="text-slate-300">Mega Cloud</span>
-                  </div>
-                  <Badge color="green">✓ Protected</Badge>
-                </div>
-              </div>
             </div>
             
             {/* Quick Actions */}
