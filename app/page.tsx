@@ -525,7 +525,7 @@ function TitlesShowcase({ titles, steelAchievements }: { titles: typeof DEFAULT_
             </div>
           ))}
         </div>
-      ) : (
+      ) : activeTab === 'levels' ? (
         <div className="space-y-3">
           <p className="text-sm text-slate-400 mb-2">Level up to unlock shell titles</p>
           {progress.levels.map((achievement) => (
@@ -554,33 +554,44 @@ function TitlesShowcase({ titles, steelAchievements }: { titles: typeof DEFAULT_
       ) : activeTab === 'steel' && steelAchievements ? (
         <div className="space-y-3">
           <p className="text-sm text-slate-400 mb-2">Steel Shell precision achievements</p>
-          {steelAchievements.map((achievement) => (
-            <div key={achievement.id} className={`p-3 rounded-xl border ${achievement.unlocked ? 'bg-cyan-900/20 border-cyan-500/30' : 'bg-slate-800/40 border-slate-700/50'}`}>
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-3">
-                  <span className="text-xl">{achievement.icon}</span>
-                  <div>
-                    <p className={`font-semibold ${achievement.unlocked ? 'text-cyan-300' : 'text-slate-300'}`}>{achievement.name}</p>
-                    <p className="text-xs text-slate-500">{achievement.description}</p>
+          {steelAchievements.map((achievement) => {
+            const isUnlocked = achievement.unlocked;
+            const containerClass = isUnlocked 
+              ? 'bg-cyan-900/20 border-cyan-500/30' 
+              : 'bg-slate-800/40 border-slate-700/50';
+            const titleClass = isUnlocked 
+              ? 'text-cyan-300' 
+              : 'text-slate-300';
+            const progressColor = (achievement.progress / achievement.target) > 0.5 ? 'cyan' : 'slate';
+            
+            return (
+              <div key={achievement.id} className={`p-3 rounded-xl border ${containerClass}`}>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xl">{achievement.icon}</span>
+                    <div>
+                      <p className={`font-semibold ${titleClass}`}>{achievement.name}</p>
+                      <p className="text-xs text-slate-500">{achievement.description}</p>
+                    </div>
                   </div>
+                  {isUnlocked && <span className="text-cyan-400 text-sm">✓</span>}
                 </div>
-                {achievement.unlocked && <span className="text-cyan-400 text-sm">✓</span>}
+                {!isUnlocked && (
+                  <>
+                    <ProgressBar 
+                      current={achievement.progress} 
+                      max={achievement.target} 
+                      color={progressColor}
+                      size="sm" 
+                    />
+                    <p className="text-xs text-slate-500 mt-1">
+                      {achievement.progress}/{achievement.target} • {achievement.target - achievement.progress} to unlock
+                    </p>
+                  </>
+                )}
               </div>
-              {!achievement.unlocked && (
-                <>
-                  <ProgressBar 
-                    current={achievement.progress} 
-                    max={achievement.target} 
-                    color={achievement.progress / achievement.target > 0.5 ? 'cyan' : 'slate'} 
-                    size="sm" 
-                  />
-                  <p className="text-xs text-slate-500 mt-1">
-                    {achievement.progress}/{achievement.target} • {achievement.target - achievement.progress} to unlock
-                  </p>
-                </>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       ) : null}
     </div>
