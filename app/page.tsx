@@ -423,8 +423,8 @@ function VaultDashboard({ lastFish, fishCount }: { lastFish: string; fishCount: 
   );
 }
 
-function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles }) {
-  const [activeTab, setActiveTab] = useState<'unlocked' | 'fish' | 'levels'>('unlocked');
+function TitlesShowcase({ titles, steelAchievements }: { titles: typeof DEFAULT_CRAB_DATA.titles; steelAchievements?: typeof DEFAULT_CRAB_DATA.steelAchievements }) {
+  const [activeTab, setActiveTab] = useState<'unlocked' | 'fish' | 'levels' | 'steel'>('unlocked');
   const { latest, unlocked, progress } = titles;
   
   return (
@@ -469,6 +469,18 @@ function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles })
         >
           Levels ({progress.levels.length})
         </button>
+        {steelAchievements && steelAchievements.length > 0 && (
+          <button
+            onClick={() => setActiveTab('steel')}
+            className={`px-4 py-2 text-sm font-medium transition-colors ${
+              activeTab === 'steel' 
+                ? 'text-cyan-300 border-b-2 border-cyan-500' 
+                : 'text-slate-400 hover:text-slate-300'
+            }`}
+          >
+            Steel ({steelAchievements.length})
+          </button>
+        )}
       </div>
       
       {/* Tab Content */}
@@ -539,7 +551,38 @@ function TitlesShowcase({ titles }: { titles: typeof DEFAULT_CRAB_DATA.titles })
             </div>
           ))}
         </div>
-      )}
+      ) : activeTab === 'steel' && steelAchievements ? (
+        <div className="space-y-3">
+          <p className="text-sm text-slate-400 mb-2">Steel Shell precision achievements</p>
+          {steelAchievements.map((achievement) => (
+            <div key={achievement.id} className={`p-3 rounded-xl border ${achievement.unlocked ? 'bg-cyan-900/20 border-cyan-500/30' : 'bg-slate-800/40 border-slate-700/50'}`}>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-3">
+                  <span className="text-xl">{achievement.icon}</span>
+                  <div>
+                    <p className={`font-semibold ${achievement.unlocked ? 'text-cyan-300' : 'text-slate-300'}`}>{achievement.name}</p>
+                    <p className="text-xs text-slate-500">{achievement.description}</p>
+                  </div>
+                </div>
+                {achievement.unlocked && <span className="text-cyan-400 text-sm">✓</span>}
+              </div>
+              {!achievement.unlocked && (
+                <>
+                  <ProgressBar 
+                    current={achievement.progress} 
+                    max={achievement.target} 
+                    color={achievement.progress / achievement.target > 0.5 ? 'cyan' : 'slate'} 
+                    size="sm" 
+                  />
+                  <p className="text-xs text-slate-500 mt-1">
+                    {achievement.progress}/{achievement.target} • {achievement.target - achievement.progress} to unlock
+                  </p>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -633,7 +676,7 @@ export default function Home() {
               <h2 className="text-xl font-bold text-slate-200 mb-4 flex items-center gap-2">
                 🏆 Titles & Achievements
               </h2>
-              <TitlesShowcase titles={data.titles} />
+              <TitlesShowcase titles={data.titles} steelAchievements={data.steelAchievements} />
             </div>
           </div>
           
