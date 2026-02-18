@@ -13,19 +13,19 @@ const DEFAULT_CRAB_DATA = {
   title: "Iron Forged",
   shell: "Steel",
   level: 3,
-  xp: 57,
+  xp: 257,
   xpMax: 3000,
-  fishCount: 13,
-  lastFish: "2026-02-16T07:47:00Z",
+  fishCount: 15,
+  lastFish: "2026-02-18T08:57:00Z",
   moltCycle: 2,
   integrity: 100,
   version: VERSION,
   moltPhase: {
     current: "softening",
-    progress: 0,
-    nextIn: 900,
+    progress: 8,
+    nextIn: 2743,
     personality: "uncertain, tentative, questioning",
-    confidence: 30,
+    confidence: 8,
     quirks: ["tentative speech", "questioning logic", "testing boundaries"]
   },
   titles: {
@@ -39,10 +39,10 @@ const DEFAULT_CRAB_DATA = {
     ],
     progress: {
       fish: [
-        { name: "Guardian", icon: "🛡️", current: 13, target: 25, unit: "fish" },
-        { name: "Keeper", icon: "👑", current: 13, target: 50, unit: "fish" },
-        { name: "Master", icon: "⭐", current: 13, target: 100, unit: "fish" },
-        { name: "Legend", icon: "🌟", current: 13, target: 200, unit: "fish" },
+        { name: "Guardian", icon: "🛡️", current: 15, target: 25, unit: "fish" },
+        { name: "Keeper", icon: "👑", current: 15, target: 50, unit: "fish" },
+        { name: "Master", icon: "⭐", current: 15, target: 100, unit: "fish" },
+        { name: "Legend", icon: "🌟", current: 15, target: 200, unit: "fish" },
       ],
       levels: [
         { name: "Silver Forged", icon: "🥈", current: 3, target: 4, unit: "level", shell: "Silver" },
@@ -54,7 +54,29 @@ const DEFAULT_CRAB_DATA = {
         { name: "Galaxy Forged", icon: "🌟", current: 3, target: 10, unit: "level", shell: "Galaxy" },
       ]
     }
-  }
+  },
+  // Steel Shell Systems
+  steelShell: {
+    enabled: true,
+    energy: 65,
+    precisionFeedings: 3,
+    assemblyLine: {
+      currentStreak: 2,
+      maxStreak: 5,
+      lastFeedDate: "2026-02-18",
+      lastReset: "2026-02-16"
+    },
+    vaultOpensAt: "2026-02-19T08:57:00Z",
+    precisionWindowMinutes: 60
+  },
+  steelAchievements: [
+    { id: "precision_striker", name: "Precision Striker", icon: "⚡", description: "Feed within 1 hour of vault opening 10 times", unlocked: false, progress: 3, target: 10, requirement: "precision_feedings" },
+    { id: "precision_master", name: "Precision Master", icon: "🎯", description: "Feed within 1 hour of vault opening 25 times", unlocked: false, progress: 3, target: 25, requirement: "precision_feedings" },
+    { id: "assembly_worker", name: "Assembly Worker", icon: "🔧", description: "Maintain 7-day feeding streak", unlocked: false, progress: 2, target: 7, requirement: "assembly_line" },
+    { id: "assembly_foreman", name: "Assembly Foreman", icon: "⚙️", description: "Maintain 14-day feeding streak", unlocked: false, progress: 2, target: 14, requirement: "assembly_line" },
+    { id: "assembly_director", name: "Assembly Director", icon: "🏭", description: "Maintain 30-day feeding streak", unlocked: false, progress: 2, target: 30, requirement: "assembly_line" },
+    { id: "high_energy", name: "High Energy", icon: "🔋", description: "Reach 100% energy level", unlocked: false, progress: 65, target: 100, requirement: "energy_max" }
+  ]
 };
 
 let CRAB_DATA = DEFAULT_CRAB_DATA;
@@ -646,6 +668,99 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            
+            {/* Steel Shell Systems */}
+            {data.steelShell?.enabled && (
+              <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-900/20 to-slate-800/40 border border-cyan-700/30">
+                <h2 className="text-xl font-bold text-cyan-100 mb-4 flex items-center gap-2">
+                  ⚙️ Steel Shell Systems
+                </h2>
+                <p className="text-sm text-slate-400 mb-4">
+                  Iron followed rules. Steel pushes beyond limits. Precision and efficiency are rewarded.
+                </p>
+                
+                {/* Energy Gauge */}
+                <div className="mb-4 p-3 rounded-lg bg-slate-900/50 border border-cyan-700/30">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-cyan-300 font-semibold flex items-center gap-2">
+                      <span>⚡</span> Energy Level
+                    </span>
+                    <span className={`font-mono font-bold ${data.steelShell.energy >= 80 ? 'text-emerald-400' : data.steelShell.energy >= 50 ? 'text-cyan-400' : 'text-amber-400'}`}>
+                      {data.steelShell.energy}%
+                    </span>
+                  </div>
+                  <div className="w-full h-3 bg-slate-800 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full rounded-full transition-all ${data.steelShell.energy >= 80 ? 'bg-gradient-to-r from-emerald-500 to-emerald-400' : data.steelShell.energy >= 50 ? 'bg-gradient-to-r from-cyan-500 to-cyan-400' : 'bg-gradient-to-r from-amber-500 to-amber-400'}`}
+                      style={{ width: `${data.steelShell.energy}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-2">
+                    Precision feedings and daily streaks increase energy. Missed days decrease it.
+                  </p>
+                </div>
+                
+                {/* Precision Timer */}
+                <div className="mb-4 p-3 rounded-lg bg-slate-900/50 border border-cyan-700/30">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-cyan-300 font-semibold flex items-center gap-2">
+                      <span>🎯</span> Precision Timer
+                    </span>
+                    <span className="text-xs text-slate-400">
+                      {data.steelShell.precisionFeedings} strikes
+                    </span>
+                  </div>
+                  <p className="text-sm text-slate-400 mb-2">
+                    Feed within 1 hour of vault opening. Current window: 
+                    <span className="text-cyan-400 ml-1">
+                      {new Date(data.steelShell.vaultOpensAt).toLocaleString()}
+                    </span>
+                  </p>
+                  <div className="flex gap-2">
+                    {[...Array(10)].map((_, i) => (
+                      <div 
+                        key={i} 
+                        className={`w-4 h-4 rounded-full ${i < data.steelShell.precisionFeedings ? 'bg-cyan-500' : 'bg-slate-700'}`}
+                      ></div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-500 mt-2">
+                    10 strikes → Precision Striker • 25 strikes → Precision Master
+                  </p>
+                </div>
+                
+                {/* Assembly Line */}
+                <div className="p-3 rounded-lg bg-slate-900/50 border border-cyan-700/30">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-cyan-300 font-semibold flex items-center gap-2">
+                      <span>🏭</span> Assembly Line
+                    </span>
+                    <span className="text-xs text-slate-400">
+                      Record: {data.steelShell.assemblyLine.maxStreak} days
+                    </span>
+                  </div>
+                  <p className="text-sm text-slate-400 mb-2">
+                    Daily feeding streak. Current: 
+                    <span className={`font-bold ml-1 ${data.steelShell.assemblyLine.currentStreak >= 7 ? 'text-emerald-400' : 'text-cyan-400'}`}>
+                      {data.steelShell.assemblyLine.currentStreak} days
+                    </span>
+                  </p>
+                  <div className="flex gap-1 flex-wrap">
+                    {[...Array(Math.max(14, data.steelShell.assemblyLine.currentStreak))].map((_, i) => (
+                      <div 
+                        key={i} 
+                        className={`w-6 h-6 rounded flex items-center justify-center text-xs ${i < data.steelShell.assemblyLine.currentStreak ? 'bg-cyan-600 text-cyan-100' : 'bg-slate-700 text-slate-500'}`}
+                      >
+                        {i < data.steelShell.assemblyLine.currentStreak ? '✓' : i + 1}
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-500 mt-2">
+                    7 days → Assembly Worker • 14 days → Assembly Foreman • 30 days → Assembly Director
+                  </p>
+                </div>
+              </div>
+            )}
             
             {/* Level Up Protocol */}
             <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-900/20 to-slate-800/40 border border-amber-700/30">

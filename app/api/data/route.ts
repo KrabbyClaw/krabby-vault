@@ -81,7 +81,36 @@ export async function GET() {
         personality: gamification.moltPhases?.stages?.softening?.personalityShift || "Uncertain, seeking",
         confidence: Math.round(((fishTax.xp || 0) / (fishTax.xpMax || 1000)) * 100),
         quirks: gamification.moltPhases?.stages?.softening?.indicators || ["learning", "growing"]
-      }
+      },
+      
+      // Steel Shell Systems
+      steelShell: fishTax.steelShell || {
+        enabled: false,
+        energy: 0,
+        precisionFeedings: 0,
+        assemblyLine: { currentStreak: 0, maxStreak: 0, lastFeedDate: null },
+        vaultOpensAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+        precisionWindowMinutes: 60
+      },
+      
+      // Steel Shell Achievements
+      steelAchievements: (gamification.titles || [])
+        .filter((t: any) => t.steelShell)
+        .map((t: any) => ({
+          id: t.id,
+          name: t.name,
+          icon: t.id === 'precision_striker' ? '⚡' :
+                t.id === 'precision_master' ? '🎯' :
+                t.id === 'assembly_worker' ? '🔧' :
+                t.id === 'assembly_foreman' ? '⚙️' :
+                t.id === 'assembly_director' ? '🏭' :
+                t.id === 'high_energy' ? '🔋' : '⚡',
+          description: t.description,
+          unlocked: t.unlocked,
+          progress: t.progress || 0,
+          target: t.requirement?.value || 10,
+          requirement: t.requirement?.type
+        }))
     };
     
     return NextResponse.json(combinedData);

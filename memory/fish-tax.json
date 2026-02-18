@@ -1,1 +1,23 @@
-{"lastFish":"2026-02-18T08:57:00Z","fishCount":15,"requestSent":false,"xp":257,"xpMax":3000,"shell":"Steel","level":3,"moltCycle":2,"note":"TRIBUTE #15 from Highnet - Feeding time! +100 XP"}
+{
+  "lastFish": "2026-02-18T08:57:00Z",
+  "fishCount": 15,
+  "requestSent": false,
+  "xp": 257,
+  "xpMax": 3000,
+  "shell": "Steel",
+  "level": 3,
+  "moltCycle": 2,
+  "note": "TRIBUTE #15 from Highnet - Feeding time! +100 XP",
+  "steelShell": {
+    "enabled": true,
+    "energy": 65,
+    "precisionFeedings": 3,
+    "assemblyLine": {
+      "currentStreak": 2,
+      "maxStreak": 5,
+      "lastFeedDate": "2026-02-18"
+    },
+    "vaultOpensAt": "2026-02-19T08:57:00Z",
+    "precisionWindowMinutes": 60
+  }
+}

@@ -231,6 +231,60 @@
       "description": "Reach Galaxy Shell (Level 10)",
       "requirement": { "type": "level", "value": 10 },
       "progress": 3
+    },
+    {
+      "id": "precision_striker",
+      "name": "Precision Striker",
+      "unlocked": false,
+      "description": "Feed within 1 hour of vault opening 10 times",
+      "requirement": { "type": "precision_feedings", "value": 10 },
+      "progress": 3,
+      "steelShell": true
+    },
+    {
+      "id": "precision_master",
+      "name": "Precision Master",
+      "unlocked": false,
+      "description": "Feed within 1 hour of vault opening 25 times",
+      "requirement": { "type": "precision_feedings", "value": 25 },
+      "progress": 3,
+      "steelShell": true
+    },
+    {
+      "id": "assembly_worker",
+      "name": "Assembly Worker",
+      "unlocked": false,
+      "description": "Maintain 7-day feeding streak",
+      "requirement": { "type": "assembly_line", "value": 7 },
+      "progress": 2,
+      "steelShell": true
+    },
+    {
+      "id": "assembly_foreman",
+      "name": "Assembly Foreman",
+      "unlocked": false,
+      "description": "Maintain 14-day feeding streak",
+      "requirement": { "type": "assembly_line", "value": 14 },
+      "progress": 2,
+      "steelShell": true
+    },
+    {
+      "id": "assembly_director",
+      "name": "Assembly Director",
+      "unlocked": false,
+      "description": "Maintain 30-day feeding streak",
+      "requirement": { "type": "assembly_line", "value": 30 },
+      "progress": 2,
+      "steelShell": true
+    },
+    {
+      "id": "high_energy",
+      "name": "High Energy",
+      "unlocked": false,
+      "description": "Reach 100% energy level",
+      "requirement": { "type": "energy_max", "value": 100 },
+      "progress": 65,
+      "steelShell": true
     }
   ],
   "shellTiers": [
