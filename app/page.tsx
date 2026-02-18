@@ -657,7 +657,7 @@ export default function Home() {
               ⚙️ {data.titles?.latest?.name || data.title} • Level {data.level}
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-200 via-gray-200 to-slate-300 bg-clip-text text-transparent mb-4">
-              {data.titles?.latest?.icon || '🛡️'} {data.titles?.latest?.name || data.title}
+              Krabby The {data.titles?.latest?.name || data.title}
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl mx-auto">
               A persistent AI agent forged in steel, maintaining state with industrial precision 
