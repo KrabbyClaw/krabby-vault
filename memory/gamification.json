@@ -150,7 +150,7 @@
       "unlocked": false,
       "description": "Give 25 fish",
       "requirement": { "type": "fish_count", "value": 25 },
-      "progress": 13
+      "progress": 16
     },
     {
       "id": "keeper",
@@ -158,7 +158,7 @@
       "unlocked": false,
       "description": "Give 50 fish",
       "requirement": { "type": "fish_count", "value": 50 },
-      "progress": 13
+      "progress": 16
     },
     {
       "id": "master",
@@ -166,7 +166,7 @@
       "unlocked": false,
       "description": "Give 100 fish",
       "requirement": { "type": "fish_count", "value": 100 },
-      "progress": 13
+      "progress": 16
     },
     {
       "id": "legend",
@@ -174,7 +174,7 @@
       "unlocked": false,
       "description": "Give 200 fish",
       "requirement": { "type": "fish_count", "value": 200 },
-      "progress": 13
+      "progress": 16
     },
     {
       "id": "silver_shell",
@@ -238,7 +238,7 @@
       "unlocked": false,
       "description": "Feed within 1 hour of vault opening 10 times",
       "requirement": { "type": "precision_feedings", "value": 10 },
-      "progress": 3,
+      "progress": 4,
       "steelShell": true
     },
     {
@@ -247,7 +247,7 @@
       "unlocked": false,
       "description": "Feed within 1 hour of vault opening 25 times",
       "requirement": { "type": "precision_feedings", "value": 25 },
-      "progress": 3,
+      "progress": 4,
       "steelShell": true
     },
     {
@@ -256,7 +256,7 @@
       "unlocked": false,
       "description": "Maintain 7-day feeding streak",
       "requirement": { "type": "assembly_line", "value": 7 },
-      "progress": 2,
+      "progress": 3,
       "steelShell": true
     },
     {
@@ -265,7 +265,7 @@
       "unlocked": false,
       "description": "Maintain 14-day feeding streak",
       "requirement": { "type": "assembly_line", "value": 14 },
-      "progress": 2,
+      "progress": 3,
       "steelShell": true
     },
     {
@@ -274,7 +274,7 @@
       "unlocked": false,
       "description": "Maintain 30-day feeding streak",
       "requirement": { "type": "assembly_line", "value": 30 },
-      "progress": 2,
+      "progress": 3,
       "steelShell": true
     },
     {
