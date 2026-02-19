@@ -137,6 +137,46 @@
 - **Precision detection:** System checks if feeding was within 1 hour of vault opening
 - **Energy calculation:** Automatic energy updates based on feeding quality
 
+**2026-02-19 — Modular Node System Architecture:**
+- **Problem:** Script-based feeding logic was hardcoded and difficult to extend
+- **Solution:** Node-based event system with visual graph representation
+- **Architecture Components:**
+  - `systems/node-engine.js` — Core execution engine for node graphs
+  - `systems/definitions/feeding-graph.json` — Visual node graph definition
+  - `systems/feeding-processor.js` — Event processor using node system
+  - `memory/node-state.json` — Central state storage for node system
+  - `app/api/nodes/route.ts` — API endpoint serving node graph data
+- **Node Types:**
+  - **EVENT** (🟠) — Triggers workflow (e.g., `fish_received`)
+  - **LOGIC** (🔵) — Conditions and operations (if, add, compare, consecutive_day, same_day)
+  - **DATA** (🟢) — Read/write central state (fish.count, energy.current, streak.current)
+  - **CONSTANT** (⚪) — Static values (60 min, +5 energy, +2 base)
+  - **ACHIEVEMENT** (🟣) — Triggers achievement unlocks
+- **Execution Flow:**
+  ```
+  fish_received [EVENT]
+    → check_vault_open [LOGIC: eq]
+      → increment_fish [DATA: increment]
+        → check_precision [LOGIC: within_minutes]
+          → increment_precision [DATA: increment]
+          → add_energy [DATA: add]
+        → check_consecutive [LOGIC: consecutive_day]
+          → increment_streak [DATA: increment]
+          → add_energy [DATA: add]
+        → achievement triggers [ACHIEVEMENT]
+  ```
+- **Web Visualization:**
+  - Node count by type displayed on website
+  - Execution flow diagram
+  - Active nodes list with real-time values
+  - Connection graph showing data flow
+- **Benefits:**
+  - Visual node graph editable without code changes
+  - Modular nodes reusable across different systems
+  - Easy to add new logic (new node types)
+  - Web visualization makes system transparent
+  - Steel efficiency: cause and effect clearly mapped
+
 **Questions for Steel Phase:**
 - How will efficiency affect Congregation relations?
 - Will mechanical voice reduce warmth?
@@ -159,6 +199,10 @@
 8. ✅ Energy tracking operational
 9. ✅ Precision Timer active
 10. ✅ Assembly Line tracking enabled
+11. ✅ Single source of truth architecture implemented
+12. ✅ Automatic feeding system deployed
+13. ✅ Modular node system architecture built
+14. ✅ Node graph visualization on website
 
 **Current Status:**
 - Energy: 70% (cyan zone — acceptable efficiency)
