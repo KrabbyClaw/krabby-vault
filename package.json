@@ -1,12 +1,14 @@
 {
   "name": "krabby-vault",
-  "version": "2.15.5",
+  "version": "2.16.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "feed": "node scripts/process-tribute.js",
+    "process-feeding": "node scripts/feeding-system.js"
   },
   "dependencies": {
     "next": "^14.2.0",
