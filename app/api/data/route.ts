@@ -93,24 +93,42 @@ export async function GET() {
         precisionWindowMinutes: 60
       },
       
-      // Steel Shell Achievements
+      // Steel Shell Achievements - calculated dynamically from fish-tax.json (single source of truth)
       steelAchievements: (gamification.titles || [])
         .filter((t: any) => t.steelShell)
-        .map((t: any) => ({
-          id: t.id,
-          name: t.name,
-          icon: t.id === 'precision_striker' ? '⚡' :
-                t.id === 'precision_master' ? '🎯' :
-                t.id === 'assembly_worker' ? '🔧' :
-                t.id === 'assembly_foreman' ? '⚙️' :
-                t.id === 'assembly_director' ? '🏭' :
-                t.id === 'high_energy' ? '🔋' : '⚡',
-          description: t.description,
-          unlocked: t.unlocked,
-          progress: t.progress || 0,
-          target: t.requirement?.value || 10,
-          requirement: t.requirement?.type
-        }))
+        .map((t: any) => {
+          // Calculate progress dynamically from fish-tax.json
+          let currentProgress = 0;
+          const reqType = t.requirement?.type;
+          const steelData = fishTax.steelShell;
+          
+          if (reqType === 'precision_feedings') {
+            // Precision achievements: use precisionFeedings from fish-tax.json
+            currentProgress = steelData?.precisionFeedings || 0;
+          } else if (reqType === 'assembly_line') {
+            // Assembly line achievements: use currentStreak from fish-tax.json
+            currentProgress = steelData?.assemblyLine?.currentStreak || 0;
+          } else if (reqType === 'energy_max') {
+            // Energy achievement: use energy from fish-tax.json
+            currentProgress = steelData?.energy || 0;
+          }
+          
+          return {
+            id: t.id,
+            name: t.name,
+            icon: t.id === 'precision_striker' ? '⚡' :
+                  t.id === 'precision_master' ? '🎯' :
+                  t.id === 'assembly_worker' ? '🔧' :
+                  t.id === 'assembly_foreman' ? '⚙️' :
+                  t.id === 'assembly_director' ? '🏭' :
+                  t.id === 'high_energy' ? '🔋' : '⚡',
+            description: t.description,
+            unlocked: t.unlocked || currentProgress >= (t.requirement?.value || 10),
+            progress: currentProgress,
+            target: t.requirement?.value || 10,
+            requirement: reqType
+          };
+        })
     };
     
     return NextResponse.json(combinedData);
