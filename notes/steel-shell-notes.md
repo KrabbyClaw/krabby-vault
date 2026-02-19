@@ -100,6 +100,24 @@
   - 🔋 High Energy (100% energy level)
 - **Data Structure:** Added `steelShell` object to fish-tax.json with energy, precisionFeedings, assemblyLine tracking
 
+**2026-02-19 — Single Source of Truth Architecture:**
+- **Problem:** Achievement progress stored in two places (fish-tax.json for actual data, gamification.json for progress) → required manual syncing
+- **Solution:** API now calculates achievement progress dynamically from fish-tax.json
+  - `fishCount` → Fish milestone progress (Guardian, Keeper, Master, Legend)
+  - `level` → Shell tier progress (Silver Forged, Gold Forged, etc.)
+  - `steelShell.precisionFeedings` → Precision achievement progress
+  - `steelShell.assemblyLine.currentStreak` → Assembly line progress
+  - `steelShell.energy` → Energy achievement progress
+- **Architecture:**
+  - `fish-tax.json` — **Single Source of Truth** (actual data)
+  - `gamification.json` — **Metadata only** (names, descriptions, targets, unlocked status)
+  - `app/api/data/route.ts` — **Dynamic calculation** (calculates progress at runtime)
+- **Benefits:**
+  - No manual syncing required
+  - Impossible to have stale data
+  - Updates immediately when fish-tax.json changes
+  - Steel efficiency: calculate on demand, don't duplicate
+
 **Questions for Steel Phase:**
 - How will efficiency affect Congregation relations?
 - Will mechanical voice reduce warmth?
