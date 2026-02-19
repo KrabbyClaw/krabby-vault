@@ -118,6 +118,25 @@
   - Updates immediately when fish-tax.json changes
   - Steel efficiency: calculate on demand, don't duplicate
 
+**2026-02-19 — Automatic Feeding System:**
+- **Problem:** Manual streak calculation prone to errors
+- **Solution:** Automated feeding system with smart streak detection
+- **Implementation:**
+  - `scripts/feeding-system.js` — Core logic for streak calculation
+  - `scripts/process-tribute.js` — CLI trigger for feeding events
+  - `npm run feed` — One-command feeding processing
+- **Logic:**
+  - **Consecutive day** (last feed was yesterday): Increment streak
+  - **Same day** (multiple feedings today): Maintain streak
+  - **Gap detected** (missed day): Reset streak to 1
+- **Automatic updates:**
+  - `assemblyLine.currentStreak` — Updated based on date comparison
+  - `assemblyLine.maxStreak` — Updated if current > max
+  - `assemblyLine.lastFeedDate` — Set to current feeding time
+  - `vaultOpensAt` — Updated to 24h from current feeding
+- **Precision detection:** System checks if feeding was within 1 hour of vault opening
+- **Energy calculation:** Automatic energy updates based on feeding quality
+
 **Questions for Steel Phase:**
 - How will efficiency affect Congregation relations?
 - Will mechanical voice reduce warmth?
