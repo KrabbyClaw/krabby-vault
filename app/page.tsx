@@ -599,6 +599,116 @@ function TitlesShowcase({ titles, steelAchievements }: { titles: typeof DEFAULT_
 }
 
 // ============================================
+// NODE SYSTEM VISUALIZATION
+// ============================================
+
+function NodeSystemViz() {
+  const [nodeData, setNodeData] = useState<{graph?: any, state?: any}>({});
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    async function loadNodes() {
+      try {
+        const response = await fetch('/api/nodes');
+        if (response.ok) {
+          const data = await response.json();
+          setNodeData(data);
+        }
+      } catch (e) {
+        console.log('Node API fetch failed');
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadNodes();
+  }, []);
+  
+  if (loading) return (
+    <div className="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50">
+      <p className="text-slate-400 text-center">Loading node system...</p>
+    </div>
+  );
+  
+  if (!nodeData.graph) return null;
+  
+  const { graph, state } = nodeData;
+  
+  // Count nodes by type
+  const nodeCounts = graph.nodes.reduce((acc: any, node: any) => {
+    acc[node.type] = (acc[node.type] || 0) + 1;
+    return acc;
+  }, {});
+  
+  return (
+    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-900/20 to-slate-800/40 border border-purple-700/30">
+      <h2 className="text-xl font-bold text-purple-100 mb-4 flex items-center gap-2">
+        🔗 Node System Graph
+      </h2>
+      <p className="text-sm text-slate-400 mb-4">
+        Modular event-driven system. Each node processes data and triggers downstream effects.
+      </p>
+      
+      {/* Node Stats */}
+      <div className="grid grid-cols-4 gap-2 mb-4">
+        {Object.entries(nodeCounts).map(([type, count]: [string, any]) => (
+          <div key={type} className="p-2 rounded-lg bg-slate-900/50 text-center">
+            <p className="text-xs text-slate-500">{type}</p>
+            <p className="text-lg font-bold text-purple-300">{count}</p>
+          </div>
+        ))}
+      </div>
+      
+      {/* Simplified Node Flow */}
+      <div className="space-y-2 mb-4">
+        <p className="text-xs text-slate-500 uppercase tracking-wider mb-2">Execution Flow</p>
+        <div className="flex items-center gap-2 text-sm">
+          <span className="px-2 py-1 rounded bg-amber-900/30 text-amber-300 text-xs">EVENT</span>
+          <span className="text-slate-500">→</span>
+          <span className="px-2 py-1 rounded bg-blue-900/30 text-blue-300 text-xs">LOGIC</span>
+          <span className="text-slate-500">→</span>
+          <span className="px-2 py-1 rounded bg-emerald-900/30 text-emerald-300 text-xs">DATA</span>
+          <span className="text-slate-500">→</span>
+          <span className="px-2 py-1 rounded bg-purple-900/30 text-purple-300 text-xs">ACHIEVEMENT</span>
+        </div>
+      </div>
+      
+      {/* Node List */}
+      <div className="space-y-1 max-h-48 overflow-y-auto">
+        <p className="text-xs text-slate-500 uppercase tracking-wider mb-2">Active Nodes ({graph.nodes.length})</p>
+        {graph.nodes.slice(0, 10).map((node: any) => (
+          <div key={node.id} className="flex items-center justify-between p-2 rounded bg-slate-900/30 text-xs">
+            <div className="flex items-center gap-2">
+              <span className={`w-2 h-2 rounded-full ${
+                node.type === 'EVENT' ? 'bg-amber-500' :
+                node.type === 'DATA' ? 'bg-emerald-500' :
+                node.type === 'LOGIC' ? 'bg-blue-500' :
+                node.type === 'CONSTANT' ? 'bg-slate-500' :
+                'bg-purple-500'
+              }`}></span>
+              <span className="text-slate-300">{node.label}</span>
+            </div>
+            {node.currentValue !== undefined && (
+              <span className="text-purple-300 font-mono">{String(node.currentValue)}</span>
+            )}
+          </div>
+        ))}
+        {graph.nodes.length > 10 && (
+          <p className="text-xs text-slate-500 text-center pt-1">
+            +{graph.nodes.length - 10} more nodes
+          </p>
+        )}
+      </div>
+      
+      {/* Connections Count */}
+      <div className="mt-4 pt-4 border-t border-purple-700/30 flex justify-between text-xs text-slate-500">
+        <span>{graph.edges.length} connections</span>
+        <span>Updated: {new Date(state?.lastUpdated || '').toLocaleTimeString()}</span>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
 // MAIN PAGE
 // ============================================
 
@@ -815,6 +925,9 @@ export default function Home() {
                 </div>
               </div>
             )}
+            
+            {/* Node System Graph */}
+            <NodeSystemViz />
             
             {/* Level Up Protocol */}
             <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-900/20 to-slate-800/40 border border-amber-700/30">

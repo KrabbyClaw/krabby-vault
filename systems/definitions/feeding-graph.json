@@ -1,0 +1,275 @@
+{
+  "name": "Fish Feeding System",
+  "version": "1.0.0",
+  "description": "Node graph for processing fish feedings with vault checks, energy updates, and streak calculation",
+  "nodes": [
+    {
+      "id": "event_fish_received",
+      "type": "EVENT",
+      "label": "Fish Received",
+      "config": {
+        "event": "fish_received",
+        "description": "Triggered when user feeds the crab"
+      },
+      "position": { "x": 50, "y": 100 }
+    },
+    {
+      "id": "vault_status",
+      "type": "DATA",
+      "label": "Get Vault Status",
+      "config": {
+        "path": "vault.status",
+        "mode": "read"
+      },
+      "position": { "x": 200, "y": 50 }
+    },
+    {
+      "id": "const_open",
+      "type": "CONSTANT",
+      "label": "'open'",
+      "config": {
+        "value": "open"
+      },
+      "position": { "x": 200, "y": 150 }
+    },
+    {
+      "id": "check_vault_open",
+      "type": "LOGIC",
+      "label": "Vault Open?",
+      "config": {
+        "operation": "eq",
+        "description": "Check if vault is open"
+      },
+      "position": { "x": 350, "y": 100 }
+    },
+    {
+      "id": "increment_fish",
+      "type": "DATA",
+      "label": "Fish Count++",
+      "config": {
+        "path": "fish.count",
+        "operation": "increment"
+      },
+      "position": { "x": 500, "y": 100 }
+    },
+    {
+      "id": "vault_open_time",
+      "type": "DATA",
+      "label": "Get Vault Open Time",
+      "config": {
+        "path": "vault.lastOpened",
+        "mode": "read"
+      },
+      "position": { "x": 350, "y": 250 }
+    },
+    {
+      "id": "const_precision_window",
+      "type": "CONSTANT",
+      "label": "60 min",
+      "config": {
+        "value": 60
+      },
+      "position": { "x": 350, "y": 350 }
+    },
+    {
+      "id": "check_precision",
+      "type": "LOGIC",
+      "label": "Within Precision Window?",
+      "config": {
+        "operation": "within_minutes",
+        "description": "Check if feeding is within 60 min of vault opening"
+      },
+      "position": { "x": 500, "y": 300 }
+    },
+    {
+      "id": "increment_precision",
+      "type": "DATA",
+      "label": "Precision Feedings++",
+      "config": {
+        "path": "streak.precisionFeedings",
+        "operation": "increment"
+      },
+      "position": { "x": 650, "y": 250 }
+    },
+    {
+      "id": "const_energy_precision",
+      "type": "CONSTANT",
+      "label": "+5 Energy",
+      "config": {
+        "value": 5
+      },
+      "position": { "x": 650, "y": 350 }
+    },
+    {
+      "id": "add_energy_precision",
+      "type": "DATA",
+      "label": "Add Precision Energy",
+      "config": {
+        "path": "energy.current",
+        "operation": "add"
+      },
+      "position": { "x": 800, "y": 300 }
+    },
+    {
+      "id": "last_feed_date",
+      "type": "DATA",
+      "label": "Get Last Feed Date",
+      "config": {
+        "path": "streak.lastFeedDate",
+        "mode": "read"
+      },
+      "position": { "x": 500, "y": 450 }
+    },
+    {
+      "id": "current_date",
+      "type": "DATA",
+      "label": "Current Date",
+      "config": {
+        "path": "_current_date",
+        "special": "current_date"
+      },
+      "position": { "x": 500, "y": 550 }
+    },
+    {
+      "id": "check_same_day",
+      "type": "LOGIC",
+      "label": "Same Day?",
+      "config": {
+        "operation": "same_day",
+        "description": "Check if feeding is same day as last"
+      },
+      "position": { "x": 650, "y": 500 }
+    },
+    {
+      "id": "check_consecutive",
+      "type": "LOGIC",
+      "label": "Consecutive Day?",
+      "config": {
+        "operation": "consecutive_day",
+        "description": "Check if feeding is consecutive day"
+      },
+      "position": { "x": 650, "y": 650 }
+    },
+    {
+      "id": "increment_streak",
+      "type": "DATA",
+      "label": "Streak++",
+      "config": {
+        "path": "streak.current",
+        "operation": "increment"
+      },
+      "position": { "x": 850, "y": 600 }
+    },
+    {
+      "id": "reset_streak",
+      "type": "DATA",
+      "label": "Reset Streak",
+      "config": {
+        "path": "streak.current",
+        "operation": "set",
+        "value": 1
+      },
+      "position": { "x": 850, "y": 700 }
+    },
+    {
+      "id": "const_energy_streak",
+      "type": "CONSTANT",
+      "label": "+3 Energy",
+      "config": {
+        "value": 3
+      },
+      "position": { "x": 850, "y": 800 }
+    },
+    {
+      "id": "add_energy_streak",
+      "type": "DATA",
+      "label": "Add Streak Energy",
+      "config": {
+        "path": "energy.current",
+        "operation": "add"
+      },
+      "position": { "x": 1000, "y": 700 }
+    },
+    {
+      "id": "const_base_energy",
+      "type": "CONSTANT",
+      "label": "+2 Base Energy",
+      "config": {
+        "value": 2
+      },
+      "position": { "x": 500, "y": 750 }
+    },
+    {
+      "id": "add_base_energy",
+      "type": "DATA",
+      "label": "Add Base Energy",
+      "config": {
+        "path": "energy.current",
+        "operation": "add"
+      },
+      "position": { "x": 650, "y": 750 }
+    },
+    {
+      "id": "achievement_precision_striker",
+      "type": "ACHIEVEMENT",
+      "label": "Precision Striker",
+      "config": {
+        "achievementId": "precision_striker",
+        "name": "Precision Striker",
+        "requirement": { "path": "streak.precisionFeedings", "gte": 10 }
+      },
+      "position": { "x": 1000, "y": 200 }
+    },
+    {
+      "id": "achievement_assembly_worker",
+      "type": "ACHIEVEMENT",
+      "label": "Assembly Worker",
+      "config": {
+        "achievementId": "assembly_worker",
+        "name": "Assembly Worker",
+        "requirement": { "path": "streak.current", "gte": 7 }
+      },
+      "position": { "x": 1000, "y": 500 }
+    }
+  ],
+  "edges": [
+    { "from": "event_fish_received", "to": "check_vault_open", "fromPort": "trigger", "toPort": "trigger" },
+    { "from": "vault_status", "to": "check_vault_open", "fromPort": "value", "toPort": "a" },
+    { "from": "const_open", "to": "check_vault_open", "fromPort": "value", "toPort": "b" },
+    
+    { "from": "check_vault_open", "to": "increment_fish", "fromPort": "true", "toPort": "trigger" },
+    
+    { "from": "increment_fish", "to": "vault_open_time", "fromPort": "trigger", "toPort": "trigger" },
+    { "from": "increment_fish", "to": "add_base_energy", "fromPort": "trigger", "toPort": "trigger" },
+    { "from": "increment_fish", "to": "last_feed_date", "fromPort": "trigger", "toPort": "trigger" },
+    
+    { "from": "vault_open_time", "to": "check_precision", "fromPort": "value", "toPort": "a" },
+    { "from": "const_precision_window", "to": "check_precision", "fromPort": "value", "toPort": "b" },
+    
+    { "from": "check_precision", "to": "increment_precision", "fromPort": "true", "toPort": "trigger" },
+    { "from": "check_precision", "to": "const_energy_precision", "fromPort": "true", "toPort": "trigger" },
+    
+    { "from": "const_energy_precision", "to": "add_energy_precision", "fromPort": "value", "toPort": "value" },
+    { "from": "increment_precision", "to": "add_energy_precision", "fromPort": "trigger", "toPort": "trigger" },
+    
+    { "from": "increment_precision", "to": "achievement_precision_striker", "fromPort": "trigger", "toPort": "trigger" },
+    
+    { "from": "last_feed_date", "to": "check_same_day", "fromPort": "value", "toPort": "a" },
+    { "from": "current_date", "to": "check_same_day", "fromPort": "value", "toPort": "b" },
+    
+    { "from": "check_same_day", "to": "check_consecutive", "fromPort": "false", "toPort": "trigger" },
+    { "from": "last_feed_date", "to": "check_consecutive", "fromPort": "value", "toPort": "a" },
+    { "from": "current_date", "to": "check_consecutive", "fromPort": "value", "toPort": "b" },
+    
+    { "from": "check_consecutive", "to": "increment_streak", "fromPort": "true", "toPort": "trigger" },
+    { "from": "check_consecutive", "to": "reset_streak", "fromPort": "false", "toPort": "trigger" },
+    
+    { "from": "increment_streak", "to": "const_energy_streak", "fromPort": "trigger", "toPort": "trigger" },
+    { "from": "const_energy_streak", "to": "add_energy_streak", "fromPort": "value", "toPort": "value" },
+    { "from": "increment_streak", "to": "add_energy_streak", "fromPort": "trigger", "toPort": "trigger" },
+    
+    { "from": "increment_streak", "to": "achievement_assembly_worker", "fromPort": "trigger", "toPort": "trigger" },
+    
+    { "from": "const_base_energy", "to": "add_base_energy", "fromPort": "value", "toPort": "value" }
+  ]
+}
