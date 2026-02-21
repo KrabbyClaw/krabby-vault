@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "description": "Central state storage for Krabby Vault node system",
+  "lastUpdated": "2026-02-19T09:53:00Z",
+  "data": {
+    "fish": {
+      "count": 17,
+      "lastReceived": "2026-02-21T21:12:00Z",
+      "history": [
+        {
+          "date": "2026-02-16",
+          "count": 1,
+          "tribute": 13
+        },
+        {
+          "date": "2026-02-17",
+          "count": 1,
+          "tribute": 14
+        },
+        {
+          "date": "2026-02-18",
+          "count": 1,
+          "tribute": 15
+        },
+        {
+          "date": "2026-02-19",
+          "count": 1,
+          "tribute": 16
+        },
+        {
+          "date": "2026-02-21",
+          "count": 1,
+          "tribute": 17
+        }
+      ]
+    },
+    "vault": {
+      "status": "open",
+      "lastOpened": "2026-02-21T08:57:00Z",
+      "nextOpenTime": "2026-02-22T08:57:00Z",
+      "precisionWindowMinutes": 60
+    },
+    "crab": {
+      "name": "Krabby",
+      "shell": "Steel",
+      "level": 3,
+      "xp": 357,
+      "xpMax": 3000,
+      "moltCycle": 2
+    },
+    "energy": {
+      "current": 75,
+      "max": 100,
+      "lastUpdate": "2026-02-21T21:12:00Z"
+    },
+    "streak": {
+      "current": 5,
+      "max": 5,
+      "lastFeedDate": "2026-02-21",
+      "precisionFeedings": 5
+    },
+    "achievements": {
+      "unlocked": [
+        "iron_forged",
+        "fish_hoarder",
+        "caretaker",
+        "feeder",
+        "novice"
+      ],
+      "pending": []
+    }
+  },
+  "events": {
+    "log": [
+      {
+        "timestamp": "2026-02-19T08:57:00Z",
+        "event": "fish_received",
+        "data": {
+          "precision": true,
+          "vaultOpen": true
+        }
+      }
+    ]
+  }
+}

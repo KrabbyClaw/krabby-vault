@@ -1,0 +1,29 @@
+# Secrets - Never commit credentials
+SECRETS.md
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Mega temporary files
+.mega*
+megatmp*
+
+# Backup bundles (these go to Mega, not GitHub)
+*.bundle
+
+# Node modules
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
