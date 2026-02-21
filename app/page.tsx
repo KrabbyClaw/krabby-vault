@@ -610,7 +610,7 @@ import NodeGraph2D from './components/NodeGraph2D';
 
 export default function Home() {
   const [data, setData] = useState(DEFAULT_CRAB_DATA);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     async function loadData() {
