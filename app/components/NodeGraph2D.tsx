@@ -1,90 +1,263 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import graphData from '../../systems/definitions/feeding-graph.json';
 
-export default function NodeGraph2D({ data }: { data: any }) {
-  const [selected, setSelected] = useState<string | null>(null);
+// Node colors based on type
+const NODE_COLORS: Record<string, string> = {
+  EVENT: '#f59e0b',      // amber
+  DATA: '#10b981',       // emerald
+  LOGIC: '#3b82f6',      // blue
+  CONSTANT: '#6b7280',   // gray
+  ACHIEVEMENT: '#8b5cf6', // purple
+};
 
-  if (!data) {
+// SVG Node component
+function Node({ 
+  x, 
+  y, 
+  label, 
+  type, 
+  isActive,
+  onClick 
+}: { 
+  x: number;
+  y: number;
+  label: string;
+  type: string;
+  isActive: boolean;
+  onClick: () => void;
+}) {
+  const color = NODE_COLORS[type] || '#6366f1';
+  
+  return (
+    <g 
+      transform={`translate(${x}, ${y})`}
+      onClick={onClick}
+      style={{ cursor: 'pointer' }}
+      className="transition-all duration-200"
+    >
+      {/* Node circle */}
+      <circle
+        r={isActive ? 28 : 24}
+        fill={color}
+        opacity={isActive ? 0.9 : 0.7}
+        stroke={isActive ? '#ffffff' : color}
+        strokeWidth={isActive ? 3 : 2}
+      />
+      
+      {/* Type label */}
+      <text
+        y={-30}
+        textAnchor="middle"
+        fill={color}
+        fontSize={10}
+        fontWeight="bold"
+      >
+        {type}
+      </text>
+      
+      {/* Node label */}
+      <text
+        y={38}
+        textAnchor="middle"
+        fill="#e2e8f0"
+        fontSize={11}
+        fontWeight={isActive ? 'bold' : 'normal'}
+      >
+        {label.length > 12 ? label.substring(0, 12) + '...' : label}
+      </text>
+    </g>
+  );
+}
+
+// SVG Connection line
+function Connection({ 
+  x1, 
+  y1, 
+  x2, 
+  y2, 
+  isActive 
+}: { 
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  isActive: boolean;
+}) {
+  return (
+    <line
+      x1={x1}
+      y1={y1}
+      x2={x2}
+      y2={y2}
+      stroke={isActive ? '#8b5cf6' : '#475569'}
+      strokeWidth={isActive ? 3 : 1.5}
+      opacity={isActive ? 0.8 : 0.4}
+    />
+  );
+}
+
+// Main export component
+export default function NodeGraph2D() {
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Parse node positions from graph data
+  const nodes = graphData.nodes.map((node: any) => ({
+    id: node.id,
+    label: node.label,
+    type: node.type,
+    x: (node.position?.x || 0) * 1.2 + 50,
+    y: (node.position?.y || 0) * 1.2 + 50,
+  }));
+
+  // Parse edges
+  const edges = graphData.edges.map((edge: any) => {
+    const fromNode = nodes.find((n: any) => n.id === edge.from);
+    const toNode = nodes.find((n: any) => n.id === edge.to);
+    return {
+      id: `${edge.from}-${edge.to}`,
+      x1: fromNode?.x || 0,
+      y1: fromNode?.y || 0,
+      x2: toNode?.x || 0,
+      y2: toNode?.y || 0,
+      fromId: edge.from,
+      toId: edge.to,
+    };
+  });
+
+  // Get selected node info
+  const selectedNodeInfo = selectedNode 
+    ? graphData.nodes.find((n: any) => n.id === selectedNode)
+    : null;
+
+  // Count nodes by type
+  const nodeCounts: Record<string, number> = {};
+  graphData.nodes.forEach((node: any) => {
+    nodeCounts[node.type] = (nodeCounts[node.type] || 0) + 1;
+  });
+
+  if (!mounted) {
     return (
-      <div className="p-6 bg-slate-800 rounded-lg">
-        <h3 className="text-xl font-bold text-purple-300 mb-4">🦀 Steel Shell Status</h3>
-        <div className="space-y-4">
-          <div className="p-4 bg-slate-700 rounded">
-            <p className="text-slate-300">Loading steel shell data...</p>
-          </div>
+      <div className="p-6 bg-slate-900/40 rounded-2xl border border-slate-700/50">
+        <h3 className="text-2xl font-bold text-slate-100 mb-4">🔗 Fish Processor Node Graph</h3>
+        <div className="h-[500px] bg-slate-950/50 rounded-xl border border-slate-700/50 flex items-center justify-center">
+          <p className="text-slate-400">Loading node graph...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="p-6 bg-gradient-to-br from-purple-900/20 to-slate-800/40 rounded-2xl border border-purple-700/30">
-      <h3 className="text-2xl font-bold text-purple-100 mb-6">🔗 Steel Shell Node System</h3>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Current Stats */}
-        <div className="p-4 bg-slate-900/50 rounded-lg">
-          <h4 className="text-lg font-semibold text-cyan-300 mb-3">Current Status</h4>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-slate-400">Fish Count:</span>
-              <span className="text-slate-300 font-bold">{data?.fishCount || 17}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-400">XP Progress:</span>
-              <span className="text-slate-300 font-bold">{data?.xp || 457}/{data?.xpMax || 3000}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-400">Shell Level:</span>
-              <span className="text-slate-300 font-bold">Level {data?.level || 3} - Steel</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-400">Energy:</span>
-              <span className="text-slate-300 font-bold">{data?.steelShell?.energy || 75}%</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-400">Streak:</span>
-              <span className="text-slate-300 font-bold">{data?.steelShell?.assemblyLine?.currentStreak || 5}/7 days</span>
-            </div>
-          </div>
-        </div>
+    <div className="p-6 bg-slate-900/40 rounded-2xl border border-slate-700/50">
+      <h3 className="text-2xl font-bold text-slate-100 mb-4">🔗 Fish Processor Node Graph</h3>
+      <p className="text-slate-400 text-sm mb-4">
+        Interactive 2D visualization of the event-driven feeding system. Click nodes to see details.
+      </p>
 
-        {/* Progress Bar */}
-        <div className="p-4 bg-slate-900/50 rounded-lg">
-          <h4 className="text-lg font-semibold text-cyan-300 mb-3">Progress to Level 4</h4>
-          <div className="w-full bg-slate-700 rounded-full h-3">
-            <div 
-              className="bg-gradient-to-r from-purple-500 to-cyan-500 h-3 rounded-full transition-all duration-300"
-              style={{ width: `${((data?.xp || 457) / (data?.xpMax || 3000)) * 100}%` }}
-            />
+      {/* Legend */}
+      <div className="flex flex-wrap gap-3 mb-4">
+        {Object.entries(NODE_COLORS).map(([type, color]) => (
+          <div 
+            key={type}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/50"
+          >
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
+            <span className="text-xs text-slate-300">{type}</span>
+            <span className="text-xs text-slate-500">({nodeCounts[type] || 0})</span>
           </div>
-          <p className="text-sm text-slate-400 mt-2">
-            {Math.round(((data?.xp || 457) / (data?.xpMax || 3000)) * 100)}% complete
-          </p>
-        </div>
+        ))}
       </div>
 
-      {/* System Overview */}
-      <div className="mt-6 p-4 bg-slate-900/30 rounded-lg">
-        <h4 className="text-lg font-semibold text-purple-300 mb-2">🛠️ System Overview</h4>
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div className="p-2 bg-slate-800/50 rounded">
-            <span className="text-slate-400">Node Type</span>
-            <span className="text-slate-300 block">Steel Shell (Level 3)</span>
+      {/* SVG Graph */}
+      <div className="h-[500px] bg-slate-950/50 rounded-xl border border-slate-700/50 overflow-hidden">
+        <svg 
+          viewBox="0 0 900 500" 
+          className="w-full h-full"
+          style={{ background: '#020617' }}
+        >
+          {/* Grid */}
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" strokeWidth="1" opacity="0.3"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+
+          {/* Render connections first (behind nodes) */}
+          {edges.map((edge: any) => (
+            <Connection
+              key={edge.id}
+              x1={edge.x1}
+              y1={edge.y1}
+              x2={edge.x2}
+              y2={edge.y2}
+              isActive={selectedNode === edge.fromId || selectedNode === edge.toId}
+            />
+          ))}
+
+          {/* Render nodes */}
+          {nodes.map((node: any) => (
+            <Node
+              key={node.id}
+              x={node.x}
+              y={node.y}
+              label={node.label}
+              type={node.type}
+              isActive={selectedNode === node.id}
+              onClick={() => setSelectedNode(selectedNode === node.id ? null : node.id)}
+            />
+          ))}
+        </svg>
+      </div>
+
+      {/* Node Info Panel */}
+      {selectedNodeInfo && (
+        <div className="mt-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+          <div className="flex items-center gap-3 mb-2">
+            <div 
+              className="w-4 h-4 rounded-full" 
+              style={{ backgroundColor: NODE_COLORS[selectedNodeInfo.type] }}
+            />
+            <h4 className="text-lg font-semibold text-slate-200">{selectedNodeInfo.label}</h4>
+            <span className="text-xs px-2 py-0.5 rounded bg-slate-700 text-slate-300">
+              {selectedNodeInfo.type}
+            </span>
           </div>
-          <div className="p-2 bg-slate-800/50 rounded">
-            <span className="text-slate-400">Status</span>
-            <span className="text-slate-300 block">Operational</span>
-          </div>
-          <div className="p-2 bg-slate-800/50 rounded">
-            <span className="text-slate-400">Next Milestone</span>
-            <span className="text-slate-300 block">Level 4 - Silver Shell</span>
-          </div>
-          <div className="p-2 bg-slate-800/50 rounded">
-            <span className="text-slate-400">Energy Level</span>
-            <span className="text-slate-300 block">75% - Optimal</span>
-          </div>
+          <p className="text-sm text-slate-400">
+            {selectedNodeInfo.config?.description || selectedNodeInfo.config?.operation || 'System component'}
+          </p>
+          {selectedNodeInfo.config?.path && (
+            <p className="text-xs text-slate-500 mt-1">
+              Path: {selectedNodeInfo.config.path}
+            </p>
+          )}
+          {selectedNodeInfo.config?.event && (
+            <p className="text-xs text-slate-500 mt-1">
+              Event: {selectedNodeInfo.config.event}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Stats */}
+      <div className="mt-4 grid grid-cols-3 gap-4">
+        <div className="p-3 bg-slate-800/30 rounded-lg text-center">
+          <p className="text-2xl font-bold text-slate-200">{graphData.nodes.length}</p>
+          <p className="text-xs text-slate-400">Total Nodes</p>
+        </div>
+        <div className="p-3 bg-slate-800/30 rounded-lg text-center">
+          <p className="text-2xl font-bold text-slate-200">{graphData.edges.length}</p>
+          <p className="text-xs text-slate-400">Connections</p>
+        </div>
+        <div className="p-3 bg-slate-800/30 rounded-lg text-center">
+          <p className="text-2xl font-bold text-slate-200">{Object.keys(nodeCounts).length}</p>
+          <p className="text-xs text-slate-400">Node Types</p>
         </div>
       </div>
     </div>

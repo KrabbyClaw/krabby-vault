@@ -823,7 +823,7 @@ export default function Home() {
             )}
             
             {/* Node System Graph - 2D R3F Visualization */}
-            <NodeGraph2D data={data} />
+            <NodeGraph2D />
             
             {/* Level Up Protocol */}
             <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-900/20 to-slate-800/40 border border-amber-700/30">
