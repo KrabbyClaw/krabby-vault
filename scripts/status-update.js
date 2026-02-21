@@ -3,8 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const fishTaxPath = path.join(__dirname, '..', 'memory', 'fish-tax.json');
-const nodeStatePath = path.join(__dirname, '..', 'memory', 'node-state.json');
+const PROJECT_ROOT = path.resolve(__dirname, '..');
+const fishTaxPath = path.join(PROJECT_ROOT, 'memory', 'fish-tax.json');
+const nodeStatePath = path.join(PROJECT_ROOT, 'memory', 'node-state.json');
 
 // Read current state
 const fishTax = JSON.parse(fs.readFileSync(fishTaxPath, 'utf8'));

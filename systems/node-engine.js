@@ -12,8 +12,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const STATE_PATH = path.join(__dirname, '..', 'memory', 'node-state.json');
-const DEFINITIONS_PATH = path.join(__dirname, '..', 'definitions');
+// Resolve paths relative to the project root (where this file is in systems/)
+const PROJECT_ROOT = path.resolve(__dirname, '..');
+const STATE_PATH = path.join(PROJECT_ROOT, 'memory', 'node-state.json');
+const DEFINITIONS_PATH = path.join(PROJECT_ROOT, 'definitions');
 
 class NodeEngine {
   constructor() {

@@ -9,7 +9,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const FISH_TAX_PATH = path.join(__dirname, '..', 'memory', 'fish-tax.json');
+const PROJECT_ROOT = path.resolve(__dirname, '..');
+const FISH_TAX_PATH = path.join(PROJECT_ROOT, 'memory', 'fish-tax.json');
 
 /**
  * Check if two dates are consecutive calendar days
