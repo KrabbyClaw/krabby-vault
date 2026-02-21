@@ -110,6 +110,10 @@ export default function NodeGraph2D() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const svgRef = useRef<SVGSVGElement>(null);
+  
+  // Pinch zoom state for mobile
+  const [pinchStartDistance, setPinchStartDistance] = useState(0);
+  const [pinchStartScale, setPinchStartScale] = useState(1);
 
   useEffect(() => {
     setMounted(true);
@@ -154,21 +158,50 @@ export default function NodeGraph2D() {
   // Touch events for mobile
   const onTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length === 1) {
+      // Single touch - start panning
       const touch = e.touches[0];
       handleStart(touch.clientX, touch.clientY);
+    } else if (e.touches.length === 2) {
+      // Two touches - start pinch zoom
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const distance = Math.hypot(
+        touch2.clientX - touch1.clientX,
+        touch2.clientY - touch1.clientY
+      );
+      setPinchStartDistance(distance);
+      setPinchStartScale(scale);
     }
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
-      e.preventDefault();
+    e.preventDefault();
+    if (e.touches.length === 1 && isDragging) {
+      // Single touch - panning
       const touch = e.touches[0];
       handleMove(touch.clientX, touch.clientY);
+    } else if (e.touches.length === 2) {
+      // Two touches - pinch zoom
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const distance = Math.hypot(
+        touch2.clientX - touch1.clientX,
+        touch2.clientY - touch1.clientY
+      );
+      
+      if (pinchStartDistance > 0) {
+        const newScale = Math.min(Math.max(
+          pinchStartScale * (distance / pinchStartDistance),
+          0.5
+        ), 3);
+        setScale(newScale);
+      }
     }
   };
 
   const onTouchEnd = () => {
     handleEnd();
+    setPinchStartDistance(0);
   };
 
   // Zoom with wheel
@@ -261,7 +294,7 @@ export default function NodeGraph2D() {
           Reset View
         </button>
         <span className="text-xs text-slate-500 self-center">
-          {isDragging ? 'Panning...' : 'Drag to pan • Scroll to zoom'}
+          {isDragging ? 'Panning...' : '🖱️ Drag to pan • Scroll to zoom • 📱 Pinch to zoom'}
         </span>
       </div>
 
