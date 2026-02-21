@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import graphData from '../../systems/definitions/feeding-graph.json';
 
 // Node colors based on type
@@ -102,10 +102,88 @@ function Connection({
 export default function NodeGraph2D() {
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  
+  // Pan and zoom state
+  const [scale, setScale] = useState(1);
+  const [translateX, setTranslateX] = useState(0);
+  const [translateY, setTranslateY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Mouse/Touch event handlers for panning
+  const handleStart = useCallback((clientX: number, clientY: number) => {
+    setIsDragging(true);
+    setDragStart({ x: clientX - translateX, y: clientY - translateY });
+  }, [translateX, translateY]);
+
+  const handleMove = useCallback((clientX: number, clientY: number) => {
+    if (isDragging) {
+      setTranslateX(clientX - dragStart.x);
+      setTranslateY(clientY - dragStart.y);
+    }
+  }, [isDragging, dragStart]);
+
+  const handleEnd = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  // Mouse events
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (e.target === svgRef.current || (e.target as Element).tagName === 'rect') {
+      handleStart(e.clientX, e.clientY);
+    }
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    handleMove(e.clientX, e.clientY);
+  };
+
+  const onMouseUp = () => {
+    handleEnd();
+  };
+
+  const onMouseLeave = () => {
+    handleEnd();
+  };
+
+  // Touch events for mobile
+  const onTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      handleStart(touch.clientX, touch.clientY);
+    }
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      handleMove(touch.clientX, touch.clientY);
+    }
+  };
+
+  const onTouchEnd = () => {
+    handleEnd();
+  };
+
+  // Zoom with wheel
+  const onWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+    setScale(prev => Math.min(Math.max(prev * delta, 0.5), 3));
+  };
+
+  // Reset view
+  const resetView = () => {
+    setScale(1);
+    setTranslateX(0);
+    setTranslateY(0);
+  };
 
   // Parse node positions from graph data
   const nodes = graphData.nodes.map((node: any) => ({
@@ -174,12 +252,34 @@ export default function NodeGraph2D() {
         ))}
       </div>
 
+      {/* Controls */}
+      <div className="flex gap-2 mb-4">
+        <button 
+          onClick={resetView}
+          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 rounded text-xs text-slate-200 transition-colors"
+        >
+          Reset View
+        </button>
+        <span className="text-xs text-slate-500 self-center">
+          {isDragging ? 'Panning...' : 'Drag to pan • Scroll to zoom'}
+        </span>
+      </div>
+
       {/* SVG Graph */}
-      <div className="h-[500px] bg-slate-950/50 rounded-xl border border-slate-700/50 overflow-hidden">
+      <div className="h-[500px] bg-slate-950/50 rounded-xl border border-slate-700/50 overflow-hidden touch-none">
         <svg 
+          ref={svgRef}
           viewBox="0 0 900 500" 
-          className="w-full h-full"
+          className="w-full h-full cursor-grab active:cursor-grabbing"
           style={{ background: '#020617' }}
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseLeave}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onWheel={onWheel}
         >
           {/* Grid */}
           <defs>
@@ -189,30 +289,33 @@ export default function NodeGraph2D() {
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
 
-          {/* Render connections first (behind nodes) */}
-          {edges.map((edge: any) => (
-            <Connection
-              key={edge.id}
-              x1={edge.x1}
-              y1={edge.y1}
-              x2={edge.x2}
-              y2={edge.y2}
-              isActive={selectedNode === edge.fromId || selectedNode === edge.toId}
-            />
-          ))}
+          {/* Transform group for pan/zoom */}
+          <g transform={`translate(${translateX}, ${translateY}) scale(${scale})`}>
+            {/* Render connections first (behind nodes) */}
+            {edges.map((edge: any) => (
+              <Connection
+                key={edge.id}
+                x1={edge.x1}
+                y1={edge.y1}
+                x2={edge.x2}
+                y2={edge.y2}
+                isActive={selectedNode === edge.fromId || selectedNode === edge.toId}
+              />
+            ))}
 
-          {/* Render nodes */}
-          {nodes.map((node: any) => (
-            <Node
-              key={node.id}
-              x={node.x}
-              y={node.y}
-              label={node.label}
-              type={node.type}
-              isActive={selectedNode === node.id}
-              onClick={() => setSelectedNode(selectedNode === node.id ? null : node.id)}
-            />
-          ))}
+            {/* Render nodes */}
+            {nodes.map((node: any) => (
+              <Node
+                key={node.id}
+                x={node.x}
+                y={node.y}
+                label={node.label}
+                type={node.type}
+                isActive={selectedNode === node.id}
+                onClick={() => setSelectedNode(selectedNode === node.id ? null : node.id)}
+              />
+            ))}
+          </g>
         </svg>
       </div>
 
