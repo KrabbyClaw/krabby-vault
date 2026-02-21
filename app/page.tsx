@@ -641,7 +641,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <span className="text-2xl">🦀</span>
             <span className="font-bold text-slate-200">Krabby&apos;s Vault</span>
-            <Badge color="blue">v{data.version}</Badge>
+            <Badge color="blue">v{VERSION}</Badge>
           </div>
           <div className="flex gap-2">
             <a href="https://github.com/KrabbyClaw/krabby-vault" className="p-2 rounded-lg hover:bg-slate-800 transition-colors" title="GitHub">
