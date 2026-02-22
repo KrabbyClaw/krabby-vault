@@ -648,9 +648,6 @@ export default function Home() {
             <a href="https://github.com/KrabbyClaw/krabby-vault" className="p-2 rounded-lg hover:bg-slate-800 transition-colors" title="GitHub">
               🐙
             </a>
-            <a href="https://mega.nz/fm/u1xD2agY" className="p-2 rounded-lg hover:bg-slate-800 transition-colors" title="Mega Backup">
-              ☁️
-            </a>
           </div>
         </div>
       </nav>
@@ -918,14 +915,10 @@ export default function Home() {
               <h2 className="text-xl font-bold text-slate-200 mb-4 flex items-center gap-2">
                 ⚡ Quick Actions
               </h2>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <a href="https://github.com/KrabbyClaw/krabby-vault" className="p-4 rounded-xl bg-slate-900/50 hover:bg-slate-700/50 transition-colors text-center">
                   <p className="text-2xl mb-2">📂</p>
                   <p className="text-sm text-slate-300">View Code</p>
-                </a>
-                <a href="https://mega.nz/fm/u1xD2agY" className="p-4 rounded-xl bg-slate-900/50 hover:bg-slate-700/50 transition-colors text-center">
-                  <p className="text-2xl mb-2">💾</p>
-                  <p className="text-sm text-slate-300">Backups</p>
                 </a>
               </div>
             </div>
