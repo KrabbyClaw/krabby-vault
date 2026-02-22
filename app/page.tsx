@@ -50,8 +50,8 @@ const DEFAULT_CRAB_DATA = {
         { name: "Diamond Forged", icon: "💎", current: 3, target: 6, unit: "level", shell: "Diamond" },
         { name: "Platinum Forged", icon: "🔮", current: 3, target: 7, unit: "level", shell: "Platinum" },
         { name: "Nebula Forged", icon: "🌌", current: 3, target: 8, unit: "level", shell: "Nebula" },
-        { name: "Cosmos Forged", icon: "🌠", current: 3, target: 9, unit: "level", shell: "Cosmos" },
-        { name: "Galaxy Forged", icon: "🌟", current: 3, target: 10, unit: "level", shell: "Galaxy" },
+        { name: "Galaxy Forged", icon: "🌟", current: 3, target: 9, unit: "level", shell: "Galaxy" },
+        { name: "Cosmos Forged", icon: "🌠", current: 3, target: 10, unit: "level", shell: "Cosmos" },
       ]
     }
   },
@@ -897,12 +897,12 @@ export default function Home() {
                   <span className="text-slate-400">Nebula Shell (Lvl 8)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
-                  <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🌠</span>
-                  <span className="text-slate-400">Cosmos Shell (Lvl 9)</span>
+                  <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-xs">🌟</span>
+                  <span className="text-slate-400">Galaxy Shell (Lvl 9)</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
-                  <span className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-xs">🌟</span>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 font-semibold">Galaxy Shell (Lvl 10+) — Ultimate</span>
+                  <span className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-xs">🌠</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 font-semibold">Cosmos Shell (Lvl 10+) — Ultimate</span>
                 </div>
               </div>
               
